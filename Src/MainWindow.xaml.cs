@@ -20,5 +20,14 @@ namespace _5_Jahre_Hoelle
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Frame
+            {
+
+                Content = new pages.menue_page()
+            };
+        }
     }
 }

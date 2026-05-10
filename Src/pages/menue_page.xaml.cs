@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Channels;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace _5_Jahre_Hoelle.pages
+{
+    /// <summary>
+    /// Interaktionslogik für menue_page.xaml
+    /// </summary>
+    public partial class menue_page : Page
+    {
+        public menue_page()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Start_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Frame
+            {
+
+                Content = new pages.choose_difficulty()
+            };
+        }
+
+        private void Button_Stats_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Frame
+            {
+
+                Content = new pages.Stats()
+            };
+        }
+
+        private void Button_Acheavments_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Frame
+            {
+
+                Content = new pages.Achievments()
+            };
+        }
+
+        private void Button_Load_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Load");
+        }
+
+        private void Button_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            // chatgpt Anfang: Wie schließe ich das ganze programm in einer page this.close() geht nicht 
+            Application.Current.Shutdown();
+            // chatgpt Ende:
+        }
+
+
+
+
+
+        private void Button_Start_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_Start.Opacity = 0.8;
+        }
+
+        private void Button_Start_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_Start.Opacity = 0;
+        }
+
+        private void Button_Load_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_Load.Opacity = 0.8;
+        }
+
+        private void Button_Load_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_Load.Opacity = 0;
+        }
+
+        private void Button_Exit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygin_Exit.Opacity = 0.8;
+        }
+
+        private void Button_Acheavments_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_Achievments.Opacity = 0;
+        }
+
+        private void Button_Stats_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygom_Stats.Opacity = 0.8;
+        }
+
+        private void Button_Stats_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygom_Stats.Opacity = 0;
+        }
+
+        private void Button_Acheavments_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_Achievments.Opacity = 0.8;
+        }
+
+        private void Button_Exit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygin_Exit.Opacity = 0;
+        }
+    }
+}

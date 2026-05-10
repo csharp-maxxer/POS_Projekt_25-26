@@ -5,10 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_5_Jahre_Hoelle.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="choose_difficulty">
 
-    <Grid>
-        
-    </Grid>
+    <Canvas Background="Black">
+        <Image Source="/assets/Difficulty_Image.png"
+               Width="1920"
+               Height="1080"
+               Stretch="Fill"
+               Canvas.Left="0"
+               Canvas.Top="0"/>
+
+        <Button Name="Button_Normal" Content="Button" Canvas.Left="819" Opacity="0" Click="Button_Normal_Click" MouseEnter="Button_Normal_MouseEnter" MouseLeave="Button_Normal_MouseLeave" Canvas.Top="528" Height="79" Width="279" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Name="Button_Hard" Content="Button" Canvas.Left="864" Opacity="0" Click="Button_Hard_Click" MouseEnter="Button_Hard_MouseEnter" MouseLeave="Button_Hard_MouseLeave" Canvas.Top="676" Height="79" Width="187" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="Button_Zurück" Content="Button" Canvas.Left="1112" Click="Button_Zurück_Click" MouseEnter="Button_Zurück_MouseEnter" MouseLeave="Button_Zurück_MouseLeave" Opacity="0" Canvas.Top="848" Height="42" Width="107" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"></Button>
+
+        <Polygon Name="polygon_Normal"
+         Points="35,20 0,0 0,40"
+         Fill="Black"
+         Opacity="0"
+         Canvas.Left="760"
+         Canvas.Top="548"/>
+
+        <Polygon Name="polygon_Hard"
+         Points="35,20 0,0 0,40"
+         Fill="Black"
+         Opacity="0"
+         Canvas.Left="805"
+         Canvas.Top="696"/>
+
+        <Line Name="Line_Zurück" X1="100" X2="200" Y1="200" Y2="200" Stroke="Black" StrokeThickness="3" Opacity="0" Canvas.Left="1019" Canvas.Top="688" HorizontalAlignment="Center" VerticalAlignment="Top"></Line>
+
+    </Canvas>
 </Page>

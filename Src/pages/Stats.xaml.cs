@@ -16,43 +16,13 @@ using System.Windows.Shapes;
 namespace _5_Jahre_Hoelle.pages
 {
     /// <summary>
-    /// Interaktionslogik für choose_difficulty.xaml
+    /// Interaktionslogik für Stats.xaml
     /// </summary>
-    public partial class choose_difficulty : Page
+    public partial class Stats : Page
     {
-        public choose_difficulty()
+        public Stats()
         {
             InitializeComponent();
-        }
-
-        private void Button_Normal_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Start Normal");
-        }
-
-        private void Button_Normal_MouseEnter(object sender, MouseEventArgs e)
-        {
-            polygon_Normal.Opacity = 0.8;
-        }
-
-        private void Button_Normal_MouseLeave(object sender, MouseEventArgs e)
-        {
-            polygon_Normal.Opacity = 0;
-        }
-
-        private void Button_Hard_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Start Hard");
-        }
-
-        private void Button_Hard_MouseEnter(object sender, MouseEventArgs e)
-        {
-            polygon_Hard.Opacity = 0.8;
-        }
-
-        private void Button_Hard_MouseLeave(object sender, MouseEventArgs e)
-        {
-            polygon_Hard.Opacity = 0;
         }
 
         private void Button_Zurück_Click(object sender, RoutedEventArgs e)
@@ -63,7 +33,6 @@ namespace _5_Jahre_Hoelle.pages
                 Content = new pages.menue_page()
             };
         }
-        
 
         private void Button_Zurück_MouseEnter(object sender, MouseEventArgs e)
         {
