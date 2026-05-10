@@ -2,7 +2,16 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="pages\Achievments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="pages\choose_difficulty.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\menue_page.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\Stats.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

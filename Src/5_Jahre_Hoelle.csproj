@@ -9,4 +9,37 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="assets\Achievments.png" />
+    <None Remove="assets\Difficulty_Image.png" />
+    <None Remove="assets\menue.png" />
+    <None Remove="assets\Pause.png" />
+    <None Remove="assets\Stats.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\Achievments.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Difficulty_Image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\menue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Stats.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="assets\Pause.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="pages\choose_difficulty.xaml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Page>
+    <Page Update="pages\menue_page.xaml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
 </Project>
