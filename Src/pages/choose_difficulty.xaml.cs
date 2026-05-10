@@ -28,6 +28,11 @@ namespace _5_Jahre_Hoelle.pages
         private void Button_Normal_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Start Normal");
+            this.Content = new Frame
+            {
+                Content = new pages.Game()
+            };
+
         }
 
         private void Button_Normal_MouseEnter(object sender, MouseEventArgs e)
@@ -59,7 +64,6 @@ namespace _5_Jahre_Hoelle.pages
         {
             this.Content = new Frame
             {
-
                 Content = new pages.menue_page()
             };
         }

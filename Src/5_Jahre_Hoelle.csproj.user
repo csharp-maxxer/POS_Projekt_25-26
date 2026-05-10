@@ -8,6 +8,9 @@
     <Compile Update="pages\choose_difficulty.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="pages\Game.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="pages\menue_page.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
