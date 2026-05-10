@@ -30,7 +30,6 @@ namespace _5_Jahre_Hoelle.pages
         {
             this.Content = new Frame
             {
-
                 Content = new pages.choose_difficulty()
             };
         }
@@ -39,7 +38,6 @@ namespace _5_Jahre_Hoelle.pages
         {
             this.Content = new Frame
             {
-
                 Content = new pages.Stats()
             };
         }
@@ -48,7 +46,6 @@ namespace _5_Jahre_Hoelle.pages
         {
             this.Content = new Frame
             {
-
                 Content = new pages.Achievments()
             };
         }
@@ -60,9 +57,11 @@ namespace _5_Jahre_Hoelle.pages
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
-            // chatgpt Anfang: Wie schließe ich das ganze programm in einer page this.close() geht nicht 
+            // KI: ChatGPT
+            // Promt: Wie schließe ich das ganze programm in einer page this.close() geht nicht 
+            // KI Anfang: 
             Application.Current.Shutdown();
-            // chatgpt Ende:
+            // KI Ende
         }
 
 

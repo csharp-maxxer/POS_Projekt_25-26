@@ -25,7 +25,6 @@ namespace _5_Jahre_Hoelle
         {
             this.Content = new Frame
             {
-
                 Content = new pages.menue_page()
             };
         }
