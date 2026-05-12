@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace _5_Jahre_Hoelle.pages
         public Game()
         {
             InitializeComponent();
+
+            // Testing
+            Room room = new Room();
+
         }
 
         private static List<List<string>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
