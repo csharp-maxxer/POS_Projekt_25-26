@@ -110,6 +110,10 @@ namespace _5_Jahre_Hoelle.pages
             Canvas.SetLeft(Rect_Player, player.X_Pos);
             Canvas.SetTop(Rect_Player, player.Y_Pos);
             
+
+            // Testing
+            Room room = new Room();
+
         }
 
         private static List<List<string>> CreateMapMatrix(int size_matrix, int anzahl_rooms)

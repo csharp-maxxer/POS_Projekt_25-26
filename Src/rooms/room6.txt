@@ -1,0 +1,7 @@
+X,X,D,D,D,D,X,X,D,X,D,X,D,X
+D,X,X,X,X,X,X,X,X,X,X,X,X,D
+D,X,X,X,X,X,X,X,X,X,X,X,X,D
+X,X,X,X,X,X,X,X,X,X,X,X,X,X
+D,X,X,X,X,X,X,X,X,X,X,X,X,D
+X,X,X,X,X,X,X,X,X,X,X,X,X,D
+X,D,X,D,D,X,X,X,X,D,D,D,D,D
