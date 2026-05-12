@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _5_Jahre_Hoelle.classes
 {
-    class Player
+    public class Player
     {
         public List<Bullets> Bullets;
         public double Damage {  get; set; }
@@ -19,7 +19,7 @@ namespace _5_Jahre_Hoelle.classes
         public int X_Pos { get; set; }
         public int Y_Pos { get; set; }
 
-        Player(double damage, double speed, double ramge, double firerate,int grade,double energy)
+        public Player(double damage, double speed, double ramge, double firerate,int grade,double energy)
         {
             Damage = damage;
             Speed = speed;  

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace _5_Jahre_Hoelle.pages
 {
@@ -20,9 +22,35 @@ namespace _5_Jahre_Hoelle.pages
     /// </summary>
     public partial class Game : Page
     {
+        private bool moveLeft;
+        private bool moveRight;
+        private bool moveUp;
+        private bool moveDown;
+        private DispatcherTimer gameTimer;
+        private Player player;
         public Game()
         {
             InitializeComponent();
+
+            player = new Player(1.0,1.0,1.0,1.0,1,1.0);
+            gameTimer = new DispatcherTimer();
+            gameTimer.Interval = TimeSpan.FromMilliseconds(16);
+            gameTimer.Tick += GameTimer_Tick;
+
+        }
+
+        private void GameTimer_Tick(object? sender, EventArgs e)
+        {
+            DrawGame();
+        }
+
+
+        private void DrawGame()
+        {
+            main.Children.Add(Rect_Player);
+            Canvas.SetLeft(Rect_Player, player.X_Pos);
+            Canvas.SetTop(Rect_Player, player.Y_Pos);
+            
         }
 
         private static List<List<string>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
@@ -186,7 +214,14 @@ namespace _5_Jahre_Hoelle.pages
             return feld;
         }
 
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
 
-        
+        }
+
+        private void Page_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
