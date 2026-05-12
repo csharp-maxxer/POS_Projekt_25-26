@@ -13,7 +13,7 @@
 
     <Canvas Name="main" Background="White">
 
-        <Rectangle Name="Rect_Player" Stroke="Black" Fill="Gray" Width="120" Height="240" Canvas.Top="420" Canvas.Left="251" HorizontalAlignment="Center" VerticalAlignment="Top"></Rectangle>
+        <Rectangle Name="Rect_Player" Stroke="Black" Fill="Gray" Width="100" Height="200" Canvas.Top="420" Canvas.Left="251" HorizontalAlignment="Center" VerticalAlignment="Top"></Rectangle>
 
     </Canvas>
 </Page>

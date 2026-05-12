@@ -16,8 +16,8 @@ namespace _5_Jahre_Hoelle.classes
         public int Grade { get; set; }
         public double Energy { get; set; }
         public double Firerate { get; set; }
-        public int X_Pos { get; set; }
-        public int Y_Pos { get; set; }
+        public double X_Pos { get; set; } 
+        public double Y_Pos { get; set; }
 
         public Player(double damage, double speed, double ramge, double firerate,int grade,double energy)
         {
@@ -27,6 +27,8 @@ namespace _5_Jahre_Hoelle.classes
             Firerate = firerate;
             Grade = grade;
             Energy = energy;
+            X_Pos = 50;
+            Y_Pos = 50;
         }
 
         
