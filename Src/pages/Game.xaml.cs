@@ -64,7 +64,7 @@ namespace _5_Jahre_Hoelle.pages
 
             }
 
-            else if(moveRight && moveUp)
+            else if(moveRight && moveUp) 
             {
                 player.X_Pos += player.Speed / 1.8;
                 player.Y_Pos -= player.Speed / 1.8;
