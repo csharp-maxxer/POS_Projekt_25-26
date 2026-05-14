@@ -26,11 +26,46 @@ namespace _5_Jahre_Hoelle.pages
             InitializeComponent();
 
             // Testing
-            Room room = new Room();
+            List<List<char>> matrix_rooms = new List<List<char>>();
+            matrix_rooms = CreateMapMatrix(10, 15);
+            Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms); 
+        }
+        public Dictionary<(int y, int x), Room> Collect_Rooms (List<List<char>> rooms)
+        {
+            // adds all rooms into a dict<(int x, int y), Room>
+            Dictionary<(int y, int x), Room> dict_rooms = new Dictionary<(int, int), Room>(); 
 
+            for (int i = 0; i < rooms.Count; i++) 
+            {
+                for (int j = 0; j < rooms[i].Count; j++)
+                {
+                    if (rooms[i][j] == '-')
+                    {
+                        continue;
+                    }
+                    else if (rooms[i][j] ==  'X')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'X'));
+                    }
+                    else if (rooms[i][j] == 'O')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'O'));
+                    }
+                    else if (rooms[i][j] == 'B')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'B'));
+                    }
+                    else if (rooms[i][j] == 'T')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'T'));
+                    }
+                }
+            }
+            return dict_rooms;
         }
 
-        private static List<List<string>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
+
+        private static List<List<char>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
         {
             if (anzahl_rooms > size_matrix * size_matrix)
                 throw new Exception("zuviele Räume, es kann keine Sackgassen geben weil die ganze map voll ist..");
@@ -43,14 +78,14 @@ namespace _5_Jahre_Hoelle.pages
             directions.Add(2, "South");
             directions.Add(3, "West");
 
-            List<List<string>> feld = new List<List<string>>(); // mitte 5,5
+            List<List<char>> feld = new List<List<char>>(); // mitte 5,5
 
             for (int i = 0; i < size; i++)
             {
-                List<string> zwsch_speicher = new List<string>();
+                List<char> zwsch_speicher = new List<char>();
                 for (int j = 0; j < size; j++)
                 {
-                    zwsch_speicher.Add("-");
+                    zwsch_speicher.Add('-');
                 }
                 feld.Add(zwsch_speicher);
             }
@@ -59,7 +94,7 @@ namespace _5_Jahre_Hoelle.pages
             int startX = size / 2;
             int startY = size / 2;
 
-            feld[startY][startX] = "O";
+            feld[startY][startX] = 'O';
 
             Random rand = new Random();
 
@@ -68,7 +103,7 @@ namespace _5_Jahre_Hoelle.pages
             // Promt: kannst du es vllt so machen dass die räume nicht so in clustern spawnen sondern eher so wie eben in isaac in einer schöneren struktur weißt du?
             // KI-Start
 
-            static int CountNeighbors(List<List<string>> feld, int x, int y)
+            static int CountNeighbors(List<List<char>> feld, int x, int y)
             {
                 int count = 0;
 
@@ -81,7 +116,7 @@ namespace _5_Jahre_Hoelle.pages
 
                     if (nx >= 0 && nx < feld.Count && ny >= 0 && ny < feld.Count)
                     {
-                        if (feld[ny][nx] != "-")
+                        if (feld[ny][nx] != '-')
                             count++;
                     }
                 }
@@ -128,7 +163,7 @@ namespace _5_Jahre_Hoelle.pages
                     if (newX < 0 || newX >= size || newY < 0 || newY >= size)
                         continue;
 
-                    if (feld[newY][newX] != "-")
+                    if (feld[newY][newX] != '-')
                         continue;
 
                     // 👉 Nachbarn zählen (ANTI-CLUSTER!)
@@ -137,7 +172,7 @@ namespace _5_Jahre_Hoelle.pages
                     if (neighbors > 1)
                         continue;
 
-                    feld[newY][newX] = "X";
+                    feld[newY][newX] = 'X';
                     rooms.Add((newX, newY));
                     frontier.Add((newX, newY));
 
@@ -155,15 +190,13 @@ namespace _5_Jahre_Hoelle.pages
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (feld[i][j] != "-")
+                    if (feld[i][j] != '-')
                     {
 
                         if (CountNeighbors(feld, j, i) == 1)
                         {
                             possible_rooms.Add((j, i));
                         }
-
-
                     }
                 }
             }
@@ -171,22 +204,22 @@ namespace _5_Jahre_Hoelle.pages
             int random_int = rand.Next(possible_rooms.Count);
             (int tresure_x, int tresure_y) tresure_room = possible_rooms[random_int];
             possible_rooms.Remove(tresure_room);
-            feld[tresure_room.tresure_y][tresure_room.tresure_x] = "T";
+            feld[tresure_room.tresure_y][tresure_room.tresure_x] = 'T';
 
             random_int = rand.Next(possible_rooms.Count);
             (int boss_room_x, int boss_room_y) boss_room = possible_rooms[random_int];
             possible_rooms.Remove(boss_room);
-            feld[boss_room.boss_room_y][boss_room.boss_room_x] = "B";
+            feld[boss_room.boss_room_y][boss_room.boss_room_x] = 'B';
 
             // print
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Console.Write(feld[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
+            //for (int i = 0; i < size; i++)
+            //{
+            //    for (int j = 0; j < size; j++)
+            //    {
+            //        Console.Write(feld[i][j] + " ");
+            //    }
+            //    Console.WriteLine();
+            //}
 
             return feld;
         }

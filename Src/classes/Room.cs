@@ -10,14 +10,22 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Room
     {
+        public int Xpos { get; private set; }
+        public int Ypos { get; private set; }
         // 14x7 mit je 120px
         private List<List<char>> room_matrix {  get; set; }
         //public List<enemy> { get; private set; }
         public bool IsCleared { get; private set; }
+        
+        public char Type { get; private set; }
+
         private static Random random;
 
-        public Room()
+        public Room(int ypos, int xpos, char type)
         {
+            Xpos = xpos;
+            Ypos = ypos;
+            Type = type;
             IsCleared = false;
             room_matrix = new List<List<char>>();
             random = new Random();
