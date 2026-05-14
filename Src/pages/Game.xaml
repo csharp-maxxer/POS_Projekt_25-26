@@ -9,6 +9,8 @@
       Title="Game">
 
     <Canvas x:Name="CanvasTotalGamescreen" Background="LightCyan" Height="1080" Width="1920">
-        <Canvas x:Name="CanvasGame" Height="840" Width="1680" Background="Aquamarine" Canvas.Left="120" Canvas.Top="96"></Canvas>
+        <Canvas x:Name="CanvasGame" Height="840" Width="1680" Background="Aquamarine" Canvas.Left="120" Canvas.Top="96">
+            <Image Height="840" Width="1680" Source="/assets/background_game.png"></Image>
+        </Canvas>
     </Canvas>
 </Page>
