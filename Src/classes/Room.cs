@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Media.Imaging;
 
 
 namespace _5_Jahre_Hoelle.classes
@@ -72,6 +73,24 @@ namespace _5_Jahre_Hoelle.classes
         public void DrawRoom()
         {
             RoomCanvas.Children.Clear();
+
+            Image background = new Image();
+
+            background.Width = 1920;
+            background.Height = 1000;
+
+            // Source: Maxemilian Schreiter
+            // Prompt: Wie kann ich ein bild im code adden?
+            // Max Anfang
+            background.Source =
+                new BitmapImage(
+                    new Uri("../assets/background_vorlaeufig.png",UriKind.Relative));
+            // Max Ende
+
+            Canvas.SetLeft(background, -120);
+            Canvas.SetTop(background, -80);
+
+            RoomCanvas.Children.Add(background);
 
             for (int y = 0; y < room_matrix.Count; y++)
             {

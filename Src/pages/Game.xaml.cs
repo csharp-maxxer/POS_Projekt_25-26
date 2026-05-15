@@ -50,8 +50,11 @@ namespace _5_Jahre_Hoelle.pages
         {
             if (e.Key == Key.D)
             {
-                
-                var nextRoom = new Room(1,1,'X'); 
+
+                var nextRoom = new Room(
+                currentRoom.Ypos+1,
+                currentRoom.Xpos,
+                'X');
                 nextRoom.DrawRoom();
                 await SwitchRoom(currentRoom, nextRoom);
             }
@@ -237,17 +240,7 @@ namespace _5_Jahre_Hoelle.pages
             (int boss_room_x, int boss_room_y) boss_room = possible_rooms[random_int];
             possible_rooms.Remove(boss_room);
             feld[boss_room.boss_room_y][boss_room.boss_room_x] = 'B';
-
-            // print
-            //for (int i = 0; i < size; i++)
-            //{
-            //    for (int j = 0; j < size; j++)
-            //    {
-            //        Console.Write(feld[i][j] + " ");
-            //    }
-            //    Console.WriteLine();
-            //}
-
+                        
             return feld;
         }
 
@@ -276,16 +269,63 @@ namespace _5_Jahre_Hoelle.pages
 
             Duration duration = new Duration(TimeSpan.FromMilliseconds(300));
 
-            // 👉 TEST NUR RECHTS
-            // Startposition setzen
-            newTransform.X = width;
-            oldTransform.X = 0;
+            double oldToX = 0;
+            double oldToY = 0;
 
-            DoubleAnimation oldAnim = new DoubleAnimation(0, -width, duration);
-            DoubleAnimation newAnim = new DoubleAnimation(width, 0, duration);
+            double newFromX = 0;
+            double newFromY = 0;
 
-            oldTransform.BeginAnimation(TranslateTransform.XProperty, oldAnim);
-            newTransform.BeginAnimation(TranslateTransform.XProperty, newAnim);
+            // RECHTS
+            if (room_to.Xpos > room_from.Xpos)
+            {
+                newFromX = width;
+                oldToX = -width;
+            }
+
+            // LINKS
+            else if (room_to.Xpos < room_from.Xpos)
+            {
+                newFromX = -width;
+                oldToX = width;
+            }
+
+            // UNTEN
+            else if (room_to.Ypos > room_from.Ypos)
+            {
+                newFromY = height;
+                oldToY = -height;
+            }
+
+            // OBEN
+            else if (room_to.Ypos < room_from.Ypos)
+            {
+                newFromY = -height;
+                oldToY = height;
+            }
+
+            DoubleAnimation oldAnimX = new DoubleAnimation(0, oldToX, duration);
+
+            DoubleAnimation oldAnimY = new DoubleAnimation(0, oldToY, duration);
+
+            DoubleAnimation newAnimX = new DoubleAnimation(newFromX, 0, duration);
+
+            DoubleAnimation newAnimY = new DoubleAnimation(newFromY, 0, duration);
+
+            oldTransform.BeginAnimation(
+                TranslateTransform.XProperty,
+                oldAnimX);
+
+            oldTransform.BeginAnimation(
+                TranslateTransform.YProperty,
+                oldAnimY);
+
+            newTransform.BeginAnimation(
+                TranslateTransform.XProperty,
+                newAnimX);
+
+            newTransform.BeginAnimation(
+                TranslateTransform.YProperty,
+                newAnimY);
 
             await Task.Delay(300);
 
