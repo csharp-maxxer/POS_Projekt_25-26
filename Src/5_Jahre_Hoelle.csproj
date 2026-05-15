@@ -11,6 +11,17 @@
 
   <ItemGroup>
     <None Remove="assets\Achievments.png" />
+    <None Remove="assets\background_vorlaeufig.png" />
+    <None Remove="assets\chair_downwards.png" />
+    <None Remove="assets\chair_left.png" />
+    <None Remove="assets\chair_right.png" />
+    <None Remove="assets\chair_upwards.png" />
+    <None Remove="assets\desk_dave1.png" />
+    <None Remove="assets\desk_dave2.png" />
+    <None Remove="assets\desk_erik1.png" />
+    <None Remove="assets\desk_erik2.png" />
+    <None Remove="assets\desk_vale1.png" />
+    <None Remove="assets\desk_vale2.png" />
     <None Remove="assets\Difficulty_Image.png" />
     <None Remove="assets\menue.png" />
     <None Remove="assets\Pause.png" />
@@ -30,6 +41,17 @@
     <Content Include="assets\Stats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="assets\background_vorlaeufig.png" />
+    <Resource Include="assets\chair_downwards.png" />
+    <Resource Include="assets\chair_left.png" />
+    <Resource Include="assets\chair_right.png" />
+    <Resource Include="assets\chair_upwards.png" />
+    <Resource Include="assets\desk_dave1.png" />
+    <Resource Include="assets\desk_dave2.png" />
+    <Resource Include="assets\desk_erik1.png" />
+    <Resource Include="assets\desk_erik2.png" />
+    <Resource Include="assets\desk_vale1.png" />
+    <Resource Include="assets\desk_vale2.png" />
     <Resource Include="assets\Pause.png" />
   </ItemGroup>
 
@@ -40,7 +62,6 @@
     <Page Update="pages\menue_page.xaml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Page>
-    <Folder Include="assets\" />
   </ItemGroup>
 
 </Project>

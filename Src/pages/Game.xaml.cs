@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace _5_Jahre_Hoelle.pages
@@ -22,6 +23,8 @@ namespace _5_Jahre_Hoelle.pages
     /// </summary>
     public partial class Game : Page
     {
+        private Room currentRoom;
+        private bool isTransitioning = false;
         private bool moveLeft;
         private bool moveRight;
         private bool moveUp;
@@ -112,11 +115,73 @@ namespace _5_Jahre_Hoelle.pages
             
 
             // Testing
-            Room room = new Room();
+            List<List<char>> matrix_rooms = new List<List<char>>();
+            matrix_rooms = CreateMapMatrix(10, 15);
+            Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms);
+            
 
+            // code
+            currentRoom = cllted_rooms[(5, 5)];
+            currentRoom.DrawRoom();
+            CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+
+            // TESTING DELETE ME
+            //this.KeyDown += Game_KeyDown_DELETE_ME;
+            this.Focusable = true;
+            this.Focus();
         }
 
-        private static List<List<string>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
+        //private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.D)
+        //    {
+
+        //        var nextRoom = new Room(
+        //        currentRoom.Ypos + 1,
+        //        currentRoom.Xpos,
+        //        'X');
+        //        nextRoom.DrawRoom();
+        //        await SwitchRoom(currentRoom, nextRoom);
+        //    }
+        //}
+
+        public Dictionary<(int y, int x), Room> Collect_Rooms (List<List<char>> rooms)
+        {
+            // adds all rooms into a dict<(int x, int y), Room>
+            Dictionary<(int y, int x), Room> dict_rooms = new Dictionary<(int, int), Room>(); 
+
+            for (int i = 0; i < rooms.Count; i++) 
+            {
+                for (int j = 0; j < rooms[i].Count; j++)
+                {
+                    if (rooms[i][j] == '-')
+                    {
+                        continue;
+                    }
+                    else if (rooms[i][j] ==  'X')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'X'));
+                    }
+                    else if (rooms[i][j] == 'O')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'O'));
+                    }
+                    else if (rooms[i][j] == 'B')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'B'));
+                    }
+                    else if (rooms[i][j] == 'S')
+                    {
+                        dict_rooms.Add((i, j), new Room(i, j, 'S'));
+                    }
+                }
+            }
+            return dict_rooms;
+        }
+
+
+        private static List<List<char>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
         {
             if (anzahl_rooms > size_matrix * size_matrix)
                 throw new Exception("zuviele Räume, es kann keine Sackgassen geben weil die ganze map voll ist..");
@@ -129,14 +194,14 @@ namespace _5_Jahre_Hoelle.pages
             directions.Add(2, "South");
             directions.Add(3, "West");
 
-            List<List<string>> feld = new List<List<string>>(); // mitte 5,5
+            List<List<char>> feld = new List<List<char>>(); // mitte 5,5
 
             for (int i = 0; i < size; i++)
             {
-                List<string> zwsch_speicher = new List<string>();
+                List<char> zwsch_speicher = new List<char>();
                 for (int j = 0; j < size; j++)
                 {
-                    zwsch_speicher.Add("-");
+                    zwsch_speicher.Add('-');
                 }
                 feld.Add(zwsch_speicher);
             }
@@ -145,7 +210,7 @@ namespace _5_Jahre_Hoelle.pages
             int startX = size / 2;
             int startY = size / 2;
 
-            feld[startY][startX] = "O";
+            feld[startY][startX] = 'O';
 
             Random rand = new Random();
 
@@ -154,7 +219,7 @@ namespace _5_Jahre_Hoelle.pages
             // Promt: kannst du es vllt so machen dass die räume nicht so in clustern spawnen sondern eher so wie eben in isaac in einer schöneren struktur weißt du?
             // KI-Start
 
-            static int CountNeighbors(List<List<string>> feld, int x, int y)
+            static int CountNeighbors(List<List<char>> feld, int x, int y)
             {
                 int count = 0;
 
@@ -167,7 +232,7 @@ namespace _5_Jahre_Hoelle.pages
 
                     if (nx >= 0 && nx < feld.Count && ny >= 0 && ny < feld.Count)
                     {
-                        if (feld[ny][nx] != "-")
+                        if (feld[ny][nx] != '-')
                             count++;
                     }
                 }
@@ -187,7 +252,7 @@ namespace _5_Jahre_Hoelle.pages
             {
 
 
-                foreach (var room in rooms)
+                foreach ((int x, int y) room in rooms)
                 {
                     int n = CountNeighbors(feld, room.x, room.y);
 
@@ -196,7 +261,7 @@ namespace _5_Jahre_Hoelle.pages
                 }
 
                 // 👉 Bevorzuge neue Räume (letzte = natürlicher Pfad)
-                var current = frontier[rand.Next(Math.Min(3, frontier.Count))];
+                (int x, int y) current = frontier[rand.Next(Math.Min(3, frontier.Count))];
 
                 List<(int dx, int dy)> dirs = new List<(int, int)>()
                 {
@@ -206,7 +271,7 @@ namespace _5_Jahre_Hoelle.pages
                 // mischen
                 dirs.Sort((a, b) => rand.Next(-1, 2));
 
-                foreach (var d in dirs)
+                foreach ((int dx, int dy) d in dirs)
                 {
                     int newX = current.x + d.dx;
                     int newY = current.y + d.dy;
@@ -214,7 +279,7 @@ namespace _5_Jahre_Hoelle.pages
                     if (newX < 0 || newX >= size || newY < 0 || newY >= size)
                         continue;
 
-                    if (feld[newY][newX] != "-")
+                    if (feld[newY][newX] != '-')
                         continue;
 
                     // 👉 Nachbarn zählen (ANTI-CLUSTER!)
@@ -223,7 +288,7 @@ namespace _5_Jahre_Hoelle.pages
                     if (neighbors > 1)
                         continue;
 
-                    feld[newY][newX] = "X";
+                    feld[newY][newX] = 'X';
                     rooms.Add((newX, newY));
                     frontier.Add((newX, newY));
 
@@ -241,42 +306,122 @@ namespace _5_Jahre_Hoelle.pages
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (feld[i][j] != "-")
+                    if (feld[i][j] != '-')
                     {
 
                         if (CountNeighbors(feld, j, i) == 1)
                         {
                             possible_rooms.Add((j, i));
                         }
-
-
                     }
                 }
             }
 
             int random_int = rand.Next(possible_rooms.Count);
-            (int tresure_x, int tresure_y) tresure_room = possible_rooms[random_int];
-            possible_rooms.Remove(tresure_room);
-            feld[tresure_room.tresure_y][tresure_room.tresure_x] = "T";
+            (int shop_x, int shop_y) shop = possible_rooms[random_int];
+            possible_rooms.Remove(shop);
+            feld[shop.shop_y][shop.shop_x] = 'S';
 
             random_int = rand.Next(possible_rooms.Count);
             (int boss_room_x, int boss_room_y) boss_room = possible_rooms[random_int];
             possible_rooms.Remove(boss_room);
-            feld[boss_room.boss_room_y][boss_room.boss_room_x] = "B";
-
-            // print
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Console.Write(feld[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
-
+            feld[boss_room.boss_room_y][boss_room.boss_room_x] = 'B';
+                        
             return feld;
         }
 
+        // KI: Chatgpt
+        // Prompt: Kannst du mir bitte eine Animation zwischen den Räumen machen, halt wenn man wechselt dass es so eine ist wie in the biinding of isaac
+        // KI Start
+        public async Task SwitchRoom(Room room_from, Room room_to)
+        {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            room_to.DrawRoom();
+
+            CanvasGame.Children.Add(room_to.RoomCanvas);
+            Panel.SetZIndex(room_to.RoomCanvas, 1);
+            Panel.SetZIndex(room_from.RoomCanvas, 0);
+
+            double width = 1680;
+            double height = 840;
+
+            TranslateTransform oldTransform = new TranslateTransform();
+            TranslateTransform newTransform = new TranslateTransform();
+
+            room_from.RoomCanvas.RenderTransform = oldTransform;
+            room_to.RoomCanvas.RenderTransform = newTransform;
+
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(300));
+
+            double oldToX = 0;
+            double oldToY = 0;
+
+            double newFromX = 0;
+            double newFromY = 0;
+
+            // RECHTS
+            if (room_to.Xpos > room_from.Xpos)
+            {
+                newFromX = width;
+                oldToX = -width;
+            }
+
+            // LINKS
+            else if (room_to.Xpos < room_from.Xpos)
+            {
+                newFromX = -width;
+                oldToX = width;
+            }
+
+            // UNTEN
+            else if (room_to.Ypos > room_from.Ypos)
+            {
+                newFromY = height;
+                oldToY = -height;
+            }
+
+            // OBEN
+            else if (room_to.Ypos < room_from.Ypos)
+            {
+                newFromY = -height;
+                oldToY = height;
+            }
+
+            DoubleAnimation oldAnimX = new DoubleAnimation(0, oldToX, duration);
+
+            DoubleAnimation oldAnimY = new DoubleAnimation(0, oldToY, duration);
+
+            DoubleAnimation newAnimX = new DoubleAnimation(newFromX, 0, duration);
+
+            DoubleAnimation newAnimY = new DoubleAnimation(newFromY, 0, duration);
+
+            oldTransform.BeginAnimation(
+                TranslateTransform.XProperty,
+                oldAnimX);
+
+            oldTransform.BeginAnimation(
+                TranslateTransform.YProperty,
+                oldAnimY);
+
+            newTransform.BeginAnimation(
+                TranslateTransform.XProperty,
+                newAnimX);
+
+            newTransform.BeginAnimation(
+                TranslateTransform.YProperty,
+                newAnimY);
+
+            await Task.Delay(300);
+
+            CanvasGame.Children.Remove(room_from.RoomCanvas);
+
+            currentRoom = room_to;
+
+            isTransitioning = false;
+        }
+        // KI ENDE
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.A)
