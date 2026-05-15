@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace _5_Jahre_Hoelle.pages
 {
@@ -24,9 +25,94 @@ namespace _5_Jahre_Hoelle.pages
     {
         private Room currentRoom;
         private bool isTransitioning = false;
+        private bool moveLeft;
+        private bool moveRight;
+        private bool moveUp;
+        private bool moveDown;
+        private DispatcherTimer gameTimer;
+        private Player player;
         public Game()
         {
             InitializeComponent();
+            Focus();
+            player = new Player(1.0,5.0,1.0,1.0,1,1.0);
+            gameTimer = new DispatcherTimer();
+            gameTimer.Interval = TimeSpan.FromMilliseconds(16);
+            gameTimer.Tick += GameTimer_Tick;
+            gameTimer.Start();
+
+        }
+
+        private void GameTimer_Tick(object? sender, EventArgs e)
+        {
+            move();
+            DrawGame();
+            
+        }
+
+        private void move()
+        {
+            if (moveLeft && moveUp)
+            {
+                
+                player.X_Pos -= player.Speed / 1.8;
+                player.Y_Pos -= player.Speed / 1.8;
+
+            }
+
+            else if (moveLeft && moveDown)
+            {
+                player.X_Pos -= player.Speed / 1.8;
+                player.Y_Pos += player.Speed / 1.8;
+
+            }
+
+            else if(moveRight && moveUp)
+            {
+                player.X_Pos += player.Speed / 1.8;
+                player.Y_Pos -= player.Speed / 1.8;
+
+            }
+
+            else if(moveRight && moveDown)
+            {
+                player.X_Pos += player.Speed / 1.8;
+                player.Y_Pos += player.Speed / 1.8;
+
+            }
+
+            else if (moveLeft)
+            {
+                player.X_Pos -= player.Speed;
+
+            }
+
+            else if (moveRight)
+            {
+                player.X_Pos += player.Speed;
+                
+            }
+            else if (moveUp)
+            {
+                player.Y_Pos -= player.Speed;
+               
+
+            }
+            else if (moveDown)
+            {
+                player.Y_Pos += player.Speed;
+                
+
+            }
+        }
+
+        private void DrawGame()
+        {
+          
+           
+            Canvas.SetLeft(Rect_Player, player.X_Pos);
+            Canvas.SetTop(Rect_Player, player.Y_Pos);
+            
 
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
@@ -336,5 +422,50 @@ namespace _5_Jahre_Hoelle.pages
             isTransitioning = false;
         }
         // KI ENDE
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.A)
+            {
+                moveLeft = true;
+            }
+
+            if (e.Key == Key.W)
+            {
+                moveUp = true;
+            }
+
+            if (e.Key == Key.D)
+            {
+                moveRight = true;
+            }
+
+            if (e.Key == Key.S)
+            {
+                moveDown = true;
+            }
+        }
+
+        private void Page_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.A)
+            {
+                moveLeft = false;
+            }
+
+            if (e.Key == Key.W)
+            {
+                moveUp = false;
+            }
+
+            if (e.Key == Key.D)
+            {
+                moveRight = false;
+            }
+
+            if (e.Key == Key.S)
+            {
+                moveDown = false;
+            }
+        }
     }
 }

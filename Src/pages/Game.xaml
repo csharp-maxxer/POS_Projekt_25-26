@@ -6,11 +6,17 @@
       xmlns:local="clr-namespace:_5_Jahre_Hoelle.pages"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Game">
+      Title="Game"
+      KeyDown="Page_KeyDown"
+      KeyUp="Page_KeyUp"
+      Focusable="True">
 
     <Canvas x:Name="CanvasTotalGamescreen" Background="LightCyan" Height="1080" Width="1920">
         <Canvas x:Name="CanvasGame" Height="840" Width="1680" Background="Aquamarine" Canvas.Left="120" Canvas.Top="96">
-            
+              <Rectangle Name="Rect_Player" Stroke="Black" Fill="Gray" Width="100" Height="200" Canvas.Top="420" Canvas.Left="251" HorizontalAlignment="Center" VerticalAlignment="Top"></Rectangle>
         </Canvas>
+
+       
+
     </Canvas>
 </Page>
