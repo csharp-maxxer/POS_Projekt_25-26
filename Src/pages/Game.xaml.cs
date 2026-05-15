@@ -40,6 +40,22 @@ namespace _5_Jahre_Hoelle.pages
             gameTimer.Interval = TimeSpan.FromMilliseconds(16);
             gameTimer.Tick += GameTimer_Tick;
             gameTimer.Start();
+            // Testing
+            List<List<char>> matrix_rooms = new List<List<char>>();
+            matrix_rooms = CreateMapMatrix(10, 15);
+            Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms);
+
+
+            // code
+            currentRoom = cllted_rooms[(5, 5)];
+            currentRoom.DrawRoom();
+            CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+
+            // TESTING DELETE ME
+            //this.KeyDown += Game_KeyDown_DELETE_ME;
+            this.Focusable = true;
+            this.Focus();
 
         }
 
@@ -114,22 +130,7 @@ namespace _5_Jahre_Hoelle.pages
             Canvas.SetTop(Rect_Player, player.Y_Pos);
             
 
-            // Testing
-            List<List<char>> matrix_rooms = new List<List<char>>();
-            matrix_rooms = CreateMapMatrix(10, 15);
-            Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms);
             
-
-            // code
-            currentRoom = cllted_rooms[(5, 5)];
-            currentRoom.DrawRoom();
-            CanvasGame.Children.Add(currentRoom.RoomCanvas);
-
-
-            // TESTING DELETE ME
-            //this.KeyDown += Game_KeyDown_DELETE_ME;
-            this.Focusable = true;
-            this.Focus();
         }
 
         //private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
