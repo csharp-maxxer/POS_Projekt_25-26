@@ -62,7 +62,6 @@ namespace _5_Jahre_Hoelle.classes
                 foreach (string c in row)
                 {
                     char char_ = Convert.ToChar(c);
-                    //MessageBox.Show(c);
                     row_splitted.Add(char_);
                 }
 
@@ -90,28 +89,6 @@ namespace _5_Jahre_Hoelle.classes
 
             RoomCanvas.Children.Add(background);
             PlaceObjects();
-            //for (int y = 0; y < room_matrix.Count; y++)
-            //{
-            //    for (int x = 0; x < room_matrix[y].Count; x++)
-            //    {
-            //        char currentChar = room_matrix[y][x];
-
-            //        if (currentChar == 'D')
-            //        {
-            //            Rectangle rect = new Rectangle();
-
-            //            rect.Width = 120;
-            //            rect.Height = 120;
-
-            //            rect.Fill = Brushes.Red;
-
-            //            Canvas.SetLeft(rect, x * 120);
-            //            Canvas.SetTop(rect, y * 120);
-
-            //            RoomCanvas.Children.Add(rect);
-            //        }
-            //    }
-            //}
         }
 
         public void SpawnEnemies()

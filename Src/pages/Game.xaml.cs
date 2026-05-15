@@ -41,24 +41,24 @@ namespace _5_Jahre_Hoelle.pages
 
 
             // TESTING DELETE ME
-            this.KeyDown += Game_KeyDown_DELETE_ME;
+            //this.KeyDown += Game_KeyDown_DELETE_ME;
             this.Focusable = true;
             this.Focus();
         }
 
-        private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.D)
-            {
+        //private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.D)
+        //    {
 
-                var nextRoom = new Room(
-                currentRoom.Ypos+1,
-                currentRoom.Xpos,
-                'X');
-                nextRoom.DrawRoom();
-                await SwitchRoom(currentRoom, nextRoom);
-            }
-        }
+        //        var nextRoom = new Room(
+        //        currentRoom.Ypos + 1,
+        //        currentRoom.Xpos,
+        //        'X');
+        //        nextRoom.DrawRoom();
+        //        await SwitchRoom(currentRoom, nextRoom);
+        //    }
+        //}
 
         public Dictionary<(int y, int x), Room> Collect_Rooms (List<List<char>> rooms)
         {
