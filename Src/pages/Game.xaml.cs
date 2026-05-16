@@ -66,59 +66,30 @@ namespace _5_Jahre_Hoelle.pages
             
         }
 
-        private void move()
+        private async void move()
         {
-            if (moveLeft && moveUp)
+            Vector direction = new Vector(0, 0);
+
+            if (moveLeft)
+                direction.X -= 1;
+
+            if (moveRight)
+                direction.X += 1;
+
+            if (moveUp)
+                direction.Y -= 1;
+
+            if (moveDown)
+                direction.Y += 1;
+
+            
+            if (direction.Length > 0)
             {
-                
-                player.X_Pos -= player.Speed / 1.8;
-                player.Y_Pos -= player.Speed / 1.8;
-
-            }
-
-            else if (moveLeft && moveDown)
-            {
-                player.X_Pos -= player.Speed / 1.8;
-                player.Y_Pos += player.Speed / 1.8;
-
-            }
-
-            else if(moveRight && moveUp)
-            {
-                player.X_Pos += player.Speed / 1.8;
-                player.Y_Pos -= player.Speed / 1.8;
-
-            }
-
-            else if(moveRight && moveDown)
-            {
-                player.X_Pos += player.Speed / 1.8;
-                player.Y_Pos += player.Speed / 1.8;
-
-            }
-
-            else if (moveLeft)
-            {
-                player.X_Pos -= player.Speed;
-
-            }
-
-            else if (moveRight)
-            {
-                player.X_Pos += player.Speed;
-                
-            }
-            else if (moveUp)
-            {
-                player.Y_Pos -= player.Speed;
-               
-
-            }
-            else if (moveDown)
-            {
-                player.Y_Pos += player.Speed;
-                
-
+                // chatgpt anfang: wie mach ich das die diagonales laufen gleich schnell ist
+                direction.Normalize();
+                // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
+                player.X_Pos += direction.X * player.Speed;
+                player.Y_Pos += direction.Y * player.Speed;
             }
         }
 
