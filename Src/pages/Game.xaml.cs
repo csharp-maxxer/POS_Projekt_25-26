@@ -47,7 +47,7 @@ namespace _5_Jahre_Hoelle.pages
             
         }
 
-        private void move()
+        private async void move()
         {
             Vector direction = new Vector(0, 0);
 
