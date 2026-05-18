@@ -12,8 +12,18 @@
   <ItemGroup>
     <None Remove="assets\Achievments.png" />
     <None Remove="assets\Difficulty_Image.png" />
+    <None Remove="assets\front_1.png" />
+    <None Remove="assets\front_2.png" />
+    <None Remove="assets\links_1.png" />
+    <None Remove="assets\links_2.png" />
     <None Remove="assets\menue.png" />
     <None Remove="assets\Pause.png" />
+    <None Remove="assets\Player.png" />
+    <None Remove="assets\Player_spritesheet.png" />
+    <None Remove="assets\Player_up_1.png" />
+    <None Remove="assets\Player_up_2.png" />
+    <None Remove="assets\rechts_1.png" />
+    <None Remove="assets\rechts_2.png" />
     <None Remove="assets\Stats.png" />
   </ItemGroup>
 
@@ -30,7 +40,34 @@
     <Content Include="assets\Stats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="assets\front_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\front_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\links_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\links_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\Pause.png" />
+    <Resource Include="assets\Player_spritesheet.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\Player_up_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\Player_up_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\rechts_1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\rechts_2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +77,6 @@
     <Page Update="pages\menue_page.xaml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Page>
-    <Folder Include="assets\" />
   </ItemGroup>
 
 </Project>
