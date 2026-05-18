@@ -36,10 +36,83 @@ namespace _5_Jahre_Hoelle.pages
         private int downframecount;
         private int rightframcount;
         private int leftframcount;
+        //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+        private ImageBrush links1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/links_1.png")
+    ),
+            Stretch = Stretch.Uniform
+        };
+        //chatgpt Ende
+
+        private ImageBrush links2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                new Uri($"pack://application:,,,/assets/links_2.png")
+),
+            Stretch = Stretch.Uniform
+        };
+
+
+
+        private ImageBrush rechts1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/rechts_1.png")
+    ),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush rechts2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                new Uri($"pack://application:,,,/assets/rechts_2.png")
+),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush front1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/front_1.png")
+    ),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush front2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                new Uri($"pack://application:,,,/assets/front_2.png")
+),
+            Stretch = Stretch.Uniform
+        };
+
+
+
+        private ImageBrush up1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/Player_up_1.png")
+    ),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush up2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                new Uri($"pack://application:,,,/assets/Player_up_2.png")
+),
+            Stretch = Stretch.Uniform
+        };
+
         public Game()
         {
             InitializeComponent();
             Focus();
+
+            
+
 
             player = new Player(1.0, 5.0, 1.0, 1.0, 1, 1.0);
 
@@ -84,15 +157,16 @@ namespace _5_Jahre_Hoelle.pages
             {
                 direction.X -= 1;
                 leftframcount++;
-                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
-                Rect_Player.Fill = new ImageBrush
+
+                if (leftframcount == 1)
                 {
-                    ImageSource = new BitmapImage(
-                    new Uri($"pack://application:,,,/assets/links_{leftframcount}.png")
-    ),
-                    Stretch = Stretch.Uniform
-                };
-                //chatgpt Ende
+                    Rect_Player.Fill = links1;
+                }
+
+                if (leftframcount == 2)
+                {
+                    Rect_Player.Fill = links2;
+                }
                 if (leftframcount == 2)
                     leftframcount = 0;
             }
@@ -100,15 +174,17 @@ namespace _5_Jahre_Hoelle.pages
             {
                 direction.X += 1;
                 rightframcount++;
-                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
-                Rect_Player.Fill = new ImageBrush
+
+                if (rightframcount == 1)
                 {
-                    ImageSource = new BitmapImage(
-                    new Uri($"pack://application:,,,/assets/rechts_{rightframcount}.png")
-    ),
-                    Stretch = Stretch.Uniform
-                };
-                //chatgpt Ende
+                    Rect_Player.Fill = rechts1;
+                }
+
+                if (rightframcount == 2)
+                {
+                    Rect_Player.Fill = rechts2;
+                }
+
                 if (rightframcount == 2)
                     rightframcount = 0;
             }
@@ -118,15 +194,17 @@ namespace _5_Jahre_Hoelle.pages
             {
                 direction.Y -= 1;
                 upframcount++;
-                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
-                Rect_Player.Fill = new ImageBrush
+
+                if (upframcount == 1)
                 {
-                    ImageSource = new BitmapImage(
-                    new Uri($"pack://application:,,,/assets/Player_up_{upframcount}.png")
-    ),
-                    Stretch = Stretch.Uniform
-                };
-                //chatgpt Ende
+                    Rect_Player.Fill = up1;
+                }
+
+                if (upframcount == 2)
+                {
+                    Rect_Player.Fill = up2;
+                }
+
                 if (upframcount == 2) 
                     upframcount = 0;
             }
@@ -136,15 +214,17 @@ namespace _5_Jahre_Hoelle.pages
             {
                 direction.Y += 1;
                 downframecount++;
-                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
-                Rect_Player.Fill = new ImageBrush
+
+                if (downframecount == 1)
                 {
-                    ImageSource = new BitmapImage(
-                    new Uri($"pack://application:,,,/assets/front_{downframecount}.png")
-    ),
-                    Stretch = Stretch.Uniform
-                };
-                //chatgpt Ende
+                    Rect_Player.Fill = front1;
+                }
+
+                if (downframecount == 2)
+                {
+                    Rect_Player.Fill = front2;
+                }
+
                 if (downframecount == 2)
                     downframecount = 0;
             }
