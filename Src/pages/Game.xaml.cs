@@ -73,15 +73,15 @@ namespace _5_Jahre_Hoelle.pages
 
             if (moveLeft)
             {
-                if (!isTransitioning)
-                {
-                    var nextRoom = new Room(
-                            currentRoom.Ypos + 1,
-                            currentRoom.Xpos,
-                            'X');
-                    nextRoom.DrawRoom();
-                    await SwitchRoom(currentRoom, nextRoom);
-                }
+                //if (!isTransitioning)
+                //{
+                //    var nextRoom = new Room(
+                //            currentRoom.Ypos + 1,
+                //            currentRoom.Xpos,
+                //            'X');
+                //    nextRoom.DrawRoom();
+                //    await SwitchRoom(currentRoom, nextRoom);
+                //}
 
                 direction.X -= 1;
             }
@@ -322,7 +322,7 @@ namespace _5_Jahre_Hoelle.pages
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (feld[i][j] != '-')
+                    if (feld[i][j] == 'X')
                     {
 
                         if (CountNeighbors(feld, j, i) == 1)

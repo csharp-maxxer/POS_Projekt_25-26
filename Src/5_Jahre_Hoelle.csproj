@@ -29,6 +29,7 @@
     <None Remove="assets\door_up.png" />
     <None Remove="assets\menue.png" />
     <None Remove="assets\Pause.png" />
+    <None Remove="assets\shop_booth.png" />
     <None Remove="assets\Stats.png" />
   </ItemGroup>
 
@@ -61,6 +62,7 @@
     <Resource Include="assets\door_right.png" />
     <Resource Include="assets\door_up.png" />
     <Resource Include="assets\Pause.png" />
+    <Resource Include="assets\shop_booth.png" />
   </ItemGroup>
 
   <ItemGroup>
