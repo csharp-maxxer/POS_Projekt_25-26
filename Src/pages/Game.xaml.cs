@@ -1,6 +1,7 @@
 ﻿using _5_Jahre_Hoelle.classes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,11 +32,17 @@ namespace _5_Jahre_Hoelle.pages
         private bool moveDown;
         private DispatcherTimer gameTimer;
         private Player player;
+        private int upframcount;
+        private int downframecount;
+        private int rightframcount;
+        private int leftframcount;
         public Game()
         {
             InitializeComponent();
             Focus();
-            player = new Player(1.0,5.0,1.0,1.0,1,1.0);
+
+            player = new Player(1.0, 5.0, 1.0, 1.0, 1, 1.0);
+
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = TimeSpan.FromMilliseconds(16);
             gameTimer.Tick += GameTimer_Tick;
@@ -57,13 +64,16 @@ namespace _5_Jahre_Hoelle.pages
             this.Focusable = true;
             this.Focus();
 
+            upframcount = 0;
+            downframecount = 0;
+            rightframcount = 0;
+            leftframcount = 0;
         }
 
         private void GameTimer_Tick(object? sender, EventArgs e)
         {
             move();
             DrawGame();
-            
         }
 
         private async void move()
@@ -71,23 +81,80 @@ namespace _5_Jahre_Hoelle.pages
             Vector direction = new Vector(0, 0);
 
             if (moveLeft)
+            {
                 direction.X -= 1;
-
+                leftframcount++;
+                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+                Rect_Player.Fill = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/links_{leftframcount}.png")
+    ),
+                    Stretch = Stretch.Uniform
+                };
+                //chatgpt Ende
+                if (leftframcount == 2)
+                    leftframcount = 0;
+            }
             if (moveRight)
+            {
                 direction.X += 1;
+                rightframcount++;
+                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+                Rect_Player.Fill = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/rechts_{rightframcount}.png")
+    ),
+                    Stretch = Stretch.Uniform
+                };
+                //chatgpt Ende
+                if (rightframcount == 2)
+                    rightframcount = 0;
+            }
+
 
             if (moveUp)
+            {
                 direction.Y -= 1;
+                upframcount++;
+                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+                Rect_Player.Fill = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/Player_up_{upframcount}.png")
+    ),
+                    Stretch = Stretch.Uniform
+                };
+                //chatgpt Ende
+                if (upframcount == 2) 
+                    upframcount = 0;
+            }
+
 
             if (moveDown)
+            {
                 direction.Y += 1;
+                downframecount++;
+                //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+                Rect_Player.Fill = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(
+                    new Uri($"pack://application:,,,/assets/front_{downframecount}.png")
+    ),
+                    Stretch = Stretch.Uniform
+                };
+                //chatgpt Ende
+                if (downframecount == 2)
+                    downframecount = 0;
+            }
 
-            
             if (direction.Length > 0)
             {
                 // chatgpt anfang: wie mach ich das die diagonales laufen gleich schnell ist
                 direction.Normalize();
                 // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
+
                 player.X_Pos += direction.X * player.Speed;
                 player.Y_Pos += direction.Y * player.Speed;
             }
@@ -95,12 +162,11 @@ namespace _5_Jahre_Hoelle.pages
 
         private void DrawGame()
         {
-          
-           
             Canvas.SetLeft(Rect_Player, player.X_Pos);
             Canvas.SetTop(Rect_Player, player.Y_Pos);
-            
 
+            // Testing
+          
             
         }
 
@@ -186,7 +252,6 @@ namespace _5_Jahre_Hoelle.pages
 
             Random rand = new Random();
 
-            
             // KI: ChatGPT
             // Promt: kannst du es vllt so machen dass die räume nicht so in clustern spawnen sondern eher so wie eben in isaac in einer schöneren struktur weißt du?
             // KI-Start
@@ -208,6 +273,7 @@ namespace _5_Jahre_Hoelle.pages
                             count++;
                     }
                 }
+
                 return count;
             }
 
@@ -271,16 +337,17 @@ namespace _5_Jahre_Hoelle.pages
                 if (rand.NextDouble() < 0.3)
                     frontier.Remove(current);
             }
+
             //KI-Ende
 
             List<(int, int)> possible_rooms = new List<(int, int)>();
+
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     if (feld[i][j] != '-')
                     {
-
                         if (CountNeighbors(feld, j, i) == 1)
                         {
                             possible_rooms.Add((j, i));
