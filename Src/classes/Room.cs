@@ -15,6 +15,11 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Room
     {
+        public bool DoorTop { get; set; }
+        public bool DoorRight { get; set; }
+        public bool DoorBottom { get; set; }
+        public bool DoorLeft { get; set; }
+
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
         // 14x7 mit je 120px
@@ -29,6 +34,10 @@ namespace _5_Jahre_Hoelle.classes
 
         public Room(int ypos, int xpos, char type)
         {
+            DoorTop = false;
+            DoorRight = false;
+            DoorBottom = false;
+            DoorLeft = false;
 
             Xpos = xpos;
             Ypos = ypos;
@@ -89,6 +98,7 @@ namespace _5_Jahre_Hoelle.classes
 
             RoomCanvas.Children.Add(background);
             PlaceObjects();
+            PlaceDoors();
         }
 
         public void SpawnEnemies()
@@ -96,7 +106,7 @@ namespace _5_Jahre_Hoelle.classes
 
         }
 
-        public void PlaceObjects()
+        private void PlaceObjects()
         {
             Dictionary<int, (string, int, int)> graphics = new Dictionary<int, (string, int, int)>();
 
@@ -118,7 +128,7 @@ namespace _5_Jahre_Hoelle.classes
                     if (room_matrix[y][x] == 'D')
                     {
                         int random_grafic = random.Next(graphics.Count);
-                        (string,  int, int) selected_grafic = graphics[random_grafic];
+                        (string, int, int) selected_grafic = graphics[random_grafic];
 
                         Image image = new Image();
                         image.Width = selected_grafic.Item2;
@@ -136,6 +146,70 @@ namespace _5_Jahre_Hoelle.classes
                         RoomCanvas.Children.Add(image);
                     }
                 }
+            }
+        }
+
+        private void PlaceDoors()
+        {
+            if (DoorTop)
+            {
+                Image door = new Image();
+
+                door.Width = 205;
+                door.Height = 80;
+
+
+                door.Source = new BitmapImage(new Uri("../assets/door_up.png", UriKind.Relative));
+
+                Canvas.SetLeft(door, 738);
+                Canvas.SetTop(door, -80);
+
+                RoomCanvas.Children.Add(door);
+            }
+            if (DoorBottom)
+            {
+                Image door = new Image();
+
+                door.Width = 206;
+                door.Height = 80;
+
+
+                door.Source = new BitmapImage(new Uri("../assets/door_down.png", UriKind.Relative));
+
+                Canvas.SetLeft(door, 738);
+                Canvas.SetTop(door, 840);
+
+                RoomCanvas.Children.Add(door);
+            }
+            if (DoorLeft)
+            {
+                Image door = new Image();
+
+                door.Width = 120;
+                door.Height = 209;
+
+
+                door.Source = new BitmapImage(new Uri("../assets/door_left.png", UriKind.Relative));
+
+                Canvas.SetLeft(door, -120);
+                Canvas.SetTop(door, 316);
+
+                RoomCanvas.Children.Add(door);
+            }
+            if (DoorRight)
+            {
+                Image door = new Image();
+
+                door.Width = 120;
+                door.Height = 209;
+
+
+                door.Source = new BitmapImage(new Uri("../assets/door_right.png", UriKind.Relative));
+
+                Canvas.SetLeft(door, 1680);
+                Canvas.SetTop(door, 316);
+
+                RoomCanvas.Children.Add(door);
             }
         }
     }

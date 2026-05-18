@@ -44,6 +44,7 @@ namespace _5_Jahre_Hoelle.pages
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, 15);
             Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms);
+            assing_doors_to_rooms(cllted_rooms);
 
 
             // code
@@ -71,7 +72,20 @@ namespace _5_Jahre_Hoelle.pages
             Vector direction = new Vector(0, 0);
 
             if (moveLeft)
+            {
+                if (!isTransitioning)
+                {
+                    var nextRoom = new Room(
+                            currentRoom.Ypos + 1,
+                            currentRoom.Xpos,
+                            'X');
+                    nextRoom.DrawRoom();
+                    await SwitchRoom(currentRoom, nextRoom);
+                }
+
                 direction.X -= 1;
+            }
+                
 
             if (moveRight)
                 direction.X += 1;
@@ -117,6 +131,36 @@ namespace _5_Jahre_Hoelle.pages
         //        await SwitchRoom(currentRoom, nextRoom);
         //    }
         //}
+
+        public void assing_doors_to_rooms(Dictionary<(int, int), Room> clltd_rooms)
+        {
+            // welcher raum hat welche türen?
+            foreach (Room room in clltd_rooms.Values)
+            {
+                int x = room.Xpos;
+                int y = room.Ypos;
+
+                if (clltd_rooms.ContainsKey((y - 1, x)))
+                {
+                    room.DoorTop = true;
+                }
+
+                if (clltd_rooms.ContainsKey((y, x + 1)))
+                {
+                    room.DoorRight = true;
+                }
+
+                if (clltd_rooms.ContainsKey((y + 1, x)))
+                {
+                    room.DoorBottom = true;
+                }
+
+                if (clltd_rooms.ContainsKey((y, x - 1)))
+                {
+                    room.DoorLeft = true;
+                }
+            }
+        }
 
         public Dictionary<(int y, int x), Room> Collect_Rooms (List<List<char>> rooms)
         {
