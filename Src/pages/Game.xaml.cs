@@ -36,6 +36,9 @@ namespace _5_Jahre_Hoelle.pages
         private int downframecount;
         private int rightframcount;
         private int leftframcount;
+
+        private int animationTick = 0;
+        private int animationFrame = 0;
         //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
         private ImageBrush links1 = new ImageBrush
         {
@@ -561,6 +564,29 @@ namespace _5_Jahre_Hoelle.pages
             if (e.Key == Key.S)
             {
                 moveDown = true;
+            }
+        }
+
+        
+
+        private void UpdatePlayerAnimation(ImageBrush frame1, ImageBrush frame2)
+        {
+            animationTick++;
+
+            if (animationTick >= 10)
+            {
+                animationTick = 0;
+
+                if (animationFrame == 0)
+                {
+                    Rect_Player.Fill = frame1;
+                    animationFrame = 1;
+                }
+                else
+                {
+                    Rect_Player.Fill = frame2;
+                    animationFrame = 0;
+                }
             }
         }
 
