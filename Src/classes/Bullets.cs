@@ -10,7 +10,7 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Bullets
     {
-        public Vector direction {  get; private set; }
+        public Vector Direction {  get; private set; }
         public double Damage { get; private set; }
 
         public double Speed {  get; private set; }
@@ -19,11 +19,12 @@ namespace _5_Jahre_Hoelle.classes
 
         public double Y_pos { get; private set; } 
 
-        public Bullets(double damage, double speed, double range)
+        public Bullets(double damage, double speed, double range, Vector direction)
         {
             Speed = speed;
             Range = range;
             Range = range;
+            Direction = direction;
         }
 
 
