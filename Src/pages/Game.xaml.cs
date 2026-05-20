@@ -37,6 +37,10 @@ namespace _5_Jahre_Hoelle.pages
         private int rightframcount;
         private int leftframcount;
 
+       //chatgpt anfang: wie mache ich hier einen Deltatimer
+        private DateTime lastFrameTime;
+        private double deltaTime;
+        //chatgpt ende
         private int animationTick = 0;
         private int animationFrame = 0;
         //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
@@ -119,12 +123,17 @@ namespace _5_Jahre_Hoelle.pages
             
 
 
-            player = new Player(1.0, 5.0, 1.0, 1.0, 1, 1.0);
-
+            player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
+            //chatgpt anfang: wie mache ich hier einen Deltatimer
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = TimeSpan.FromMilliseconds(16);
             gameTimer.Tick += GameTimer_Tick;
+
+            lastFrameTime = DateTime.Now;
+
             gameTimer.Start();
+            //chatgpt ende
+
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, 15);
@@ -151,10 +160,16 @@ namespace _5_Jahre_Hoelle.pages
 
         private void GameTimer_Tick(object? sender, EventArgs e)
         {
+            //chatgpt anfang: wie mache ich hier einen Deltatimer
+            DateTime now = DateTime.Now;
+            deltaTime = (now - lastFrameTime).TotalSeconds;
+            lastFrameTime = now;
+            //chatgpt ende
+
             move();
             DrawGame();
         }
-
+         
         private async void move()
         {
             if (isTransitioning) return;
@@ -294,8 +309,8 @@ namespace _5_Jahre_Hoelle.pages
                 direction.Normalize();
                 // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
 
-                player.X_Pos += direction.X * player.Speed;
-                player.Y_Pos += direction.Y * player.Speed;
+                player.X_Pos += direction.X * player.Speed * deltaTime;
+                player.Y_Pos += direction.Y * player.Speed * deltaTime;
             }
         }
 
