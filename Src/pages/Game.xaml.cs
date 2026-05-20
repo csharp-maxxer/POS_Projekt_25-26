@@ -36,8 +36,9 @@ namespace _5_Jahre_Hoelle.pages
         private int downframecount;
         private int rightframcount;
         private int leftframcount;
-
-       //chatgpt anfang: wie mache ich hier einen Deltatimer
+        
+       
+        //chatgpt anfang: wie mache ich hier einen Deltatimer
         private DateTime lastFrameTime;
         private double deltaTime;
         //chatgpt ende
@@ -121,7 +122,7 @@ namespace _5_Jahre_Hoelle.pages
             Focus();
 
             
-
+            
 
             player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
             //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -169,11 +170,46 @@ namespace _5_Jahre_Hoelle.pages
             move();
             DrawGame();
         }
-         
+
+        private bool CollidesWithObstacle(double newX, double newY)
+        {
+            Rect playerHitbox = new Rect(
+                newX + 30,
+                newY + 50,
+                43,
+                50
+            );
+
+            foreach (Rect obstacle in currentRoom.obstacles)
+            {
+                //caht gpt Anfang: Wie kann ich checken ob zwei Rect miteinander kollidieren
+                if (playerHitbox.IntersectsWith(obstacle))
+                // chatgpt ende
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private async void move()
         {
-            if (isTransitioning) return;
-            //if (player.X_Pos >= 1640) MessageBox.Show("test");
+
+
+
+            Rect palyer_rect = new Rect();
+            palyer_rect.X = player.X_Pos;
+            palyer_rect.Y = player.Y_Pos;
+            palyer_rect.Width = 73;
+            palyer_rect.Height = 100;
+
+            foreach (Rect obstacle in currentRoom.obstacles)
+            {
+
+            }
+
+
             Vector direction = new Vector(0, 0);
 
             if (moveLeft && player.X_Pos  >= 0)
@@ -309,8 +345,18 @@ namespace _5_Jahre_Hoelle.pages
                 direction.Normalize();
                 // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
 
-                player.X_Pos += direction.X * player.Speed * deltaTime;
-                player.Y_Pos += direction.Y * player.Speed * deltaTime;
+                double Xnew = player.X_Pos + direction.X * player.Speed * deltaTime;
+                double Ynew = player.Y_Pos + direction.Y * player.Speed * deltaTime;
+
+                if (!CollidesWithObstacle(Xnew, player.Y_Pos))
+                {
+                    player.X_Pos = Xnew;
+                }
+
+                if (!CollidesWithObstacle(player.X_Pos, Ynew))
+                {
+                    player.Y_Pos = Ynew;
+                }
             }
         }
 

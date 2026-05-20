@@ -27,8 +27,9 @@ namespace _5_Jahre_Hoelle.classes
             Firerate = firerate;
             Grade = grade;
             Energy = energy;
-            X_Pos = 50;
-            Y_Pos = 50;
+            X_Pos = 803;
+            Y_Pos = 370;
+            Bullets = new List<Bullets>();
         }
 
         
