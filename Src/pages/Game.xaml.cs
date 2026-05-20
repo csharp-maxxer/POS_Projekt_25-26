@@ -157,20 +157,8 @@ namespace _5_Jahre_Hoelle.pages
         {
             Vector direction = new Vector(0, 0);
 
-            if (moveLeft)
+            if (moveLeft && player.X_Pos  >= 0)
             {
-                //if (!isTransitioning)
-                //{
-                //    var nextRoom = new Room(
-                //            currentRoom.Ypos + 1,
-                //            currentRoom.Xpos,
-                //            'X');
-                //    nextRoom.DrawRoom();
-                //    await SwitchRoom(currentRoom, nextRoom);
-                //}
-
-           
-            
                 
 
                 direction.X -= 1;
@@ -188,7 +176,9 @@ namespace _5_Jahre_Hoelle.pages
                 if (leftframcount == 2)
                     leftframcount = 0;
             }
-            if (moveRight)
+
+
+            if (moveRight && player.X_Pos + 73 <= 1680)
             {
                 direction.X += 1;
                 rightframcount++;
@@ -208,7 +198,7 @@ namespace _5_Jahre_Hoelle.pages
             }
 
 
-            if (moveUp)
+            if (moveUp && player.Y_Pos >= 0)
             {
                 direction.Y -= 1;
                 upframcount++;
@@ -228,7 +218,8 @@ namespace _5_Jahre_Hoelle.pages
             }
 
 
-            if (moveDown)
+            if (moveDown && player.Y_Pos + 100
+                <= 840)
             {
                 direction.Y += 1;
                 downframecount++;
@@ -345,7 +336,6 @@ namespace _5_Jahre_Hoelle.pages
             }
             return dict_rooms;
         }
-
 
         private static List<List<char>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
         {
@@ -609,6 +599,55 @@ namespace _5_Jahre_Hoelle.pages
             if (e.Key == Key.S)
             {
                 moveDown = true;
+            }
+
+            if (e.Key == Key.A)
+            {
+                moveLeft = true;
+            }
+
+
+
+
+
+            if (e.Key == Key.Up)
+            {
+                if (moveLeft) 
+                {
+                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector((player.Speed / 2) * -1, 1 * player.Firerate)));
+                }
+
+               
+                else if (moveDown)
+                {
+                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(0, 1 * player.Firerate - (player.Speed / 4))));
+                }
+
+                else if (moveUp)
+                {
+                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(0, (1 * player.Firerate + (player.Speed / 4)) * -1 )));
+                }
+
+                else if (moveRight)
+                {
+                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(player.Speed / 2, 1 * player.Firerate)));
+                }
+
+            }
+
+            else if (e.Key == Key.Left)
+            {
+                MessageBox.Show("Left");
+            }
+
+            else if (e.Key == Key.Right)
+            {
+                MessageBox.Show("Right");
+            }
+
+            else if (e.Key == Key.Down)
+            {
+                MessageBox.Show("Down");
             }
         }
 

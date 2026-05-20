@@ -32,9 +32,9 @@ namespace _5_Jahre_Hoelle.classes
         }
 
         
-        public void Attack()
+        public void Attack(Bullets bullet)
         {
-
+            Bullets.Add(bullet);
         }
     }
 }
