@@ -109,6 +109,8 @@ namespace _5_Jahre_Hoelle.pages
             Stretch = Stretch.Uniform
         };
 
+        Dictionary<(int y, int x), Room> cllted_rooms;
+
         public Game()
         {
             InitializeComponent();
@@ -126,7 +128,7 @@ namespace _5_Jahre_Hoelle.pages
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, 15);
-            Dictionary<(int y, int x), Room> cllted_rooms = Collect_Rooms(matrix_rooms);
+            cllted_rooms = Collect_Rooms(matrix_rooms);
             assing_doors_to_rooms(cllted_rooms);
 
 
@@ -155,23 +157,22 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void move()
         {
+            if (isTransitioning) return;
+            //if (player.X_Pos >= 1640) MessageBox.Show("test");
             Vector direction = new Vector(0, 0);
 
             if (moveLeft)
             {
-                //if (!isTransitioning)
-                //{
-                //    var nextRoom = new Room(
-                //            currentRoom.Ypos + 1,
-                //            currentRoom.Xpos,
-                //            'X');
-                //    nextRoom.DrawRoom();
-                //    await SwitchRoom(currentRoom, nextRoom);
-                //}
-
-           
-            
-                
+                if (currentRoom.DoorLeft && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos <= 2)
+                {
+                    if (!isTransitioning)
+                    {
+                        Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos - 1)];
+                        player.X_Pos = -200;
+                        await SwitchRoom(currentRoom, next_room);
+                        player.X_Pos = 1620;
+                    }
+                }
 
                 direction.X -= 1;
                 leftframcount++;
@@ -190,6 +191,17 @@ namespace _5_Jahre_Hoelle.pages
             }
             if (moveRight)
             {
+                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1600)
+                {
+                    if (!isTransitioning)   
+                    {
+                        Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos + 1)];
+                        player.X_Pos = -200;
+                        await SwitchRoom(currentRoom, next_room);
+                        player.X_Pos = 40;
+                    }
+                }
+
                 direction.X += 1;
                 rightframcount++;
 
@@ -210,6 +222,18 @@ namespace _5_Jahre_Hoelle.pages
 
             if (moveUp)
             {
+                
+                if (currentRoom.DoorTop && player.Y_Pos <= 2 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                {
+                    if (!isTransitioning)
+                    {
+                        Room next_room = cllted_rooms[(currentRoom.Ypos - 1, currentRoom.Xpos)];
+                        player.Y_Pos = -200;
+                        await SwitchRoom(currentRoom, next_room);
+                        player.Y_Pos = 720;
+                    }
+                }
+                
                 direction.Y -= 1;
                 upframcount++;
 
@@ -230,8 +254,21 @@ namespace _5_Jahre_Hoelle.pages
 
             if (moveDown)
             {
+                if (currentRoom.DoorBottom && player.Y_Pos >= 730 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                {
+                    if (!isTransitioning)
+                    {
+                        Room next_room = cllted_rooms[(currentRoom.Ypos + 1, currentRoom.Xpos)];
+                        player.Y_Pos = -200;
+                        await SwitchRoom(currentRoom, next_room);
+                        player.Y_Pos = 20;
+                    }
+                }
+
                 direction.Y += 1;
                 downframecount++;
+                
+                
 
                 if (downframecount == 1)
                 {
