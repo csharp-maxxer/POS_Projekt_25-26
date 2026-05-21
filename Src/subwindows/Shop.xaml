@@ -1,0 +1,77 @@
+﻿<Window x:Class="_5_Jahre_Hoelle.subwindows.Shop"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_5_Jahre_Hoelle.subwindows"
+        mc:Ignorable="d"
+        Title="Shop" Height="800" Width="800" ResizeMode="NoResize">
+    <!-- KI: Chatgpt, Prompt: yo chat wie kann ich es machen dass buttons beim hovern invis sind??, KI Anfang:-->
+    <Window.Resources>
+        <Style x:Key="InvisibleButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                        <Grid>
+                            <!-- HITBOX -->
+                            <Border Background="Transparent"/>
+
+                            <!-- HOVER FRAME -->
+                            <Border x:Name="HoverBorder"
+                                BorderBrush="Red"
+                                BorderThickness="3"
+                                Opacity="0"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="HoverBorder"
+                                    Property="Opacity"
+                                    Value="1"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="HoverBorder"
+                                    Property="Opacity"
+                                    Value="0"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!--KI ENDE-->
+    <Canvas>
+        <Image Source="/assets/shop_items.png"></Image>
+        <Label Content="Preis 1" Canvas.Left="73" Canvas.Top="293" FontSize="40" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Preis 2" Canvas.Left="222" Canvas.Top="668" FontSize="40" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Preis 3" Canvas.Left="530" Canvas.Top="476" FontSize="40" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Button Canvas.Left="73" Canvas.Top="36" Height="320" Width="135" Name="Button_Monster" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Click="Button_Monster_Click" MouseEnter="Button_Monster_MouseEnter" MouseLeave="Button_Monster_MouseLeave" Style="{StaticResource InvisibleButton}"/>
+        <Button Canvas.Left="220" Canvas.Top="406" Height="325" Width="117" x:Name="Button_Redbull" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Redbull_Click" MouseEnter="Button_Redbull_MouseEnter" MouseLeave="Button_Redbull_MouseLeave" Style="{StaticResource InvisibleButton}"/>
+        <Button Canvas.Left="460" Canvas.Top="214" Height="325" Width="291" x:Name="Button_Leberkase" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Leberkase_Click" MouseEnter="Button_Leberkase_MouseEnter" MouseLeave="Button_Leberkase_MouseLeave" Style="{StaticResource InvisibleButton}"/>
+        <TextBlock Height="100" Canvas.Left="213"  Canvas.Top="36" Width="100" FontSize="30" Foreground="Transparent" Name="TxtBlock_MonsterDescription" Text="HIER DESCRIPTION REIN"/>
+        <TextBlock Height="100" Canvas.Left="51"  Canvas.Top="414" Width="150" FontSize="30" Foreground="Transparent" Name="TxtBlock_RedbullDescription" Text="HIER DESCRIPTION REIN" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Height="100" Canvas.Left="465"  Canvas.Top="544" Width="150" FontSize="30" Foreground="Transparent" Name="TxtBlock_LeberkaseDescription" Text="HIER DESCRIPTION REIN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <!-- Source: https://stackoverflow.com/questions/2720463/creating-a-clickable-image-in-wpf-->
+        <!-- Source Start-->
+        <Button Height="120" Width="120" Canvas.Left="680" Canvas.Top="650" Name="Button_Exit" Click="Button_Exit_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="/assets/arrow_back.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Canvas>
+</Window>

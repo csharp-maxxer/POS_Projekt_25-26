@@ -13,6 +13,7 @@
 
     <Canvas x:Name="CanvasTotalGamescreen" Background="LightCyan" Height="1080" Width="1920">
         <Canvas x:Name="CanvasGame" Height="840" Width="1680" Background="Aquamarine" Canvas.Left="120" Canvas.Top="96">
+            <TextBlock x:Name="TxtShopHint" Text="Press E to open shop" FontSize="28" FontWeight="Bold" Foreground="White" Background="Black" Padding="10" Visibility="Collapsed" Canvas.Left="20" Canvas.Top="20"/>
             <Rectangle Panel.ZIndex="2" Name="Rect_Player" Stroke="Black" StrokeThickness="0" Fill="Gray" Width="72" Height="100" Canvas.Top="370" Canvas.Left="804" HorizontalAlignment="Left" VerticalAlignment="Top"></Rectangle>
         </Canvas>
 

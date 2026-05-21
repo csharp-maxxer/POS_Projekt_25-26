@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="assets\Achievments.png" />
+    <None Remove="assets\arrow_back.png" />
     <None Remove="assets\background_vorlaeufig.png" />
     <None Remove="assets\chair_downwards.png" />
     <None Remove="assets\chair_left.png" />
@@ -42,6 +43,7 @@
     <None Remove="assets\Player_up_2.png" />
     <None Remove="assets\rechts_1.png" />
     <None Remove="assets\rechts_2.png" />
+    <None Remove="assets\shop_items.png" />
     <None Remove="assets\Stats.png" />
   </ItemGroup>
 
@@ -58,6 +60,7 @@
     <Content Include="assets\Stats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="assets\arrow_back.png" />
     <Resource Include="assets\front_1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -102,6 +105,7 @@
     <Resource Include="assets\rechts_2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\shop_items.png" />
   </ItemGroup>
 
   <ItemGroup>

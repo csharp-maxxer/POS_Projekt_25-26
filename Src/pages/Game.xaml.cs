@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using _5_Jahre_Hoelle.subwindows;
 
 namespace _5_Jahre_Hoelle.pages
 {
@@ -36,6 +37,9 @@ namespace _5_Jahre_Hoelle.pages
         private int downframecount;
         private int rightframcount;
         private int leftframcount;
+        private bool playerNearShop = false;
+        private bool shopOpen = false;
+
         
        
         //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -274,7 +278,7 @@ namespace _5_Jahre_Hoelle.pages
             }
 
 
-            if (moveUp && player.Y_Pos >= 0)
+            if (moveUp && player.Y_Pos >= -10)
             {
                 
                 if (currentRoom.DoorTop && player.Y_Pos <= 2 && player.X_Pos >= 760 && player.X_Pos <= 900)
@@ -358,16 +362,26 @@ namespace _5_Jahre_Hoelle.pages
                     player.Y_Pos = Ynew;
                 }
             }
+
+            CheckShopCollision();
         }
 
         private void DrawGame()
         {
             Canvas.SetLeft(Rect_Player, player.X_Pos);
             Canvas.SetTop(Rect_Player, player.Y_Pos);
+            Panel.SetZIndex(TxtShopHint, 20);
 
-            // Testing
-          
-            
+
+
+            if (playerNearShop)
+            {
+                TxtShopHint.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TxtShopHint.Visibility = Visibility.Collapsed;
+            }
         }
 
         //private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
@@ -746,6 +760,8 @@ namespace _5_Jahre_Hoelle.pages
 
             }
 
+
+
             else if (e.Key == Key.Left)
             {
                 MessageBox.Show("Left");
@@ -759,6 +775,16 @@ namespace _5_Jahre_Hoelle.pages
             else if (e.Key == Key.Down)
             {
                 MessageBox.Show("Down");
+            }
+
+            if (e.Key == Key.E && playerNearShop && !shopOpen)
+            {
+                shopOpen = true;
+
+                Shop shop = new Shop(player);
+                shop.ShowDialog();
+
+                shopOpen = false;
             }
         }
 
@@ -806,6 +832,31 @@ namespace _5_Jahre_Hoelle.pages
             {
                 moveDown = false;
             }
+        }
+
+        private void CheckShopCollision()
+        {
+            playerNearShop = false;
+
+            if (currentRoom.Type != 'S')
+                return;
+
+            double shopX = 771;
+            double shopY = 319;
+            double shopWidth = 138;
+            double shopHeight = 202;
+
+            double playerX = player.X_Pos;
+            double playerY = player.Y_Pos;
+            double playerWidth = 73;
+            double playerHeight = 100;
+            // KI: Chatgpt
+            // Prompt: Hey chat kannst du bitte einen bool machen wo true macht wenn man in diese Borders reinkommt weil lwk ich bin faul
+            // KI Anfang
+            bool intersects = playerX < shopX + shopWidth && playerX + playerWidth > shopX && playerY < shopY + shopHeight && playerY + playerHeight > shopY;
+            // KI Ende
+
+            playerNearShop = intersects;
         }
     }
 }
