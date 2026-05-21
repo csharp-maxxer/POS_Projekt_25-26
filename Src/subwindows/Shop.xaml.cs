@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace _5_Jahre_Hoelle.subwindows
     /// </summary>
     public partial class Shop : Window
     {
-        public Shop()
+        public Shop(Player player)
         {
             InitializeComponent();
         }
