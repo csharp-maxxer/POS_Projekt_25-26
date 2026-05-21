@@ -40,6 +40,12 @@ namespace _5_Jahre_Hoelle.pages
         private bool playerNearShop = false;
         private bool shopOpen = false;
 
+        
+       
+        //chatgpt anfang: wie mache ich hier einen Deltatimer
+        private DateTime lastFrameTime;
+        private double deltaTime;
+        //chatgpt ende
         private int animationTick = 0;
         private int animationFrame = 0;
         //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
@@ -120,14 +126,19 @@ namespace _5_Jahre_Hoelle.pages
             Focus();
 
             
+            
 
-
-            player = new Player(1.0, 5.0, 1.0, 1.0, 1, 1.0);
-
+            player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
+            //chatgpt anfang: wie mache ich hier einen Deltatimer
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = TimeSpan.FromMilliseconds(16);
             gameTimer.Tick += GameTimer_Tick;
+
+            lastFrameTime = DateTime.Now;
+
             gameTimer.Start();
+            //chatgpt ende
+
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, 15);
@@ -154,14 +165,55 @@ namespace _5_Jahre_Hoelle.pages
 
         private void GameTimer_Tick(object? sender, EventArgs e)
         {
+            //chatgpt anfang: wie mache ich hier einen Deltatimer
+            DateTime now = DateTime.Now;
+            deltaTime = (now - lastFrameTime).TotalSeconds;
+            lastFrameTime = now;
+            //chatgpt ende
+
             move();
             DrawGame();
         }
 
+        private bool CollidesWithObstacle(double newX, double newY)
+        {
+            Rect playerHitbox = new Rect(
+                newX + 30,
+                newY + 50,
+                43,
+                50
+            );
+
+            foreach (Rect obstacle in currentRoom.obstacles)
+            {
+                //caht gpt Anfang: Wie kann ich checken ob zwei Rect miteinander kollidieren
+                if (playerHitbox.IntersectsWith(obstacle))
+                // chatgpt ende
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private async void move()
         {
-            if (isTransitioning) return;
-            //if (player.X_Pos >= 1640) MessageBox.Show("test");
+
+
+
+            Rect palyer_rect = new Rect();
+            palyer_rect.X = player.X_Pos;
+            palyer_rect.Y = player.Y_Pos;
+            palyer_rect.Width = 73;
+            palyer_rect.Height = 100;
+
+            foreach (Rect obstacle in currentRoom.obstacles)
+            {
+
+            }
+
+
             Vector direction = new Vector(0, 0);
 
             if (moveLeft && player.X_Pos  >= 0)
@@ -297,8 +349,18 @@ namespace _5_Jahre_Hoelle.pages
                 direction.Normalize();
                 // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
 
-                player.X_Pos += direction.X * player.Speed;
-                player.Y_Pos += direction.Y * player.Speed;
+                double Xnew = player.X_Pos + direction.X * player.Speed * deltaTime;
+                double Ynew = player.Y_Pos + direction.Y * player.Speed * deltaTime;
+
+                if (!CollidesWithObstacle(Xnew, player.Y_Pos))
+                {
+                    player.X_Pos = Xnew;
+                }
+
+                if (!CollidesWithObstacle(player.X_Pos, Ynew))
+                {
+                    player.Y_Pos = Ynew;
+                }
             }
 
             CheckShopCollision();

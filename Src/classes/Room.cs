@@ -19,7 +19,7 @@ namespace _5_Jahre_Hoelle.classes
         public bool DoorRight { get; set; }
         public bool DoorBottom { get; set; }
         public bool DoorLeft { get; set; }
-
+        public List<Rect> obstacles {  get; set; }
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
         // 14x7 mit je 120px
@@ -34,6 +34,7 @@ namespace _5_Jahre_Hoelle.classes
 
         public Room(int ypos, int xpos, char type)
         {
+            obstacles = new List<Rect>();
             DoorTop = false;
             DoorRight = false;
             DoorBottom = false;
@@ -80,6 +81,7 @@ namespace _5_Jahre_Hoelle.classes
 
         public void DrawRoom()
         {
+            obstacles.Clear();
             RoomCanvas.Children.Clear();
 
             Image background = new Image();
@@ -142,11 +144,23 @@ namespace _5_Jahre_Hoelle.classes
                             double mittelpunkt_y = 120 * y + 60;
                             double draw_at_x = mittelpunkt_x - (selected_grafic.Item2 / 2);
                             double draw_at_y = mittelpunkt_y - (selected_grafic.Item3 / 2);
+                            Rect obstacle = new Rect();
+                            obstacle.Width = 120;
+                            obstacle.Height = 120;
+                            obstacle.X = mittelpunkt_x -(selected_grafic.Item2 / 2);
+                            obstacle.Y = mittelpunkt_y - (selected_grafic.Item3 / 2);
+                           
+                            
 
                             Canvas.SetLeft(image, draw_at_x);
                             Canvas.SetTop(image, draw_at_y);
+                            obstacles.Add(obstacle);
+                          
+
 
                             RoomCanvas.Children.Add(image);
+
+                            
                         }
                     }
                 }
