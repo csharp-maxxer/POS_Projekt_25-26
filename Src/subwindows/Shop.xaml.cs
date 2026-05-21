@@ -68,5 +68,10 @@ namespace _5_Jahre_Hoelle.subwindows
         {
             TxtBlock_LeberkaseDescription.Foreground= Brushes.Transparent;
         }
+
+        private void Button_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

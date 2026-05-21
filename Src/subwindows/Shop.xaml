@@ -13,8 +13,20 @@
         <Label Content="Preis 3" Canvas.Left="530" Canvas.Top="476" FontSize="40" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <Button Canvas.Left="73" Canvas.Top="36" Height="320" Width="135" Name="Button_Monster" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Click="Button_Monster_Click" MouseEnter="Button_Monster_MouseEnter" MouseLeave="Button_Monster_MouseLeave"/>
-        <Button Canvas.Left="220" Canvas.Top="406" Height="325" Width="117" x:Name="Button_Redbull" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Redbull_Click"/>
-        <Button Canvas.Left="460" Canvas.Top="214" Height="325" Width="291" x:Name="Button_Leberkase" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Leberkase_Click"/>
-        <Rectangle Height="100" Canvas.Left="289"  Canvas.Top="66" Width="100" Fill="Transparent" Name="Rect_MonsterDescription" />
+        <Button Canvas.Left="220" Canvas.Top="406" Height="325" Width="117" x:Name="Button_Redbull" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Redbull_Click" MouseEnter="Button_Redbull_MouseEnter" MouseLeave="Button_Redbull_MouseLeave"/>
+        <Button Canvas.Left="460" Canvas.Top="214" Height="325" Width="291" x:Name="Button_Leberkase" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Click="Button_Leberkase_Click" MouseEnter="Button_Leberkase_MouseEnter" MouseLeave="Button_Leberkase_MouseLeave"/>
+        <TextBlock Height="100" Canvas.Left="213"  Canvas.Top="36" Width="100" FontSize="30" Foreground="Transparent" Name="TxtBlock_MonsterDescription" Text="HIER DESCRIPTION REIN"/>
+        <TextBlock Height="100" Canvas.Left="51"  Canvas.Top="414" Width="150" FontSize="30" Foreground="Transparent" Name="TxtBlock_RedbullDescription" Text="HIER DESCRIPTION REIN" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Height="100" Canvas.Left="465"  Canvas.Top="544" Width="150" FontSize="30" Foreground="Transparent" Name="TxtBlock_LeberkaseDescription" Text="HIER DESCRIPTION REIN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <!-- Source: https://stackoverflow.com/questions/2720463/creating-a-clickable-image-in-wpf-->
+        <!-- Source Start-->
+        <Button Height="120" Width="120" Canvas.Left="680" Canvas.Top="664" Name="Button_Exit" Click="Button_Exit_Click">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="/assets/arrow_back.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
     </Canvas>
 </Window>
