@@ -223,7 +223,7 @@ namespace _5_Jahre_Hoelle.pages
             }
 
 
-            if (moveUp && player.Y_Pos >= 0)
+            if (moveUp && player.Y_Pos >= -10)
             {
                 
                 if (currentRoom.DoorTop && player.Y_Pos <= 2 && player.X_Pos >= 760 && player.X_Pos <= 900)
