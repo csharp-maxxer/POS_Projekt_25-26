@@ -31,7 +31,6 @@ namespace _5_Jahre_Hoelle.pages
         private bool moveRight;
         private bool moveUp;
         private bool moveDown;
-        private DispatcherTimer gameTimer;
         private Player player;
         private int upframcount;
         private int downframecount;
@@ -39,9 +38,10 @@ namespace _5_Jahre_Hoelle.pages
         private int leftframcount;
         private bool playerNearShop = false;
         private bool shopOpen = false;
+        private double animationTimer = 0;
 
-        
-       
+
+
         //chatgpt anfang: wie mache ich hier einen Deltatimer
         private DateTime lastFrameTime;
         private double deltaTime;
@@ -129,15 +129,13 @@ namespace _5_Jahre_Hoelle.pages
             
 
             player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
-            //chatgpt anfang: wie mache ich hier einen Deltatimer
-            gameTimer = new DispatcherTimer();
-            gameTimer.Interval = TimeSpan.FromMilliseconds(16);
-            gameTimer.Tick += GameTimer_Tick;
 
             lastFrameTime = DateTime.Now;
-
-            gameTimer.Start();
-            //chatgpt ende
+            // KI: Claude AI
+            // Prompt: kannt du mir was für wpf geben wo besser ist wie ein dispatcher timer?
+            // KI Anfang
+            CompositionTarget.Rendering += GameLoop;
+            // KI Ende
 
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
@@ -163,15 +161,18 @@ namespace _5_Jahre_Hoelle.pages
             leftframcount = 0;
         }
 
-        private void GameTimer_Tick(object? sender, EventArgs e)
+        private void GameLoop(object? sender, EventArgs e)
         {
-            //chatgpt anfang: wie mache ich hier einen Deltatimer
             DateTime now = DateTime.Now;
             deltaTime = (now - lastFrameTime).TotalSeconds;
             lastFrameTime = now;
-            //chatgpt ende
 
-            move();
+            if (deltaTime > 0.05) deltaTime = 0.05;
+
+            if (!isTransitioning)
+            {
+                move();
+            }
             DrawGame();
         }
 
@@ -199,7 +200,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void move()
         {
-
+            if (isTransitioning) return;
 
 
             Rect palyer_rect = new Rect();
@@ -224,89 +225,91 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos - 1)];
                         player.X_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room); // _ ist wie await nur dass es nicht wartet
                         player.X_Pos = 1620;
                     }
                 }
                 
 
                 direction.X -= 1;
-                leftframcount++;
-
-                if (leftframcount == 1)
+                // KI: Claude AI
+                // Prompt: yo big c wie kann ich die animation frameabhängig machen?
+                // KI anfang
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = links1;
                 }
-
-                if (leftframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = links2;
                 }
-                if (leftframcount == 2)
-                    leftframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
+                // KI Ende (block wird weitere 3x verwendet.)
             }
 
 
             if (moveRight && player.X_Pos + 73 <= 1680)
             {
-                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1600)
+                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1580)
                 {
                     if (!isTransitioning)   
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos + 1)];
                         player.X_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.X_Pos = 40;
                     }
                 }
 
                 direction.X += 1;
-                rightframcount++;
-
-                if (rightframcount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = rechts1;
                 }
-
-                if (rightframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = rechts2;
                 }
-
-                if (rightframcount == 2)
-                    rightframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
 
             if (moveUp && player.Y_Pos >= -10)
             {
                 
-                if (currentRoom.DoorTop && player.Y_Pos <= 2 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                if (currentRoom.DoorTop && player.Y_Pos <= 15 && player.X_Pos >= 760 && player.X_Pos <= 900)
                 {
                     if (!isTransitioning)
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos - 1, currentRoom.Xpos)];
                         player.Y_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.Y_Pos = 720;
                     }
                 }
                 
                 direction.Y -= 1;
-                upframcount++;
-
-                if (upframcount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = up1;
                 }
-
-                if (upframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = up2;
                 }
-
-                if (upframcount == 2) 
-                    upframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
 
@@ -319,28 +322,25 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos + 1, currentRoom.Xpos)];
                         player.Y_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.Y_Pos = 20;
                     }
                 }
 
                 direction.Y += 1;
-                downframecount++;
-                
-                
-
-                if (downframecount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = front1;
                 }
-
-                if (downframecount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = front2;
                 }
-
-                if (downframecount == 2)
-                    downframecount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
             if (direction.Length > 0)
