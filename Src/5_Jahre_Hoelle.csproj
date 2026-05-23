@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <None Remove="assets\Achievments.png" />
+    <None Remove="assets\ammo_pencil.png" />
+    <None Remove="assets\ammo_rubber.png" />
     <None Remove="assets\arrow_back.png" />
     <None Remove="assets\background_vorlaeufig.png" />
     <None Remove="assets\chair_downwards.png" />
@@ -60,6 +62,12 @@
     <Content Include="assets\Stats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="assets\ammo_pencil.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\ammo_rubber.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\arrow_back.png" />
     <Resource Include="assets\front_1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
