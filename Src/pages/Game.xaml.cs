@@ -26,16 +26,12 @@ namespace _5_Jahre_Hoelle.pages
     public partial class Game : Page
     {
         private Room currentRoom;
-        private bool isTransitioning = false;
+        private bool isTransitioning = false;   
         private bool moveLeft;
         private bool moveRight;
         private bool moveUp;
         private bool moveDown;
         private Player player;
-        private int upframcount;
-        private int downframecount;
-        private int rightframcount;
-        private int leftframcount;
         private bool playerNearShop = false;
         private bool shopOpen = false;
         private double animationTimer = 0;
@@ -155,10 +151,6 @@ namespace _5_Jahre_Hoelle.pages
             this.Focusable = true;
             this.Focus();
 
-            upframcount = 0;
-            downframecount = 0;
-            rightframcount = 0;
-            leftframcount = 0;
         }
 
         private void GameLoop(object? sender, EventArgs e)
@@ -619,7 +611,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             if (isTransitioning) return;
             isTransitioning = true;
-
+            Rect_Player.Visibility = Visibility.Hidden;
             room_to.DrawRoom();
 
             CanvasGame.Children.Add(room_to.RoomCanvas);
@@ -700,7 +692,7 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Remove(room_from.RoomCanvas);
 
             currentRoom = room_to;
-
+            Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
         }
         // KI ENDE
