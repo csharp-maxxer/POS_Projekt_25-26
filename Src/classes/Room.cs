@@ -26,7 +26,7 @@ namespace _5_Jahre_Hoelle.classes
         private List<List<char>> room_matrix { get; set; }
         //public List<enemy> { get; private set; }
         public bool IsCleared { get; private set; }
-
+        public bool ExamRoom { get; private set; }
         public Canvas RoomCanvas { get; private set; }
         public char Type { get; private set; }
 
@@ -44,6 +44,7 @@ namespace _5_Jahre_Hoelle.classes
             Ypos = ypos;
             Type = type;
             IsCleared = false;
+            ExamRoom = false;
 
             RoomCanvas = new Canvas();
 
@@ -52,10 +53,22 @@ namespace _5_Jahre_Hoelle.classes
 
             room_matrix = new List<List<char>>();
 
+            if (Type == 'X')
+            {
+                Exam_Enemy_Room();
+            }
             ChooseRandomRoom();
         }
+        private void Exam_Enemy_Room()
+        {
+            // wählt mit einer 33% chance ob ein raum ein exam room oder ein enemy room ist.
+            if (random.Next(3) == 2)
+            {
+                ExamRoom = true;
+            }
+        }
 
-        public void ChooseRandomRoom()
+        private void ChooseRandomRoom()
         {
 
             int roomNumber = random.Next(1, 21);
@@ -163,6 +176,17 @@ namespace _5_Jahre_Hoelle.classes
                             
                         }
                     }
+                }
+
+                if (ExamRoom)
+                {
+                    Image book_img = new Image();
+                    book_img.Width = 102;
+                    book_img.Height = 76;
+                    book_img.Source = new BitmapImage(new Uri("../assets/book.png", UriKind.Relative));
+                    Canvas.SetLeft(book_img, 790);
+                    Canvas.SetTop(book_img, 382);
+                    RoomCanvas.Children.Add(book_img);
                 }
             }
             if (this.Type == 'S')
