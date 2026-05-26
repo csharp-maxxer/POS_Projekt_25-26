@@ -1,0 +1,29 @@
+Was ist RAM?:{Grafikkarte:0,Flüchtiger Arbeitsspeicher:1,Festplatte:0,Netzwerkkabel:0}
+Was macht ein Betriebssystem?:{Erstellt nur Bilder:0,Verwaltet Hardware und Programme:1,Ist nur ein Browser:0,Löscht automatisch Viren:0}
+Welche Zahl ist binär für 5?:{110:0,101:1,111:0,100:0}
+Was bedeutet HTML?:{HyperToolMainLink:0,HyperTextMarkupLanguage:1,HighTextMachineLanguage:0,HomeToolMarkupLanguage:0}
+Welche Einheit misst Taktfrequenz?:{Volt:0,Hertz:1,Pixel:0,Byte:0}
+Was ist eine IP-Adresse?:{Passwort:0,Adresse eines Geräts im Netzwerk:1,Dateiformat:0,Seriennummer der CPU:0}
+Was speichert eine SSD?:{Nur RAM-Inhalte:0,Daten dauerhaft:1,Nur Strom:0,Nur Netzwerkdaten:0}
+Was ist ein Compiler?:{Ein Virus:0,Übersetzt Quellcode in Maschinencode:1,Ein Monitor:0,Ein Browser:0}
+Was bedeutet LAN?:{Long Array Network:0,Local Area Network:1,Large Access Node:0,Link Area Net:0}
+Welcher Datentyp speichert Wahr/Falsch?:{string:0,boolean:1,char:0,float:0}
+Was macht ein Router?:{Speichert Bilder:0,Leitet Netzwerkpakete weiter:1,Druckt Seiten:0,Kühlt die CPU:0}
+Welche Zahl ist hexadezimal A?:{12:0,10:1,8:0,15:0}
+Was ist eine Variable?:{Ein Monitor:0,Speicherplatz für Daten:1,Ein Betriebssystem:0,Ein Kabel:0}
+Welche Aussage zu ROM ist richtig?:{Kann keine Datenenthalten:0,Ist ein Netzwerkprotokoll:0,Inhalt bleibt ohne Strom erhalten:1,Ist immer schneller als RAM:0}
+Was bedeutet URL?:{Universal Router Link:0,Uniform Resource Locator:1,User Runtime Layer:0,Unique Resource List:0}
+Welche Erweiterung gehört zu einer Textdatei?:{.exe:0,.txt:1,.mp3:0,.png:0}
+Was macht ein Switch im Netzwerk?:{Speichert Webseiten:0,Verbindet Geräte im LAN:1,Übersetzt Code:0,Ersetzt RAM:0}
+Was ist ein Algorithmus?:{Ein Prozessor:0,Eine Schritt-für-Schritt-Anweisung:1,Ein Kabeltyp:0,Eine Bilddatei:0}
+Welche Schleife hat typischerweise Initialisierung, Bedingung und Änderung?:{if:0,class:0,for:1,switch:0}
+Welche Aussage zu Arrays ist richtig? #21:{Sie sind Netzwerkgeräte:0,Elemente sind typischerweise indexiert:1,Sie speichern nur Text:0,Sie ersetzen Funktionen:0}
+Was ist ein Byte?:{1 Bit:0,8 Bit:1,16 Bit:0,4 Bit:0}
+Wofür dient SQL?:{Audioaufnahme:0,Abfrage und Verwaltung von Datenbanken:1,Bildbearbeitung:0,Netzwerkkühlung:0}
+Was macht ein if-Statement?:{Startet das Betriebssystem:0,Prüft Bedingungen:1,Speichert Dateien:0,Erhöht RAM:0}
+Welche Topologie ist ein Netzwerktyp?:{Quadrat:0,Stern:1,Zylinder:0,Welle:0}
+Was ist HTTPS?:{Ein RAM-Typ:0,Ein Druckerprotokoll:0,Verschlüsselte Web-Kommunikation:1,Ein Grafikformat:0}
+Was ist eine Funktion in der Programmierung?:{CPU-Kern:0,Festplatte:0,Wiederverwendbarer Codeblock:1,Monitoranschluss:0}
+Was beschreibt OOP?:{Open Output Port:0,Objektorientierte Programmierung:1,Optische Online Plattform:0,Ordinary Operation Process:0}
+Welche Zahl ist dezimal 2 in Binär?:{11:0,10:1,01:0,100:0}
+Was ist die Hauptfunktion von DNS?:{CPU kühlen:0,Dateien komprimieren:0,Namen in IP-Adressen auflösen:1,Passwörter verschlüsseln:0}
