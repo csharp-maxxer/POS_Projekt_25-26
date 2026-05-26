@@ -1,7 +1,7 @@
 ﻿using _5_Jahre_Hoelle.classes;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +37,13 @@ namespace _5_Jahre_Hoelle.pages
         private double animationTimer = 0;
         private bool examOpen = false;
         private bool gamePaused = false;
+        private List<Rectangle> bulletRects = new List<Rectangle>();
+        bool shootup;
+        bool shootright;
+        bool shootleft;
+        bool shootdown;
+        double bulletRotationTimer = 0;
+        private double shootTimer = 0;
 
 
 
@@ -47,6 +54,9 @@ namespace _5_Jahre_Hoelle.pages
         private int animationTick = 0;
         private int animationFrame = 0;
         //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
+
+
+
         private ImageBrush links1 = new ImageBrush
         {
             ImageSource = new BitmapImage(
@@ -116,6 +126,22 @@ namespace _5_Jahre_Hoelle.pages
             Stretch = Stretch.Uniform
         };
 
+        private ImageBrush bullet1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+        new Uri("pack://application:,,,/assets/ammo_pencil.png")
+    ),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush bullet2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(
+                new Uri("pack://application:,,,/assets/ammo_rubber.png")
+            ),
+            Stretch = Stretch.Uniform
+        };
+
         Dictionary<(int y, int x), Room> cllted_rooms;
 
         public Game()
@@ -163,6 +189,116 @@ namespace _5_Jahre_Hoelle.pages
             {
                 move();
             }
+            //chatgpt andang: fixe den bug das ich wenn ich schießen anfange nicht mehr aufhören kann und ich mich nicht bewegen kann
+            moveLeft = Keyboard.IsKeyDown(Key.A);
+            moveRight = Keyboard.IsKeyDown(Key.D);
+            moveUp = Keyboard.IsKeyDown(Key.W);
+            moveDown = Keyboard.IsKeyDown(Key.S);
+
+            shootup = Keyboard.IsKeyDown(Key.Up);
+            shootleft = Keyboard.IsKeyDown(Key.Left);
+            shootright = Keyboard.IsKeyDown(Key.Right);
+            shootdown = Keyboard.IsKeyDown(Key.Down);
+            //chatgpt ende
+            DateTime now = DateTime.Now;
+            deltaTime = (now - lastFrameTime).TotalSeconds;
+            lastFrameTime = now;
+            // chatgpt anfang: wie mache ich bei diesem code das die bullets nur 4 mal in der sekunde geschossen werden (ganzer code)
+            shootTimer -= deltaTime;
+
+            if (shootup && shootTimer <= 0)
+            {
+                Bullets bullet = new Bullets(
+                    player.Damage,
+                    player.Firerate,
+                    player.Range,
+                    new Vector(0, -10)
+                );
+
+                bullet.X_pos = player.X_Pos + 35;
+                bullet.Y_pos = player.Y_Pos + 40;
+
+                player.Attack(bullet);
+
+                shootTimer = player.Firerate;
+            }
+            // chatgpt ende
+            if (shootleft && shootTimer <= 0)
+            {
+                Bullets bullet = new Bullets(
+                    player.Damage,
+                    player.Firerate,
+                    player.Range,
+                    new Vector(-10, 0)
+                );
+
+                bullet.X_pos = player.X_Pos + 35;
+                bullet.Y_pos = player.Y_Pos + 40;
+
+                player.Attack(bullet);
+
+                shootTimer = player.Firerate;
+            }
+
+            if (shootright && shootTimer <= 0)
+            {
+                Bullets bullet = new Bullets(
+                    player.Damage,
+                    player.Firerate,
+                    player.Range,
+                    new Vector(10, 0)
+                );
+
+                bullet.X_pos = player.X_Pos + 35;
+                bullet.Y_pos = player.Y_Pos + 40;
+
+                player.Attack(bullet);
+
+                shootTimer = player.Firerate;
+            }
+
+            if (shootdown && shootTimer <= 0)
+            {
+                Bullets bullet = new Bullets(
+                    player.Damage,
+                    player.Firerate,
+                    player.Range,
+                    new Vector(0, 10)
+                );
+
+                bullet.X_pos = player.X_Pos + 35;
+                bullet.Y_pos = player.Y_Pos + 40;
+
+                player.Attack(bullet);
+
+                shootTimer = player.Firerate;
+            }
+
+
+
+            bulletRotationTimer -= deltaTime;
+
+            if (bulletRotationTimer <= 0)
+            {
+                foreach (Bullets bullet in player.Bullets)
+                {
+                    bullet.rotation += 45;
+
+                    if (bullet.rotation >= 360)
+                    {
+                        bullet.rotation = 0;
+                    }
+                }
+
+                bulletRotationTimer = 0.04;
+            }
+
+            foreach (Rect obstacle in currentRoom.obstacles)
+            {
+                player_bullet_collision_obstacle(obstacle);
+            }
+            move();
+            player_bullet_move();
             DrawGame();
         }
 
@@ -359,6 +495,43 @@ namespace _5_Jahre_Hoelle.pages
 
         private void DrawGame()
         {
+            
+            foreach (Rectangle rect in bulletRects)
+            {
+                CanvasGame.Children.Remove(rect);
+            }
+
+            bulletRects.Clear();
+
+            foreach (Bullets bullet in player.Bullets)
+            {
+                Rectangle bulletRect = new Rectangle();
+
+                bulletRect.Width = 25;
+                bulletRect.Height = 25;
+
+                if (bullet.random == 1)
+                {
+                    bulletRect.Fill = bullet1;
+                }
+                else
+                {
+                    bulletRect.Fill = bullet2;
+                }
+
+                
+                bulletRect.RenderTransform = new RotateTransform(bullet.rotation);
+
+
+                Canvas.SetLeft(bulletRect, bullet.X_pos);
+                Canvas.SetTop(bulletRect, bullet.Y_pos);
+                Panel.SetZIndex(bulletRect, 10);
+
+                CanvasGame.Children.Add(bulletRect);
+                bulletRects.Add(bulletRect);
+            }
+
+
             Canvas.SetLeft(Rect_Player, player.X_Pos);
             Canvas.SetTop(Rect_Player, player.Y_Pos);
             Panel.SetZIndex(TxtShopHint, 20);
@@ -375,19 +548,6 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
-        //private async void Game_KeyDown_DELETE_ME(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.D)
-        //    {
-
-        //        var nextRoom = new Room(
-        //        currentRoom.Ypos + 1,
-        //        currentRoom.Xpos,
-        //        'X');
-        //        nextRoom.DrawRoom();
-        //        await SwitchRoom(currentRoom, nextRoom);
-        //    }
-        //}
 
         public void assing_doors_to_rooms(Dictionary<(int, int), Room> clltd_rooms)
         {
@@ -697,75 +857,27 @@ namespace _5_Jahre_Hoelle.pages
         // KI ENDE
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.A)
-            {
-                moveLeft = true;
-            }
-
-            if (e.Key == Key.W)
-            {
-                moveUp = true;
-            }
-
-            if (e.Key == Key.D)
-            {
-                moveRight = true;
-            }
-
-            if (e.Key == Key.S)
-            {
-                moveDown = true;
-            }
-
-            if (e.Key == Key.A)
-            {
-                moveLeft = true;
-            }
-
-
-
-
 
             if (e.Key == Key.Up)
             {
-                if (moveLeft) 
-                {
-                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector((player.Speed / 2) * -1, 1 * player.Firerate)));
-                }
-
-               
-                else if (moveDown)
-                {
-                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(0, 1 * player.Firerate - (player.Speed / 4))));
-                }
-
-                else if (moveUp)
-                {
-                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(0, (1 * player.Firerate + (player.Speed / 4)) * -1 )));
-                }
-
-                else if (moveRight)
-                {
-                    player.Attack(new Bullets(player.Damage, player.Firerate, player.Range, new Vector(player.Speed / 2, 1 * player.Firerate)));
-                }
-
+              
             }
 
 
 
             else if (e.Key == Key.Left)
             {
-                MessageBox.Show("Left");
+
             }
 
             else if (e.Key == Key.Right)
             {
-                MessageBox.Show("Right");
+
             }
 
             else if (e.Key == Key.Down)
             {
-                MessageBox.Show("Down");
+
             }
 
             if (e.Key == Key.E && playerNearShop && !shopOpen)
@@ -779,7 +891,45 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
-        
+      
+
+        private void player_bullet_collision_obstacle(Rect obstacle)
+        {
+
+            for (int i = player.Bullets.Count - 1; i >= 0; i--)
+            {
+                Bullets bullet = player.Bullets[i];
+
+                Rect rect_bullet = new Rect(bullet.X_pos, bullet.Y_pos, 10, 10);
+
+                if (rect_bullet.IntersectsWith(obstacle))
+                {
+
+                    player.Bullets.RemoveAt(i);
+                }
+            }
+        }
+
+
+        private void player_bullet_move()
+        {
+            for (int i = player.Bullets.Count - 1; i >= 0; i--)
+            {
+                Bullets bullet = player.Bullets[i];
+
+                bullet.X_pos += bullet.Direction.X;
+                bullet.Y_pos += bullet.Direction.Y;
+
+                if (bullet.X_pos >= 1680 ||
+                    bullet.Y_pos <= 0 ||
+                    bullet.X_pos <= 0 ||
+                    bullet.Y_pos >= 840)
+                {
+                    player.Bullets.RemoveAt(i);
+                }
+            }
+        }
+
 
         private void UpdatePlayerAnimation(ImageBrush frame1, ImageBrush frame2)
         {
@@ -804,24 +954,27 @@ namespace _5_Jahre_Hoelle.pages
 
         private void Page_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.A)
+            if (e.Key == Key.Up)
             {
-                moveLeft = false;
+             
+
             }
 
-            if (e.Key == Key.W)
+
+
+            else if (e.Key == Key.Left)
             {
-                moveUp = false;
+
             }
 
-            if (e.Key == Key.D)
+            else if (e.Key == Key.Right)
             {
-                moveRight = false;
+
             }
 
-            if (e.Key == Key.S)
+            else if (e.Key == Key.Down)
             {
-                moveDown = false;
+
             }
         }
 
