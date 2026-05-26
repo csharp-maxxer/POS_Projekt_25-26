@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace _5_Jahre_Hoelle.usercontrols
+{
+    /// <summary>
+    /// Interaktionslogik für Pausescreen.xaml
+    /// </summary>
+    public partial class Pausescreen : UserControl
+    {
+        public event Action ContinueClicked;
+
+        public Pausescreen()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_continue_Click(object sender, RoutedEventArgs e)
+        {
+            // cbatgpt anfang: Mach mir den ContinueButton das er funktioniert(code)
+            ContinueClicked?.Invoke();
+
+            Panel parent = this.Parent as Panel;
+
+            if (parent != null)
+            {
+                parent.Children.Remove(this);
+            }
+            // chatgpt ende
+        }
+
+        private void Button_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            // chatgpt anfang: wie mach ich das die menue page nicht im usercontrol aufgeht sondern in der main page
+            Window.GetWindow(this).Content = new Frame
+            {
+                NavigationUIVisibility = NavigationUIVisibility.Hidden,
+                Content = new pages.menue_page()
+            };
+        }
+            // chatgpt ende
+        
+
+        private void Button_savegame_Click(object sender, RoutedEventArgs e)
+        {
+            // chatgpt anfang: wie mach ich das die menue page nicht im usercontrol aufgeht sondern in der main page
+            Window.GetWindow(this).Content = new Frame
+            {
+                NavigationUIVisibility = NavigationUIVisibility.Hidden,
+                Content = new pages.menue_page()
+            };
+            // chatgpt ende
+        }
+    }
+}

@@ -31,6 +31,7 @@
     <None Remove="assets\door_right.png" />
     <None Remove="assets\door_up.png" />
     <None Remove="assets\menue.png" />
+    <None Remove="assets\Pause %282%29.png" />
     <None Remove="assets\Pause.png" />
     <None Remove="assets\shop_booth.png" />
     <None Remove="assets\front_1.png" />
@@ -96,7 +97,9 @@
     <Resource Include="assets\door_left.png" />
     <Resource Include="assets\door_right.png" />
     <Resource Include="assets\door_up.png" />
-    <Resource Include="assets\Pause.png" />
+    <Resource Include="assets\Pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\shop_booth.png" />
     <Resource Include="assets\Player_spritesheet.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -20,5 +20,8 @@
     <Compile Update="subwindows\Shop.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="usercontrols\Pausescreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

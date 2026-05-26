@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using _5_Jahre_Hoelle.usercontrols;
 using _5_Jahre_Hoelle.subwindows;
 
 namespace _5_Jahre_Hoelle.pages
@@ -46,6 +47,7 @@ namespace _5_Jahre_Hoelle.pages
         bool shootdown;
         double bulletRotationTimer = 0;
         private double shootTimer = 0;
+        private usercontrols.Pausescreen pauseScreen;
 
 
 
@@ -862,7 +864,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (e.Key == Key.Up)
             {
-              
+
             }
 
 
@@ -882,14 +884,42 @@ namespace _5_Jahre_Hoelle.pages
 
             }
 
-            if (e.Key == Key.E && playerNearShop && !shopOpen)
+            if (e.Key == Key.Escape)
             {
-                shopOpen = true;
+                gameTimer.Stop();
 
-                Shop shop = new Shop(player);
-                shop.ShowDialog();
+                if (pauseScreen == null)
+                {
+                    pauseScreen = new usercontrols.Pausescreen();
 
-                shopOpen = false;
+                    pauseScreen.Width = 600;
+                    pauseScreen.Height = 700;
+
+                    Canvas.SetLeft(pauseScreen, 540);
+                    Canvas.SetTop(pauseScreen, 88);
+                    Panel.SetZIndex(pauseScreen, 99);
+                    // cbatgpt anfang: Mach mir den ContinueButton das er funktioniert(code)
+                    pauseScreen.ContinueClicked += () =>
+                    {
+                        pauseScreen = null;
+                        lastFrameTime = DateTime.Now;
+                        gameTimer.Start();
+                        this.Focus();
+                    };
+                    // ende
+
+                    CanvasGame.Children.Add(pauseScreen);
+                }
+
+                if (e.Key == Key.E && playerNearShop && !shopOpen)
+                {
+                    shopOpen = true;
+
+                    Shop shop = new Shop(player);
+                    shop.ShowDialog();
+
+                    shopOpen = false;
+                }
             }
         }
 
