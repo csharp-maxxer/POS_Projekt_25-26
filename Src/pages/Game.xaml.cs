@@ -120,9 +120,6 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
             Focus();
-
-            //test
-            question_asking question_Asking = new question_asking(player);
             
 
             player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
@@ -147,8 +144,6 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
 
-            // TESTING DELETE ME
-            //this.KeyDown += Game_KeyDown_DELETE_ME;
             this.Focusable = true;
             this.Focus();
 

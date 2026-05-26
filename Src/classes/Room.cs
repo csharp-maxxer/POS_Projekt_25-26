@@ -169,11 +169,7 @@ namespace _5_Jahre_Hoelle.classes
                             Canvas.SetTop(image, draw_at_y);
                             obstacles.Add(obstacle);
                           
-
-
                             RoomCanvas.Children.Add(image);
-
-                            
                         }
                     }
                 }

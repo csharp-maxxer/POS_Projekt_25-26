@@ -12,30 +12,41 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace _5_Jahre_Hoelle.subwindows
 {
     /// <summary>
-    /// Interaktionslogik für question_asking.xaml
+    /// Interaktionslogik für question_ask.xaml
     /// </summary>
-    public partial class question_asking : UserControl
+    public partial class question_ask : Window
     {
-        public question_asking(Player player)
+        private int antwort1;
+        private int antwort2;
+        private int antwort3;
+        private int antwort4;
+        public question_ask(Player player)
         {
             InitializeComponent();
 
             Tuple<string, Dictionary<string, int>> test = ParseQuestion(choose_question());
 
-            MessageBox.Show(test.Item1);
+            Txt_Frage.Text = test.Item1;
 
-            foreach (KeyValuePair<string, int> entry in test.Item2)
-            {
-                string key = entry.Key;
-                int val = entry.Value;
-                MessageBox.Show($"{key}:{val}");
-            }
+            List<KeyValuePair<string, int>> answers =
+                test.Item2.ToList();
+
+            // Antworttexte setzen
+            Txt_Antwort1.Text = answers[0].Key;
+            Txt_Antwort2.Text = answers[1].Key;
+            Txt_Antwort3.Text = answers[2].Key;
+            Txt_Antwort4.Text = answers[3].Key;
+
+            // Werte speichern
+            antwort1 = answers[0].Value;
+            antwort2 = answers[1].Value;
+            antwort3 = answers[2].Value;
+            antwort4 = answers[3].Value;
         }
 
         // KI Chatgpt
@@ -79,6 +90,46 @@ namespace _5_Jahre_Hoelle.subwindows
             string[] unformated = File.ReadAllLines("../../../questions/questions.txt");
             Random random = new Random();
             return unformated[random.Next(unformated.Length)];
+        }
+
+        private async void Rect_Antwort1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            await CheckAnswer(antwort1, Rect_Antwort1);
+        }
+
+        private async void Rect_Antwort2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            await CheckAnswer(antwort2, Rect_Antwort2);
+        }
+
+        private async void Rect_Antwort3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            await CheckAnswer(antwort3, Rect_Antwort3);
+        }
+
+        private async void Rect_Antwort4_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            await CheckAnswer(antwort4, Rect_Antwort4);
+        }
+
+        private async Task CheckAnswer(int value, Border clickedBorder)
+        {
+            IsEnabled = false;
+
+            if (value == 1)
+            {
+                clickedBorder.Background = Brushes.Green;
+                MessageBox.Show("add grading");
+            }   
+            else
+            {
+                clickedBorder.Background = Brushes.Red;
+                MessageBox.Show("RM Grading");
+            }
+
+            await Task.Delay(300);
+
+            Close();
         }
     }
 }
