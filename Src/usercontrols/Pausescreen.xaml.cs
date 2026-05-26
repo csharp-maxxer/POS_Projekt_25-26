@@ -64,5 +64,38 @@ namespace _5_Jahre_Hoelle.usercontrols
             };
             // chatgpt ende
         }
+
+        private void Button_Exit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_exit.Opacity = 1;
+        }
+
+        private void Button_Exit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_exit.Opacity = 0
+                ;
+        }
+
+        private void Button_savegame_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_Save.Opacity = 1
+                ;
+        }
+
+        private void Button_savegame_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_Save.Opacity = 0
+                ;
+        }
+
+        private void Button_continue_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_Continue.Opacity = 1;
+        }
+
+        private void Button_continue_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_Continue.Opacity = 0;
+        }
     }
 }

@@ -149,35 +149,51 @@ namespace _5_Jahre_Hoelle.pages
         public Game()
         {
             InitializeComponent();
-            Focus();
-            
 
-            player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
+            player = new Player(1.0, 250.0, 1.0, 0.5, 1, 1.0);
 
             lastFrameTime = DateTime.Now;
-            // KI: Claude AI
-            // Prompt: kannt du mir was für wpf geben wo besser ist wie ein dispatcher timer?
-            // KI Anfang
             CompositionTarget.Rendering += GameLoop;
-            // KI Ende
 
-            // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, 15);
             cllted_rooms = Collect_Rooms(matrix_rooms);
             assing_doors_to_rooms(cllted_rooms);
 
-
-            // code
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
-
             this.Focusable = true;
+            // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
+            this.Loaded += Game_Loaded;
+            this.Unloaded += Game_Unloaded;
+            //chatgpt ende
+        }
+
+        // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
+        private void Game_Loaded(object sender, RoutedEventArgs e)
+        {
             this.Focus();
 
+            Window window = Window.GetWindow(this);
+
+            if (window != null)
+            {
+                window.PreviewKeyDown += Window_PreviewKeyDown;
+            }
         }
+
+        private void Game_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Window window = Window.GetWindow(this);
+
+            if (window != null)
+            {
+                window.PreviewKeyDown -= Window_PreviewKeyDown;
+            }
+        }
+       // chatgpt ende
 
         private void GameLoop(object? sender, EventArgs e)
         {
@@ -768,6 +784,7 @@ namespace _5_Jahre_Hoelle.pages
         public async Task SwitchRoom(Room room_from, Room room_to)
         {
             if (isTransitioning) return;
+            player.Bullets.Clear();
             isTransitioning = true;
             Rect_Player.Visibility = Visibility.Hidden;
             room_to.DrawRoom();
@@ -854,71 +871,63 @@ namespace _5_Jahre_Hoelle.pages
             isTransitioning = false;
         }
         // KI ENDE
-        private void Page_KeyDown(object sender, KeyEventArgs e)
+
+        //chatgpt anfang: warum kann ich wenn ich schieße nicht mehr pause drücken(code)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
-            if (e.Key == Key.Up)
-            {
-
-            }
-
-
-
-            else if (e.Key == Key.Left)
-            {
-
-            }
-
-            else if (e.Key == Key.Right)
-            {
-
-            }
-
-            else if (e.Key == Key.Down)
-            {
-
-            }
-
             if (e.Key == Key.Escape)
             {
-                gameTimer.Stop();
+                e.Handled = true;
 
-                if (pauseScreen == null)
+                if (!gamePaused)
                 {
-                    pauseScreen = new usercontrols.Pausescreen();
-
-                    pauseScreen.Width = 600;
-                    pauseScreen.Height = 700;
-
-                    Canvas.SetLeft(pauseScreen, 540);
-                    Canvas.SetTop(pauseScreen, 88);
-                    Panel.SetZIndex(pauseScreen, 99);
-                    // cbatgpt anfang: Mach mir den ContinueButton das er funktioniert(code)
-                    pauseScreen.ContinueClicked += () =>
-                    {
-                        pauseScreen = null;
-                        lastFrameTime = DateTime.Now;
-                        gameTimer.Start();
-                        this.Focus();
-                    };
-                    // ende
-
-                    CanvasGame.Children.Add(pauseScreen);
+                    ShowPauseScreen();
                 }
 
-                if (e.Key == Key.E && playerNearShop && !shopOpen)
-                {
-                    shopOpen = true;
+                return;
+            }
 
-                    Shop shop = new Shop(player);
-                    shop.ShowDialog();
+            if (e.Key == Key.E && playerNearShop && !shopOpen && !gamePaused)
+            {
+                e.Handled = true;
 
-                    shopOpen = false;
-                }
+                shopOpen = true;
+
+                Shop shop = new Shop(player);
+                shop.ShowDialog();
+
+                shopOpen = false;
+                this.Focus();
             }
         }
 
-      
+        private void ShowPauseScreen()
+        {
+            PauseGame();
+
+            if (pauseScreen == null)
+            {
+                pauseScreen = new usercontrols.Pausescreen();
+
+                pauseScreen.Width = 600;
+                pauseScreen.Height = 700;
+
+                Canvas.SetLeft(pauseScreen, 540);
+                Canvas.SetTop(pauseScreen, 88);
+                Panel.SetZIndex(pauseScreen, 99);
+                // chatgpt mach das der continue button funktioniert(code)
+                pauseScreen.ContinueClicked += () =>
+                {
+                    CanvasGame.Children.Remove(pauseScreen);
+                    pauseScreen = null;
+
+                    ResumeGame();
+                    this.Focus();
+                };
+                // ende
+                CanvasGame.Children.Add(pauseScreen);
+            }
+        }
 
         private void player_bullet_collision_obstacle(Rect obstacle)
         {
@@ -979,31 +988,7 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
-        private void Page_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Up)
-            {
-             
-
-            }
-
-
-
-            else if (e.Key == Key.Left)
-            {
-
-            }
-
-            else if (e.Key == Key.Right)
-            {
-
-            }
-
-            else if (e.Key == Key.Down)
-            {
-
-            }
-        }
+     
 
         private void CheckShopCollision()
         {

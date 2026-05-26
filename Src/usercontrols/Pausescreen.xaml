@@ -12,9 +12,30 @@
        Stretch="Fill"
        Width="600"
        Height="700"/>
-        <Button x:Name="Button_continue" Content="Button" Opacity="0" Canvas.Left="154" Canvas.Top="289" Height="76" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_continue_Click"/>
-        <Button x:Name="Button_savegame" Content="Button" Opacity="0" Canvas.Left="154" Canvas.Top="424" Height="76" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_savegame_Click"/>
-        <Button x:Name="Button_Exit" Content="Button" Opacity="0" Canvas.Left="216" Canvas.Top="540" Height="76" Width="176" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Exit_Click"/>
+        <Button x:Name="Button_continue" Content="Button" Opacity="0" Canvas.Left="154" Canvas.Top="289" Height="76" Width="300" HorizontalAlignment="Left" MouseEnter="Button_continue_MouseEnter" MouseLeave="Button_continue_MouseLeave" VerticalAlignment="Top" Click="Button_continue_Click"/>
+        <Button x:Name="Button_savegame" Content="Button" Opacity="0" Canvas.Left="154" Canvas.Top="424" Height="76" Width="300" HorizontalAlignment="Center" MouseEnter="Button_savegame_MouseEnter" MouseLeave="Button_savegame_MouseLeave" VerticalAlignment="Top" Click="Button_savegame_Click"/>
+        <Button x:Name="Button_Exit" Content="Button" Opacity="0" Canvas.Left="216" Canvas.Top="540" Height="76" Width="176" HorizontalAlignment="Left" MouseEnter="Button_Exit_MouseEnter" MouseLeave="Button_Exit_MouseLeave" VerticalAlignment="Top" Click="Button_Exit_Click"/>
+
+        <Polygon Name="polygon_exit"
+                Points="35,20 0,0 0,40"
+                Fill="Black"
+                Opacity="0"
+                Canvas.Left="181"
+                Canvas.Top="558"/>
+
+        <Polygon Name="polygon_Continue"
+        Points="35,20 0,0 0,40"
+        Fill="Black"
+        Opacity="0"
+        Canvas.Left="108"
+        Canvas.Top="307"/>
+
+        <Polygon Name="polygon_Save"
+        Points="35,20 0,0 0,40"
+        Fill="Black"
+        Opacity="0"
+        Canvas.Left="90"
+        Canvas.Top="430"/>
 
 
     </Canvas>
