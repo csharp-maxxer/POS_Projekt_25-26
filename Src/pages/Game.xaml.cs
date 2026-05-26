@@ -150,7 +150,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
 
-            player = new Player(1.0, 250.0, 1.0, 0.5, 1, 1.0);
+            player = new Player(1.0, 250.0, 4.5, 0.5, 1, 1.0);
 
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
@@ -221,13 +221,22 @@ namespace _5_Jahre_Hoelle.pages
             // chatgpt anfang: wie mache ich bei diesem code das die bullets nur 4 mal in der sekunde geschossen werden (ganzer code)
             shootTimer -= deltaTime;
 
+            if (shootTimer <= 0)
+            {
+                shootrangecheck();
+
+            }
+
             if (shootup && shootTimer <= 0)
             {
                 Bullets bullet = new Bullets(
                     player.Damage,
                     player.Firerate,
                     player.Range,
-                    new Vector(0, -10)
+                    new Vector(0, -10),
+                    player.X_Pos + 35,
+                    player.Y_Pos + 40
+                    
                 );
 
                 bullet.X_pos = player.X_Pos + 35;
@@ -244,7 +253,9 @@ namespace _5_Jahre_Hoelle.pages
                     player.Damage,
                     player.Firerate,
                     player.Range,
-                    new Vector(-10, 0)
+                    new Vector(-10, 0),
+                    player.X_Pos + 35,
+                    player.Y_Pos + 40
                 );
 
                 bullet.X_pos = player.X_Pos + 35;
@@ -261,7 +272,9 @@ namespace _5_Jahre_Hoelle.pages
                     player.Damage,
                     player.Firerate,
                     player.Range,
-                    new Vector(10, 0)
+                    new Vector(10, 0),
+                    player.X_Pos + 35,
+                    player.Y_Pos + 40
                 );
 
                 bullet.X_pos = player.X_Pos + 35;
@@ -278,7 +291,9 @@ namespace _5_Jahre_Hoelle.pages
                     player.Damage,
                     player.Firerate,
                     player.Range,
-                    new Vector(0, 10)
+                    new Vector(0, 10),
+                    player.X_Pos + 35,
+                    player.Y_Pos + 40
                 );
 
                 bullet.X_pos = player.X_Pos + 35;
@@ -338,6 +353,9 @@ namespace _5_Jahre_Hoelle.pages
 
             return false;
         }
+
+        
+        
 
         private async void move()
         {
@@ -966,6 +984,48 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
+        private void shootrangecheck()
+        {
+
+            for (int i = player.Bullets.Count - 1; i >= 0; i--)
+            {
+                Bullets bullet = player.Bullets[i];
+
+               
+
+                if (bullet.Direction.X == 10)
+                {
+                    if (bullet.X_pos_created + bullet.Range * 100 <= bullet.X_pos)
+                    {
+                        player.Bullets.RemoveAt(i);
+                    }
+                }
+
+                if (bullet.Direction.X == -10)
+                {
+                    if (bullet.X_pos_created - bullet.Range * 100 >= bullet.X_pos)
+                    {
+                        player.Bullets.RemoveAt(i);
+                    }
+                }
+
+                if (bullet.Direction.Y == 10)
+                {
+                    if (bullet.Y_pos_created + bullet.Range * 100 <= bullet.Y_pos)
+                    {
+                        player.Bullets.RemoveAt(i);
+                    }
+                }
+
+                if (bullet.Direction.Y == -10)
+                {
+                    if (bullet.Y_pos_created - bullet.Range * 100 >= bullet.Y_pos)
+                    {
+                        player.Bullets.RemoveAt(i);
+                    }
+                }
+            }
+        }
 
         private void UpdatePlayerAnimation(ImageBrush frame1, ImageBrush frame2)
         {
