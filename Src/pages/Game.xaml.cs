@@ -35,6 +35,8 @@ namespace _5_Jahre_Hoelle.pages
         private bool playerNearShop = false;
         private bool shopOpen = false;
         private double animationTimer = 0;
+        private bool examOpen = false;
+        private bool gamePaused = false;
 
 
 
@@ -188,7 +190,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void move()
         {
-            if (isTransitioning) return;
+            if (isTransitioning || gamePaused) return;
 
 
             Rect palyer_rect = new Rect();
@@ -352,6 +354,7 @@ namespace _5_Jahre_Hoelle.pages
             }
 
             CheckShopCollision();
+            CheckExamCollision();
         }
 
         private void DrawGame()
@@ -845,6 +848,56 @@ namespace _5_Jahre_Hoelle.pages
             // KI Ende
 
             playerNearShop = intersects;
+        }
+
+        private void CheckExamCollision()
+        {
+            if (currentRoom.Type != 'X') return;
+            if (!currentRoom.ExamRoom) return;
+            if (currentRoom.ExamTriggered) return;
+
+            Rect playerRect = new Rect(
+                player.X_Pos,
+                player.Y_Pos,
+                73,
+                100
+            );
+
+            if (playerRect.IntersectsWith(currentRoom.ExamBookRect))
+            {
+                currentRoom.ExamTriggered = true;
+                OpenExamRoom();
+            }
+        }
+
+        private void OpenExamRoom()
+        {
+            PauseGame();
+
+            question_ask exam = new question_ask(player);
+            exam.ShowDialog();
+
+            ResumeGame();
+        }
+
+        private void PauseGame()
+        {
+            gamePaused = true;
+            CompositionTarget.Rendering -= GameLoop;
+
+            moveLeft = false;
+            moveRight = false;
+            moveUp = false;
+            moveDown = false;
+        }
+
+        private void ResumeGame()
+        {
+            if (!gamePaused) return;
+
+            gamePaused = false;
+            lastFrameTime = DateTime.Now;
+            CompositionTarget.Rendering += GameLoop;
         }
     }
 }

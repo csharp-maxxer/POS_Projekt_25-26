@@ -15,6 +15,8 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Room
     {
+        public Rect ExamBookRect { get; private set; }
+        public bool ExamTriggered { get; set; } = false;
         public bool DoorTop { get; set; }
         public bool DoorRight { get; set; }
         public bool DoorBottom { get; set; }
@@ -180,8 +182,14 @@ namespace _5_Jahre_Hoelle.classes
                     book_img.Width = 102;
                     book_img.Height = 76;
                     book_img.Source = new BitmapImage(new Uri("../assets/book.png", UriKind.Relative));
-                    Canvas.SetLeft(book_img, 790);
-                    Canvas.SetTop(book_img, 382);
+
+                    double x = 790;
+                    double y = 382;
+
+                    Canvas.SetLeft(book_img, x);
+                    Canvas.SetTop(book_img, y);
+
+                    ExamBookRect = new Rect(x, y, book_img.Width, book_img.Height);
                     RoomCanvas.Children.Add(book_img);
                 }
             }
