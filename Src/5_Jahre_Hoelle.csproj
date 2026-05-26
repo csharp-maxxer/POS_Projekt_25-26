@@ -15,6 +15,7 @@
     <None Remove="assets\ammo_rubber.png" />
     <None Remove="assets\arrow_back.png" />
     <None Remove="assets\background_vorlaeufig.png" />
+    <None Remove="assets\book.png" />
     <None Remove="assets\chair_downwards.png" />
     <None Remove="assets\chair_left.png" />
     <None Remove="assets\chair_right.png" />
@@ -69,6 +70,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\arrow_back.png" />
+    <Resource Include="assets\book.png" />
     <Resource Include="assets\front_1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -123,6 +125,10 @@
     <Page Update="pages\menue_page.xaml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="questions\" />
   </ItemGroup>
 
 </Project>

@@ -26,19 +26,17 @@ namespace _5_Jahre_Hoelle.pages
     public partial class Game : Page
     {
         private Room currentRoom;
-        private bool isTransitioning = false;
+        private bool isTransitioning = false;   
         private bool moveLeft;
         private bool moveRight;
         private bool moveUp;
         private bool moveDown;
-        private DispatcherTimer gameTimer;
         private Player player;
-        private int upframcount;
-        private int downframecount;
-        private int rightframcount;
-        private int leftframcount;
         private bool playerNearShop = false;
         private bool shopOpen = false;
+        private double animationTimer = 0;
+        private bool examOpen = false;
+        private bool gamePaused = false;
         private List<Rectangle> bulletRects = new List<Rectangle>();
         bool shootup;
         bool shootright;
@@ -150,20 +148,16 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
             Focus();
-
-            
             
 
-            player = new Player(1.0, 250.0, 1.0, 0.5, 1, 1.0);
-            //chatgpt anfang: wie mache ich hier einen Deltatimer
-            gameTimer = new DispatcherTimer();
-            gameTimer.Interval = TimeSpan.FromMilliseconds(16);
-            gameTimer.Tick += GameTimer_Tick;
+            player = new Player(1.0, 250.0, 1.0, 1.0, 1, 1.0);
 
             lastFrameTime = DateTime.Now;
-
-            gameTimer.Start();
-            //chatgpt ende
+            // KI: Claude AI
+            // Prompt: kannt du mir was für wpf geben wo besser ist wie ein dispatcher timer?
+            // KI Anfang
+            CompositionTarget.Rendering += GameLoop;
+            // KI Ende
 
             // Testing
             List<List<char>> matrix_rooms = new List<List<char>>();
@@ -178,19 +172,23 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
 
-            // TESTING DELETE ME
-            //this.KeyDown += Game_KeyDown_DELETE_ME;
             this.Focusable = true;
             this.Focus();
 
-            upframcount = 0;
-            downframecount = 0;
-            rightframcount = 0;
-            leftframcount = 0;
         }
 
-        private void GameTimer_Tick(object? sender, EventArgs e)
+        private void GameLoop(object? sender, EventArgs e)
         {
+            DateTime now = DateTime.Now;
+            deltaTime = (now - lastFrameTime).TotalSeconds;
+            lastFrameTime = now;
+
+            if (deltaTime > 0.05) deltaTime = 0.05;
+
+            if (!isTransitioning)
+            {
+                move();
+            }
             //chatgpt andang: fixe den bug das ich wenn ich schießen anfange nicht mehr aufhören kann und ich mich nicht bewegen kann
             moveLeft = Keyboard.IsKeyDown(Key.A);
             moveRight = Keyboard.IsKeyDown(Key.D);
@@ -328,7 +326,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void move()
         {
-
+            if (isTransitioning || gamePaused) return;
 
 
             Rect palyer_rect = new Rect();
@@ -353,89 +351,91 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos - 1)];
                         player.X_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room); // _ ist wie await nur dass es nicht wartet
                         player.X_Pos = 1620;
                     }
                 }
                 
 
                 direction.X -= 1;
-                leftframcount++;
-
-                if (leftframcount == 1)
+                // KI: Claude AI
+                // Prompt: yo big c wie kann ich die animation frameabhängig machen?
+                // KI anfang
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = links1;
                 }
-
-                if (leftframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = links2;
                 }
-                if (leftframcount == 2)
-                    leftframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
+                // KI Ende (block wird weitere 3x verwendet.)
             }
 
 
             if (moveRight && player.X_Pos + 73 <= 1680)
             {
-                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1600)
+                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1580)
                 {
                     if (!isTransitioning)   
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos, currentRoom.Xpos + 1)];
                         player.X_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.X_Pos = 40;
                     }
                 }
 
                 direction.X += 1;
-                rightframcount++;
-
-                if (rightframcount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = rechts1;
                 }
-
-                if (rightframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = rechts2;
                 }
-
-                if (rightframcount == 2)
-                    rightframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
 
             if (moveUp && player.Y_Pos >= -10)
             {
                 
-                if (currentRoom.DoorTop && player.Y_Pos <= 2 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                if (currentRoom.DoorTop && player.Y_Pos <= 15 && player.X_Pos >= 760 && player.X_Pos <= 900)
                 {
                     if (!isTransitioning)
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos - 1, currentRoom.Xpos)];
                         player.Y_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.Y_Pos = 720;
                     }
                 }
                 
                 direction.Y -= 1;
-                upframcount++;
-
-                if (upframcount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = up1;
                 }
-
-                if (upframcount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = up2;
                 }
-
-                if (upframcount == 2) 
-                    upframcount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
 
@@ -448,28 +448,25 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         Room next_room = cllted_rooms[(currentRoom.Ypos + 1, currentRoom.Xpos)];
                         player.Y_Pos = -200;
-                        await SwitchRoom(currentRoom, next_room);
+                        _ = SwitchRoom(currentRoom, next_room);
                         player.Y_Pos = 20;
                     }
                 }
 
                 direction.Y += 1;
-                downframecount++;
-                
-                
-
-                if (downframecount == 1)
+                animationTimer += deltaTime;
+                if (animationTimer < 0.15)
                 {
                     Rect_Player.Fill = front1;
                 }
-
-                if (downframecount == 2)
+                else if (animationTimer < 0.3)
                 {
                     Rect_Player.Fill = front2;
                 }
-
-                if (downframecount == 2)
-                    downframecount = 0;
+                else
+                {
+                    animationTimer = 0;
+                }
             }
 
             if (direction.Length > 0)
@@ -493,6 +490,7 @@ namespace _5_Jahre_Hoelle.pages
             }
 
             CheckShopCollision();
+            CheckExamCollision();
         }
 
         private void DrawGame()
@@ -772,7 +770,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             if (isTransitioning) return;
             isTransitioning = true;
-
+            Rect_Player.Visibility = Visibility.Hidden;
             room_to.DrawRoom();
 
             CanvasGame.Children.Add(room_to.RoomCanvas);
@@ -853,7 +851,7 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Remove(room_from.RoomCanvas);
 
             currentRoom = room_to;
-
+            Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
         }
         // KI ENDE
@@ -1003,6 +1001,56 @@ namespace _5_Jahre_Hoelle.pages
             // KI Ende
 
             playerNearShop = intersects;
+        }
+
+        private void CheckExamCollision()
+        {
+            if (currentRoom.Type != 'X') return;
+            if (!currentRoom.ExamRoom) return;
+            if (currentRoom.ExamTriggered) return;
+
+            Rect playerRect = new Rect(
+                player.X_Pos,
+                player.Y_Pos,
+                73,
+                100
+            );
+
+            if (playerRect.IntersectsWith(currentRoom.ExamBookRect))
+            {
+                currentRoom.ExamTriggered = true;
+                OpenExamRoom();
+            }
+        }
+
+        private void OpenExamRoom()
+        {
+            PauseGame();
+
+            question_ask exam = new question_ask(player);
+            exam.ShowDialog();
+
+            ResumeGame();
+        }
+
+        private void PauseGame()
+        {
+            gamePaused = true;
+            CompositionTarget.Rendering -= GameLoop;
+
+            moveLeft = false;
+            moveRight = false;
+            moveUp = false;
+            moveDown = false;
+        }
+
+        private void ResumeGame()
+        {
+            if (!gamePaused) return;
+
+            gamePaused = false;
+            lastFrameTime = DateTime.Now;
+            CompositionTarget.Rendering += GameLoop;
         }
     }
 }

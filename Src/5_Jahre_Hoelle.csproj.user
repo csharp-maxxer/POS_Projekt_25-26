@@ -17,6 +17,9 @@
     <Compile Update="pages\Stats.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="subwindows\question_ask.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="subwindows\Shop.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
