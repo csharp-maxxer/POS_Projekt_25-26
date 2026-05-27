@@ -46,7 +46,7 @@ namespace _5_Jahre_Hoelle.pages
         double bulletRotationTimer = 0;
         private double shootTimer = 0;
         private usercontrols.Pausescreen pauseScreen;
-
+        private List<Rectangle> enemyRects = new List<Rectangle>();
 
 
         //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -139,7 +139,7 @@ namespace _5_Jahre_Hoelle.pages
         private ImageBrush bullet2 = new ImageBrush
         {
             ImageSource = new BitmapImage(
-                new Uri("pack://application:,,,/assets/ammo_rubber.png")
+                new Uri("pack://application:,,,/assets/ammo_rubber.png") // new Uri ("/assets", uri kind relative)
             ),
             Stretch = Stretch.Uniform
         };
@@ -149,9 +149,9 @@ namespace _5_Jahre_Hoelle.pages
         public Game()
         {
             InitializeComponent();
-
+            
             player = new Player(1.0, 250.0, 1.0, 0.5, 1, 1.0);
-
+            Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
 
