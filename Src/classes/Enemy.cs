@@ -30,12 +30,34 @@ namespace _5_Jahre_Hoelle.classes
             Bullets = new List<Bullets>();
         }
 
-        public void Move(Player player, double deltaTime)
+        public void Move(Player player, double deltaTime, List<Enemy>AllEnemies)
         {
             double direction_x = player.X_Pos - X_Pos;
             double direction_y = player.Y_Pos - Y_Pos;
 
             Vector move_direction = new Vector(direction_x, direction_y);
+
+            if (move_direction.Length > 0)
+            {
+                move_direction.Normalize();
+            }
+
+            // claude. kannst du bitte seperation machen?
+            foreach (Enemy other in AllEnemies)
+            {
+                if (other == this) continue;
+
+                double dx = X_Pos - other.X_Pos;
+                double dy = Y_Pos - other.Y_Pos;
+                double distance = Math.Sqrt(dx * dx + dy * dy);
+
+                if (distance < 60 && distance > 0)
+                {
+                    move_direction.X += (dx / distance) * 2;
+                    move_direction.Y += (dy / distance) * 2;
+                }
+            }
+            // claude ende
 
             if (move_direction.Length > 0)
             {

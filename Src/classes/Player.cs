@@ -13,7 +13,7 @@ namespace _5_Jahre_Hoelle.classes
         public double Damage {  get; set; }
         public double Speed { get; set; }
         public double Range { get; set; }
-        public int Grade { get; set; }
+        public double Grade { get; set; }
         public double Energy { get; set; }
         public double Firerate { get; set; }
         public double X_Pos { get; set; } 

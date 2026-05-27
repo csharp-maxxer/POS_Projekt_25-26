@@ -313,6 +313,7 @@ namespace _5_Jahre_Hoelle.pages
                 player_bullet_collision_obstacle(obstacle);
             }
             move();
+            UpdateEnemies();
             player_bullet_move();
             DrawGame();
         }
@@ -560,6 +561,40 @@ namespace _5_Jahre_Hoelle.pages
             else
             {
                 TxtShopHint.Visibility = Visibility.Collapsed;
+            }
+
+
+            // OPS
+            foreach (Rectangle rect in enemyRects)
+            {
+                CanvasGame.Children.Remove(rect);
+            }
+            enemyRects.Clear();
+
+            foreach (Enemy enemy in currentRoom.Enemies)
+            {
+                Rectangle enemyRect = new Rectangle();
+                enemyRect.Width = 50;
+                enemyRect.Height = 50;
+                enemyRect.Fill = new SolidColorBrush(Colors.Red); // TODO here sprite
+                Canvas.SetLeft(enemyRect, enemy.X_Pos);
+                Canvas.SetTop(enemyRect, enemy.Y_Pos);
+                Panel.SetZIndex(enemyRect, 5);
+                CanvasGame.Children.Add(enemyRect);
+                enemyRects.Add(enemyRect);
+
+                foreach (Bullets bullet in enemy.Bullets)
+                {
+                    Rectangle bulletRect = new Rectangle();
+                    bulletRect.Width = 25;
+                    bulletRect.Height = 25;
+                    bulletRect.Fill = new SolidColorBrush(Colors.OrangeRed);
+                    Canvas.SetLeft(bulletRect, bullet.X_pos);
+                    Canvas.SetTop(bulletRect, bullet.Y_pos);
+                    Panel.SetZIndex(bulletRect, 10);
+                    CanvasGame.Children.Add(bulletRect);
+                    enemyRects.Add(bulletRect); 
+                }
             }
         }
 
@@ -867,6 +902,7 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Remove(room_from.RoomCanvas);
 
             currentRoom = room_to;
+            currentRoom.SpawnEnemies();
             Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
         }
@@ -1069,6 +1105,63 @@ namespace _5_Jahre_Hoelle.pages
             gamePaused = false;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
+        }
+
+        private void UpdateEnemies()
+        {
+            for (int i = currentRoom.Enemies.Count - 1; i >= 0; i--)
+            {
+                Enemy enemy = currentRoom.Enemies[i];
+
+                enemy.Move(player, deltaTime, currentRoom.Enemies);
+                enemy.Shoot(player, deltaTime);
+
+                // move bullets
+                for (int j = enemy.Bullets.Count - 1; j >= 0; j--)
+                {
+                    Bullets bullet = enemy.Bullets[j];
+
+                    bullet.X_pos += bullet.Direction.X;
+                    bullet.Y_pos += bullet.Direction.Y;
+
+                    // hitbox room
+                    if (bullet.X_pos >= 1680 || bullet.Y_pos <= 0 || bullet.X_pos <= 0 || bullet.Y_pos >= 840)
+                    {
+                        enemy.Bullets.RemoveAt(j);
+                        continue;
+                    }
+
+                    // Bullet hit player
+                    Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
+                    Rect playerRect = new Rect(player.X_Pos + 30, player.Y_Pos + 50, 43, 50);
+
+                    if (bulletRect.IntersectsWith(playerRect))
+                    {
+                        player.Grade -= bullet.Damage;
+                        enemy.Bullets.RemoveAt(j);
+                    }
+                }
+
+                //player hit enemy
+                for (int j = player.Bullets.Count - 1; j >= 0; j--)
+                {
+                    Bullets bullet = player.Bullets[j];
+                    Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
+                    Rect enemyRect = new Rect(enemy.X_Pos, enemy.Y_Pos, 50, 50);
+
+                    if (bulletRect.IntersectsWith(enemyRect))
+                    {
+                        enemy.Health -= bullet.Damage;
+                        player.Bullets.RemoveAt(j);
+
+                        if (enemy.Health <= 0)
+                        {
+                            currentRoom.Enemies.RemoveAt(i);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

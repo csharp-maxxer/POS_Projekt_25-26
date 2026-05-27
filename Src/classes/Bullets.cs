@@ -27,6 +27,7 @@ namespace _5_Jahre_Hoelle.classes
 
             random = random_.Next(1, 3);
             rotation = 0;
+            Damage = damage;
             Speed = speed;
             Range = range;
             Range = range;
