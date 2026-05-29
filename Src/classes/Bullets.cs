@@ -17,11 +17,16 @@ namespace _5_Jahre_Hoelle.classes
         public double Range { get; private set; }
         public double X_pos { get; set; }
 
-        public double Y_pos { get; set; } 
+        public double Y_pos { get; set; }
+
+        public double X_pos_created { get; set; }
+
+        public double Y_pos_created { get; set; }
+
         public int random {  get; set; }
         public double rotation { get; set; }
 
-        public Bullets(double damage, double speed, double range, Vector direction)
+        public Bullets(double damage, double speed, double range, Vector direction, double x_create, double y_created)
         {
             Random random_ = new Random();
 
@@ -32,6 +37,8 @@ namespace _5_Jahre_Hoelle.classes
             Range = range;
             Range = range;
             Direction = direction;
+            X_pos_created = x_create;
+            Y_pos_created = y_created;
         }
 
 

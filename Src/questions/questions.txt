@@ -27,3 +27,364 @@ Was ist eine Funktion in der Programmierung?:{CPU-Kern:0,Festplatte:0,Wiederverw
 Was beschreibt OOP?:{Open Output Port:0,Objektorientierte Programmierung:1,Optische Online Plattform:0,Ordinary Operation Process:0}
 Welche Zahl ist dezimal 2 in Binär?:{11:0,10:1,01:0,100:0}
 Was ist die Hauptfunktion von DNS?:{CPU kühlen:0,Dateien komprimieren:0,Namen in IP-Adressen auflösen:1,Passwörter verschlüsseln:0}
+Was ist eine Variable?:{Ein Speicherplatz für Daten:1,Ein Monitor:0,Ein Kabel:0,Ein Browser:0}
+Was speichert ein string?:{Text:1,Ganze Zahlen:0,Wahr oder Falsch:0,Bilder direkt:0}
+Was speichert ein int?:{Ganze Zahlen:1,Text:0,Kommazahlen immer:0,Dateien:0}
+Was speichert ein bool?:{true oder false:1,Text:0,Bilder:0,Netzwerkdaten:0}
+Was speichert ein double?:{Kommazahlen:1,Nur Text:0,Nur Wahr/Falsch:0,Nur Zeichen:0}
+Was bedeutet true?:{Wahr:1,Falsch:0,Leer:0,Fehler:0}
+Was bedeutet false?:{Falsch:1,Wahr:0,Text:0,Zahl:0}
+Was ist eine Methode?:{Ein wiederverwendbarer Codeblock:1,Ein Monitor:0,Ein Netzwerkgerät:0,Ein Kabel:0}
+Was ist eine Funktion?:{Ein Codeblock der etwas erledigt:1,Ein Bildschirm:0,Ein Router:0,Ein Dateiformat:0}
+Was ist ein Parameter?:{Ein Wert der an eine Methode übergeben wird:1,Ein Monitoranschluss:0,Ein Virus:0,Ein Passwort:0}
+Was ist ein Rückgabewert?:{Das Ergebnis einer Methode:1,Ein Dateiname:0,Ein Kabeltyp:0,Ein Betriebssystem:0}
+Was bedeutet void in C#?:{Die Methode gibt nichts zurück:1,Die Methode gibt immer Text zurück:0,Die Methode ist ein Fehler:0,Die Methode löscht Daten:0}
+Was macht ein if?:{Prüft eine Bedingung:1,Startet den PC:0,Löscht Variablen:0,Öffnet Dateien:0}
+Was macht else?:{Wird ausgeführt wenn if falsch ist:1,Wird immer zuerst ausgeführt:0,Erstellt eine Klasse:0,Beendet Windows:0}
+Was macht else if?:{Prüft eine weitere Bedingung:1,Löscht den Code:0,Erstellt ein Bild:0,Startet den Compiler:0}
+Was ist eine Bedingung?:{Ein Ausdruck der wahr oder falsch sein kann:1,Ein Kabel:0,Ein Monitor:0,Ein Datenträger:0}
+Was bedeutet ==?:{Vergleich auf Gleichheit:1,Zuweisung:0,Kommentar:0,Division:0}
+Was bedeutet =?:{Zuweisung:1,Vergleich:0,Kommentar:0,Schleife:0}
+Was bedeutet !=?:{Ungleich:1,Gleich:0,Addieren:0,Speichern:0}
+Was bedeutet >?:{Größer als:1,Kleiner als:0,Gleich:0,Kommentar:0}
+Was bedeutet <?:{Kleiner als:1,Größer als:0,Gleich:0,Schleife:0}
+Was bedeutet >=?:{Größer oder gleich:1,Kleiner oder gleich:0,Nicht gleich:0,Zuweisung:0}
+Was bedeutet <=?:{Kleiner oder gleich:1,Größer oder gleich:0,Nicht gleich:0,Kommentar:0}
+Was bedeutet &&?:{Logisches UND:1,Logisches ODER:0,Nicht:0,Zuweisung:0}
+Was bedeutet ||?:{Logisches ODER:1,Logisches UND:0,Nicht:0,Addieren:0}
+Was bedeutet ! vor einem bool?:{Nicht:1,Plus:0,Minus:0,Speichern:0}
+Was macht eine for-Schleife?:{Wiederholt Code mit Zähler:1,Erstellt eine Klasse:0,Löscht Dateien:0,Öffnet Webseiten:0}
+Was macht eine while-Schleife?:{Wiederholt solange eine Bedingung wahr ist:1,Läuft nur einmal:0,Speichert Bilder:0,Erstellt Variablen automatisch:0}
+Was macht eine do-while-Schleife?:{Führt Code mindestens einmal aus:1,Führt Code nie aus:0,Erstellt eine Datei:0,Löscht das Programm:0}
+Was bedeutet break?:{Beendet eine Schleife oder switch:1,Startet eine Schleife:0,Erstellt eine Variable:0,Kopiert Text:0}
+Was bedeutet continue?:{Springt zum nächsten Schleifendurchlauf:1,Beendet das Programm immer:0,Löscht eine Datei:0,Öffnet den Browser:0}
+Was ist eine Endlosschleife?:{Eine Schleife die nicht aufhört:1,Eine Schleife die nie startet:0,Eine Methode ohne Parameter:0,Ein Compilerfehler immer:0}
+Was ist ein Array?:{Eine Sammlung von mehreren Werten:1,Ein Monitor:0,Ein Netzwerkgerät:0,Ein Betriebssystem:0}
+Was ist ein Index?:{Die Position eines Elements:1,Ein Passwort:0,Ein Dateiformat:0,Ein Compiler:0}
+Bei welchem Index beginnen Arrays meistens?:{0:1,1:0,2:0,10:0}
+Was ist eine List in C#?:{Eine veränderbare Sammlung von Elementen:1,Ein Monitor:0,Ein Kabel:0,Ein Dateityp:0}
+Was macht Add bei einer Liste?:{Fügt ein Element hinzu:1,Löscht die Liste:0,Sortiert immer:0,Beendet das Programm:0}
+Was macht Remove bei einer Liste?:{Entfernt ein Element:1,Fügt ein Element hinzu:0,Startet eine Schleife:0,Erstellt eine Klasse:0}
+Was macht Count bei einer Liste?:{Gibt die Anzahl der Elemente an:1,Gibt den letzten Wert zurück:0,Löscht Elemente:0,Sortiert Elemente:0}
+Was ist ein Kommentar im Code?:{Text der den Code erklärt:1,Code der immer ausgeführt wird:0,Ein Fehler:0,Ein Passwort:0}
+Wie beginnt ein einzeiliger Kommentar in C#?:{//:1,##:0,!!:0,@@:0}
+Wie beginnt ein mehrzeiliger Kommentar in C#?:{/*:1,//:0,##:0,::0}
+Was ist Syntax?:{Die Schreibregeln einer Programmiersprache:1,Die Farbe des Codes:0,Die Geschwindigkeit des PCs:0,Ein Dateiformat:0}
+Was ist ein Syntaxfehler?:{Fehler in der Schreibweise des Codes:1,Ein Virus:0,Ein Hardwarefehler:0,Ein Monitorproblem:0}
+Was ist ein Bug?:{Ein Fehler im Programm:1,Ein Kabel:0,Ein Bild:0,Ein Browser:0}
+Was ist Debugging?:{Fehler suchen und beheben:1,Dateien löschen:0,Programme installieren:0,Monitor reinigen:0}
+Was macht ein Compiler?:{Übersetzt Code in ausführbaren Code:1,Druckt Code aus:0,Löscht Code:0,Zeigt nur Bilder an:0}
+Was ist Quellcode?:{Der geschriebene Programmcode:1,Ein Monitor:0,Ein Router:0,Ein Netzteil:0}
+Was ist Maschinencode?:{Code den der Computer ausführen kann:1,Text für Benutzer:0,Ein Bildformat:0,Eine Datenbank:0}
+Was ist eine IDE?:{Eine Entwicklungsumgebung:1,Ein Netzwerkkabel:0,Ein Dateiformat:0,Ein Virenscanner:0}
+Was ist Visual Studio?:{Eine Entwicklungsumgebung:1,Ein Betriebssystem:0,Ein Browser:0,Eine Grafikkarte:0}
+Was bedeutet public?:{Von außen zugreifbar:1,Nur innerhalb der Methode:0,Immer geheim:0,Nur für Bilder:0}
+Was bedeutet private?:{Nur innerhalb der Klasse zugreifbar:1,Für alle zugreifbar:0,Immer statisch:0,Ein Fehler:0}
+Was bedeutet static?:{Gehört zur Klasse selbst:1,Gehört nur zu einem Bild:0,Ist immer falsch:0,Löscht Speicher:0}
+Was ist eine Klasse?:{Ein Bauplan für Objekte:1,Ein Monitor:0,Ein Dateiformat:0,Ein Router:0}
+Was ist ein Objekt?:{Eine Instanz einer Klasse:1,Ein Kommentar:0,Ein Kabel:0,Eine Datei:0}
+Was ist ein Konstruktor?:{Eine Methode zum Erstellen eines Objekts:1,Ein Monitoranschluss:0,Ein Dateiformat:0,Ein Netzwerkgerät:0}
+Was ist OOP?:{Objektorientierte Programmierung:1,Offenes Online Passwort:0,Optisches Operating Panel:0,Ordner ohne Programm:0}
+Was bedeutet Vererbung?:{Eine Klasse übernimmt Eigenschaften einer anderen:1,Eine Datei wird gelöscht:0,Ein Programm startet neu:0,Ein Array wird sortiert:0}
+Was bedeutet Kapselung?:{Daten werden geschützt zusammengefasst:1,Dateien werden komprimiert:0,Code wird gelöscht:0,Variablen werden gedruckt:0}
+Was ist eine Property in C#?:{Eine Eigenschaft einer Klasse:1,Ein Dateiformat:0,Ein Compilerfehler:0,Ein Kabel:0}
+Was macht get?:{Liest einen Wert aus:1,Setzt einen Wert:0,Löscht eine Klasse:0,Startet eine Schleife:0}
+Was macht set?:{Setzt einen Wert:1,Liest nur einen Wert:0,Löscht ein Objekt:0,Beendet eine Methode:0}
+Was ist ein Namespace?:{Ein Namensbereich für Code:1,Ein Netzwerkname:0,Ein Dateityp:0,Ein Passwort:0}
+Was macht using in C#?:{Bindet einen Namespace ein:1,Löscht Code:0,Startet ein Programm:0,Erstellt automatisch Variablen:0}
+Was ist eine Exception?:{Ein Fehler während der Programmausführung:1,Ein Kommentar:0,Ein Monitor:0,Ein Router:0}
+Was macht try?:{Versucht Code auszuführen:1,Löscht Code:0,Erstellt ein Array:0,Beendet das Programm immer:0}
+Was macht catch?:{Fängt Fehler ab:1,Erstellt Fehler:0,Startet den PC:0,Löscht Variablen:0}
+Was macht finally?:{Wird nach try-catch ausgeführt:1,Wird nie ausgeführt:0,Erstellt eine Klasse:0,Löscht eine Datei:0}
+Was ist ein NullReference-Fehler?:{Zugriff auf ein nicht vorhandenes Objekt:1,Ein Netzwerkfehler:0,Ein Monitorfehler:0,Ein Druckerfehler:0}
+Was bedeutet null?:{Kein Objekt oder kein Wert:1,Immer die Zahl 0:0,Immer leerer Text:0,Immer false:0}
+Was ist ein Boolean-Ausdruck?:{Ein Ausdruck mit true oder false als Ergebnis:1,Ein Text:0,Ein Bild:0,Ein Dateipfad:0}
+Was macht Console.WriteLine?:{Gibt Text in der Konsole aus:1,Liest Text ein:0,Löscht Text:0,Kompiliert Code:0}
+Was macht Console.ReadLine?:{Liest eine Eingabe aus der Konsole:1,Gibt Text aus:0,Erstellt eine Klasse:0,Löscht Variablen:0}
+Was ist eine Zeichenkette?:{Text:1,Eine Zahl:0,Ein bool:0,Ein Objekt immer:0}
+Was ist ein char?:{Ein einzelnes Zeichen:1,Ein langer Text:0,Eine Kommazahl:0,Ein Array:0}
+Was ist ein float?:{Ein Datentyp für Kommazahlen:1,Ein Datentyp für Text:0,Ein bool:0,Ein Kommentar:0}
+Was ist ein long?:{Ein Datentyp für große ganze Zahlen:1,Ein Texttyp:0,Ein Bildtyp:0,Ein Netzwerktyp:0}
+Was ist ein short?:{Ein Datentyp für kleine ganze Zahlen:1,Ein Texttyp:0,Eine Methode:0,Ein Kommentar:0}
+Was bedeutet deklarieren?:{Eine Variable bekannt machen:1,Eine Datei löschen:0,Ein Programm schließen:0,Eine Schleife abbrechen:0}
+Was bedeutet initialisieren?:{Einen Startwert geben:1,Einen Fehler erzeugen:0,Code löschen:0,Einen Monitor anschließen:0}
+Was bedeutet zuweisen?:{Einer Variable einen Wert geben:1,Einen Kommentar schreiben:0,Ein Programm kompilieren:0,Ein Array löschen:0}
+Was ist ein Literal?:{Ein direkt geschriebener Wert im Code:1,Ein Monitor:0,Ein Compiler:0,Ein Kabel:0}
+Was ist ein String-Literal?:{Text in Anführungszeichen:1,Eine Zahl ohne Komma:0,Ein bool:0,Ein Kommentar:0}
+Was ist ein Integer-Literal?:{Eine ganze Zahl im Code:1,Ein Text im Code:0,Ein Objekt:0,Eine Klasse:0}
+Was macht der Plus-Operator bei Zahlen?:{Addieren:1,Text löschen:0,Schleife starten:0,Array sortieren:0}
+Was kann + bei strings machen?:{Texte verbinden:1,Texte löschen:0,Fehler fangen:0,Klassen erstellen:0}
+Was bedeutet Modulo %?:{Rest einer Division:1,Multiplikation:0,Kommentar:0,Arrayzugriff:0}
+Was macht ++?:{Erhöht einen Wert um 1:1,Löscht einen Wert:0,Teilt durch 2:0,Erstellt eine Methode:0}
+Was macht --?:{Verringert einen Wert um 1:1,Erhöht um 10:0,Löscht Code:0,Startet eine Klasse:0}
+Was ist eine lokale Variable?:{Variable innerhalb eines Bereichs:1,Variable im Internet:0,Variable im BIOS:0,Variable im Router:0}
+Was ist eine globale Variable grob?:{Eine Variable die in größerem Bereich verfügbar ist:1,Eine Variable nur in einer Methode:0,Ein Kommentar:0,Ein Fehler:0}
+Was ist Scope?:{Gültigkeitsbereich von Variablen:1,Ein Dateiformat:0,Ein Netzwerkgerät:0,Ein Passwort:0}
+Was ist ein Codeblock?:{Code zwischen geschweiften Klammern:1,Ein Bild:0,Ein Ordner:0,Ein Router:0}
+Was ist eine Anweisung?:{Ein einzelner Programmbefehl:1,Ein Monitor:0,Ein Kabel:0,Ein Benutzerkonto:0}
+Was ist ein Ausdruck?:{Code der einen Wert ergibt:1,Ein Kommentar immer:0,Eine Datei:0,Ein Netzwerkgerät:0}
+Was ist ein Algorithmus?:{Eine Schritt-für-Schritt-Anweisung:1,Ein Monitor:0,Ein Kabel:0,Ein Dateiformat:0}
+Was ist Pseudocode?:{Codeähnliche Beschreibung eines Ablaufs:1,Echter Maschinencode:0,Ein Bildformat:0,Ein Compiler:0}
+Was ist ein Flowchart?:{Ein Ablaufdiagramm:1,Ein Router:0,Ein Monitor:0,Ein Passwort:0}
+Was macht return?:{Gibt einen Wert zurück oder beendet die Methode:1,Startet eine Schleife:0,Löscht eine Variable:0,Öffnet den Browser:0}
+Was passiert nach return in einer Methode meistens?:{Der restliche Code der Methode wird nicht mehr ausgeführt:1,Der Code startet neu:0,Alle Variablen werden global:0,Der PC fährt herunter:0}
+Was ist Überladung von Methoden?:{Mehrere Methoden mit gleichem Namen aber anderen Parametern:1,Zu viel RAM:0,Ein Netzwerkfehler:0,Ein Kommentarfehler:0}
+Was ist ein optionaler Parameter?:{Ein Parameter mit Standardwert:1,Ein verbotener Parameter:0,Ein Array:0,Ein Compiler:0}
+Was ist ein Standardwert?:{Ein Wert der benutzt wird wenn kein anderer angegeben ist:1,Ein Fehlerwert:0,Ein Dateiname:0,Ein Kommentar:0}
+Was ist eine Signatur einer Methode?:{Name und Parameter einer Methode:1,Ein Passwort:0,Ein Dateiformat:0,Ein Monitorbild:0}
+Was ist eine Main-Methode?:{Startpunkt vieler Programme:1,Ein Bildformat:0,Ein Routername:0,Ein Kommentar:0}
+Was bedeutet async grob?:{Eine Methode kann asynchron arbeiten:1,Eine Methode ist immer schneller:0,Eine Methode löscht Code:0,Eine Methode ist ein Array:0}
+Was bedeutet await grob?:{Wartet auf eine asynchrone Aufgabe:1,Beendet das Programm:0,Erstellt eine Klasse:0,Löscht eine Datei:0}
+Was ist ein Task in C#?:{Eine asynchrone Aufgabe:1,Ein Monitor:0,Ein Netzwerkkabel:0,Ein Kommentar:0}
+Was ist ein Event?:{Ein Ereignis auf das Code reagieren kann:1,Ein Fehler immer:0,Ein Array:0,Ein Compiler:0}
+Was ist ein Click-Event?:{Ein Ereignis bei Mausklick:1,Ein Ereignis beim Kompilieren:0,Ein Fehler:0,Ein Datentyp:0}
+Was ist ein KeyDown-Event?:{Ein Ereignis beim Drücken einer Taste:1,Ein Ereignis beim Loslassen einer Taste:0,Ein Dateityp:0,Ein Router:0}
+Was ist ein KeyUp-Event?:{Ein Ereignis beim Loslassen einer Taste:1,Ein Ereignis beim Drücken einer Maus:0,Ein Compiler:0,Ein Datentyp:0}
+Was ist ein Delegate?:{Ein Typ der auf Methoden zeigen kann:1,Ein Monitor:0,Ein Dateiformat:0,Ein Netzwerkgerät:0}
+Was ist ein Lambda-Ausdruck?:{Eine kurze Schreibweise für eine Funktion:1,Ein Bildformat:0,Ein Betriebssystem:0,Ein Kabel:0}
+Was bedeutet += bei Events oft?:{Event-Handler hinzufügen:1,Event löschen:0,Variable halbieren:0,Klasse erstellen:0}
+Was bedeutet -= bei Events oft?:{Event-Handler entfernen:1,Event starten:0,Variable addieren:0,Text verbinden:0}
+Was ist ein Event-Handler?:{Methode die auf ein Event reagiert:1,Ein Monitoranschluss:0,Ein Passwort:0,Ein Dateityp:0}
+Was ist WPF?:{Framework für Windows-Oberflächen:1,Programmiersprache für Server:0,Ein Dateiformat:0,Ein Router:0}
+Was ist XAML?:{Sprache zum Beschreiben von Oberflächen:1,Ein Datentyp:0,Ein Compilerfehler:0,Ein Netzwerkprotokoll:0}
+Was ist ein Button?:{Eine Schaltfläche:1,Ein Array:0,Ein Datentyp:0,Ein Compiler:0}
+Was ist eine TextBox?:{Ein Eingabefeld für Text:1,Ein Datentyp:0,Ein Netzwerkgerät:0,Ein Dateiformat:0}
+Was ist ein Label?:{Ein Beschriftungselement:1,Ein Compiler:0,Ein Array:0,Ein Fehler:0}
+Was ist ein Canvas in WPF?:{Eine Fläche zum freien Platzieren von Elementen:1,Eine Datenbank:0,Ein Netzwerkgerät:0,Ein Betriebssystem:0}
+Was ist ein Rectangle in WPF?:{Ein Rechteck-Element:1,Ein Datentyp für Text:0,Ein Compiler:0,Ein Router:0}
+Was macht Canvas.SetLeft?:{Setzt die X-Position eines Elements:1,Setzt die Y-Position:0,Löscht ein Element:0,Kompiliert Code:0}
+Was macht Canvas.SetTop?:{Setzt die Y-Position eines Elements:1,Setzt die X-Position:0,Erstellt eine Klasse:0,Stoppt das Programm:0}
+Was ist Visibility.Visible?:{Element ist sichtbar:1,Element ist gelöscht:0,Element ist unsichtbar:0,Element ist ein Fehler:0}
+Was ist Visibility.Hidden?:{Element ist unsichtbar aber nimmt Platz ein:1,Element ist sichtbar:0,Element wird gelöscht:0,Element wird kompiliert:0}
+Was ist Visibility.Collapsed?:{Element ist unsichtbar und nimmt keinen Platz ein:1,Element ist sichtbar:0,Element ist ein Array:0,Element ist ein Datentyp:0}
+Was ist ein Timer im Spiel?:{Zählt Zeit für Aktionen:1,Ein Monitor:0,Ein Router:0,Ein Kommentar:0}
+Was ist DeltaTime?:{Zeit zwischen zwei Frames:1,Anzahl der Variablen:0,Größe einer Datei:0,Name einer Klasse:0}
+Warum nutzt man DeltaTime?:{Damit Bewegung unabhängig von FPS ist:1,Damit Code gelöscht wird:0,Damit Variablen global werden:0,Damit Arrays sortiert werden:0}
+Was ist eine Game Loop?:{Eine Schleife die das Spiel ständig aktualisiert:1,Ein Menü:0,Ein Datentyp:0,Ein Compiler:0}
+Was passiert in einer Game Loop oft?:{Eingaben prüfen und Spiel zeichnen:1,Dateien drucken:0,PC herunterfahren:0,Code kompilieren:0}
+Was ist ein Frame?:{Ein einzelnes Bild im Ablauf:1,Ein Datentyp:0,Ein Router:0,Ein Passwort:0}
+Was bedeutet FPS?:{Bilder pro Sekunde:1,Dateien pro Sekunde:0,Fehler pro System:0,Funktionen pro Speicher:0}
+Was ist Kollision in Spielen?:{Wenn sich Objekte berühren:1,Wenn Code kompiliert:0,Wenn Variablen deklariert werden:0,Wenn Text ausgegeben wird:0}
+Was ist eine Hitbox?:{Ein Bereich zur Kollisionserkennung:1,Ein Passwortfeld:0,Ein Compiler:0,Eine Methode:0}
+Was ist ein Vektor?:{Eine Größe mit Richtung:1,Ein Kommentar:0,Ein String:0,Ein Dateityp:0}
+Was bedeutet X-Position?:{Position nach links oder rechts:1,Position nach oben oder unten:0,Dateigröße:0,Methodenname:0}
+Was bedeutet Y-Position?:{Position nach oben oder unten:1,Position nach links oder rechts:0,Arraylänge:0,Klassenname:0}
+Was macht Normalize bei einem Vektor?:{Macht die Länge 1:1,Löscht den Vektor:0,Erstellt ein Array:0,Stoppt eine Schleife:0}
+Was ist Geschwindigkeit in einem Spiel?:{Positionsänderung pro Zeit:1,Anzahl der Klassen:0,Größe eines strings:0,Anzahl der Kommentare:0}
+Was ist ein Sprite?:{Ein Bildobjekt im Spiel:1,Ein Compiler:0,Ein Datentyp:0,Ein Netzwerkgerät:0}
+Was ist eine Animation?:{Eine Veränderung über mehrere Frames:1,Ein Kommentar:0,Ein Passwort:0,Eine Datenbank:0}
+Was ist ein Spielerobjekt?:{Das Objekt das den Spieler darstellt:1,Ein Router:0,Ein Compiler:0,Ein Dateiformat:0}
+Was ist ein NPC?:{Nicht spielbarer Charakter:1,Neuer Programmcode:0,Netzwerk-PC:0,Nicht geprüfter Compiler:0}
+Was ist ein Boolean-Flag?:{Eine bool-Variable für einen Zustand:1,Ein Text:0,Ein Array:0,Ein Compiler:0}
+Was kann gamePaused als bool bedeuten?:{Ob das Spiel pausiert ist:1,Ob der PC aus ist:0,Ob eine Datei existiert:0,Ob RAM voll ist:0}
+Was kann isTransitioning bedeuten?:{Ob gerade ein Übergang läuft:1,Ob eine Variable deklariert wird:0,Ob ein Compiler installiert ist:0,Ob ein Array leer ist:0}
+Was ist Refactoring?:{Code verbessern ohne Verhalten zu ändern:1,Code löschen:0,Hardware tauschen:0,Programm installieren:0}
+Was ist Clean Code?:{Gut lesbarer Code:1,Code ohne Variablen:0,Code mit vielen Fehlern:0,Code als Bild:0}
+Warum sind gute Namen wichtig?:{Damit Code verständlicher ist:1,Damit der PC schneller lädt:0,Damit Dateien kleiner werden:0,Damit RAM gelöscht wird:0}
+Was ist Einrückung?:{Abstände zur besseren Lesbarkeit:1,Eine Variable:0,Ein Compiler:0,Ein Array:0}
+Was sind geschweifte Klammern?:{Begrenzen Codeblöcke:1,Starten den PC:0,Löschen Variablen:0,Kommentieren Code:0}
+Was beendet in C# oft eine Anweisung?:{Semikolon:1,Doppelpunkt:0,Komma:0,Hashtag:0}
+Was ist ein Semikolon?:{Ein Zeichen zum Beenden vieler Anweisungen:1,Ein Datentyp:0,Ein Kommentar:0,Eine Klasse:0}
+Was ist ein String-Array?:{Array mit Texten:1,Array mit bools:0,Array mit Bildern immer:0,Array mit Klassen immer:0}
+Was ist ein int-Array?:{Array mit ganzen Zahlen:1,Array mit Texten:0,Array mit Dateien:0,Array mit Methoden:0}
+Was bedeutet array.Length?:{Anzahl der Elemente im Array:1,Erstes Element:0,Letztes Element:0,Array löschen:0}
+Was ist eine foreach-Schleife?:{Schleife über alle Elemente einer Sammlung:1,Schleife die nie endet:0,Kommentar im Code:0,Datentyp für Text:0}
+Wann nutzt man foreach oft?:{Wenn man jedes Element durchgehen will:1,Wenn man eine Klasse löschen will:0,Wenn man Code kompilieren will:0,Wenn man eine Datei öffnet:0}
+Was ist eine verschachtelte Schleife?:{Eine Schleife in einer Schleife:1,Eine Methode ohne Inhalt:0,Ein Array ohne Werte:0,Ein Kommentar mit zwei Zeilen:0}
+Was ist ein zweidimensionales Array?:{Array mit Zeilen und Spalten:1,Array mit nur einem Wert:0,Array mit nur Text:0,Ein Compiler:0}
+Was ist eine Matrix in Programmierung?:{Eine tabellenartige Datenstruktur:1,Ein Monitor:0,Ein Passwort:0,Ein Browser:0}
+Was ist Sortieren?:{Elemente in Reihenfolge bringen:1,Elemente löschen:0,Code kompilieren:0,Kommentare schreiben:0}
+Was ist Suchen in einer Liste?:{Ein bestimmtes Element finden:1,Alle Elemente löschen:0,Eine Klasse erstellen:0,Den PC starten:0}
+Was ist ein Dictionary?:{Sammlung aus Schlüssel und Wert:1,Ein Monitor:0,Ein Kabel:0,Ein Betriebssystem:0}
+Was ist ein Key im Dictionary?:{Der Schlüssel zum Finden eines Werts:1,Der Wert selbst immer:0,Ein Kommentar:0,Eine Schleife:0}
+Was ist ein Value im Dictionary?:{Der gespeicherte Wert:1,Der Compiler:0,Der Index immer:0,Der Kommentar:0}
+Was macht ContainsKey?:{Prüft ob ein Schlüssel existiert:1,Löscht einen Schlüssel:0,Sortiert alle Werte:0,Erstellt eine Klasse:0}
+Was macht Clear bei einer Liste?:{Entfernt alle Elemente:1,Fügt ein Element hinzu:0,Gibt Text aus:0,Startet ein Event:0}
+Was ist ein leeres Array?:{Ein Array ohne Elemente:1,Ein Array mit Fehlern immer:0,Ein Kommentar:0,Ein Compiler:0}
+Was ist ein leeres string?:{Text ohne Zeichen:1,Die Zahl 0:0,Ein bool:0,Ein Array:0}
+Was macht string.Length?:{Gibt die Anzahl der Zeichen zurück:1,Löscht Text:0,Sortiert Text:0,Kompiliert Text:0}
+Was macht ToString?:{Wandelt etwas in Text um:1,Wandelt Text in Bild um:0,Löscht ein Objekt:0,Startet eine Schleife:0}
+Was macht int.Parse?:{Wandelt Text in eine ganze Zahl um:1,Wandelt Zahl in Bild um:0,Löscht Text:0,Erstellt eine Klasse:0}
+Was macht double.Parse?:{Wandelt Text in eine Kommazahl um:1,Wandelt Bild in Text um:0,Löscht eine Zahl:0,Startet ein Event:0}
+Was ist TryParse?:{Sicheres Umwandeln mit Erfolgsprüfung:1,Code löschen:0,Array sortieren:0,Datei öffnen:0}
+Was ist eine Eingabevalidierung?:{Prüfen ob Eingaben gültig sind:1,Monitor prüfen:0,Datei drucken:0,Router starten:0}
+Was ist ein Compilerfehler?:{Fehler beim Übersetzen des Codes:1,Fehler nur beim Internet:0,Monitorfehler:0,Druckerfehler:0}
+Was ist ein Laufzeitfehler?:{Fehler während das Programm läuft:1,Fehler vor dem Schreiben:0,Ein Kommentar:0,Ein Array:0}
+Was ist ein Logikfehler?:{Code läuft aber Ergebnis ist falsch:1,Code kompiliert nie:0,Monitor ist aus:0,Datei fehlt immer:0}
+Was ist ein Breakpoint?:{Haltepunkt beim Debuggen:1,Ein Datenbankfeld:0,Ein Dateiformat:0,Ein Monitoranschluss:0}
+Was macht Step Over beim Debuggen?:{Führt die nächste Zeile aus ohne in Methode zu springen:1,Löscht Code:0,Startet Windows:0,Sortiert Arrays:0}
+Was macht Step Into beim Debuggen?:{Springt in eine Methode hinein:1,Beendet Debugging:0,Löscht Variablen:0,Öffnet Browser:0}
+Was zeigt der Debugger?:{Zustand des Programms beim Ausführen:1,Nur Bilder:0,Nur Dateien:0,Nur Passwörter:0}
+Was ist eine Watch im Debugger?:{Anzeige eines Variablenwerts:1,Eine Uhr im Spiel immer:0,Ein Compiler:0,Ein Router:0}
+Was ist Unit Testing?:{Testen kleiner Codeeinheiten:1,Testen des Monitors:0,Testen des WLAN-Kabels:0,Testen von Druckerpapier:0}
+Was ist ein Testfall?:{Ein bestimmter Prüffall:1,Ein Kommentar:0,Ein Monitor:0,Eine Variable immer:0}
+Was bedeutet erwartetes Ergebnis?:{Das Ergebnis das korrekt sein sollte:1,Ein Fehler:0,Ein Dateiname:0,Ein Compiler:0}
+Was bedeutet tatsächliches Ergebnis?:{Das Ergebnis das wirklich herauskommt:1,Der Code als Text:0,Ein Kommentar:0,Ein Netzwerkname:0}
+Was ist eine Assertion?:{Prüfung in einem Test:1,Ein Bild:0,Ein Router:0,Ein Datentyp:0}
+Was ist Versionskontrolle?:{Verwalten von Codeänderungen:1,Code ausdrucken:0,Monitor wechseln:0,Dateien verstecken:0}
+Was ist Git?:{Ein Versionsverwaltungssystem:1,Eine Programmiersprache:0,Ein Monitor:0,Ein Virenscanner:0}
+Was ist ein Commit?:{Gespeicherte Änderung in Git:1,Ein Compilerfehler:0,Ein Monitoranschluss:0,Ein Datentyp:0}
+Was ist ein Branch?:{Ein Entwicklungszweig:1,Ein Kabel:0,Ein Array:0,Ein Passwort:0}
+Was ist ein Merge?:{Zusammenführen von Änderungen:1,Löschen aller Änderungen:0,Starten des PCs:0,Erstellen eines bools:0}
+Was ist ein Repository?:{Speicherort für ein Codeprojekt:1,Ein Monitor:0,Ein Netzteil:0,Ein Browsercache:0}
+Was macht git push?:{Lädt Änderungen hoch:1,Lädt Änderungen herunter:0,Löscht das Projekt:0,Kompiliert C#:0}
+Was macht git pull?:{Lädt Änderungen herunter:1,Lädt Änderungen hoch:0,Erstellt eine Klasse:0,Startet Debugging:0}
+Was ist ein Merge-Konflikt?:{Widersprüchliche Änderungen im Code:1,Ein RAM-Fehler:0,Ein Monitorproblem:0,Ein Routerfehler:0}
+Was ist GitHub?:{Eine Plattform für Codeprojekte:1,Ein Compiler:0,Ein Datentyp:0,Ein Betriebssystem:0}
+Was ist README?:{Eine Datei mit Projektinfos:1,Ein Compiler:0,Ein Netzwerkprotokoll:0,Ein Datentyp:0}
+Was ist Markdown?:{Eine einfache Auszeichnungssprache:1,Eine CPU:0,Ein Router:0,Ein Fehler:0}
+Was ist JSON?:{Ein Datenformat:1,Eine Programmiersprache nur:0,Ein Monitor:0,Ein Datentyp für bool:0}
+Was ist XML?:{Ein Format für strukturierte Daten:1,Ein Compiler:0,Ein Router:0,Ein Array:0}
+Was ist CSV?:{Textformat für Tabellenwerte:1,Ein Betriebssystem:0,Ein Compiler:0,Ein Datentyp:0}
+Was ist eine API?:{Schnittstelle zwischen Programmen:1,Ein Monitor:0,Ein Kabel:0,Ein Dateiformat für Bilder:0}
+Was ist ein Request?:{Eine Anfrage:1,Ein Kommentar:0,Ein Compiler:0,Ein Datentyp:0}
+Was ist eine Response?:{Eine Antwort:1,Eine Schleife:0,Ein Array:0,Ein Fehler immer:0}
+Was macht HTTP GET?:{Daten abrufen:1,Daten löschen:0,Monitor starten:0,Code kompilieren:0}
+Was macht HTTP POST?:{Daten senden oder erstellen:1,Daten nur löschen:0,Kommentare schreiben:0,Array sortieren:0}
+Was bedeutet Statuscode 200?:{Erfolg:1,Fehler:0,Nicht gefunden:0,Keine Berechtigung:0}
+Was bedeutet Statuscode 404?:{Nicht gefunden:1,Erfolg:0,Server gestartet:0,Datei gespeichert:0}
+Was bedeutet Statuscode 500?:{Serverfehler:1,Erfolg:0,Client geöffnet:0,Code kompiliert:0}
+Was ist SQL?:{Sprache für Datenbanken:1,Eine Bildsprache:0,Ein Betriebssystem:0,Ein Compiler:0}
+Was macht SELECT in SQL?:{Daten abfragen:1,Daten löschen:0,Tabellen immer erstellen:0,Code kompilieren:0}
+Was macht INSERT in SQL?:{Daten einfügen:1,Daten löschen:0,Daten sortieren immer:0,Programm starten:0}
+Was macht UPDATE in SQL?:{Daten ändern:1,Daten nur lesen:0,Datenbank schließen:0,Code debuggen:0}
+Was macht DELETE in SQL?:{Daten löschen:1,Daten anzeigen:0,Daten kopieren immer:0,Compiler starten:0}
+Was ist eine Datenbank?:{System zum Speichern von Daten:1,Ein Monitor:0,Ein Router:0,Ein Kommentar:0}
+Was ist eine Tabelle in einer Datenbank?:{Datenstruktur mit Zeilen und Spalten:1,Ein Array immer:0,Ein Compiler:0,Ein Betriebssystem:0}
+Was ist ein Datensatz?:{Eine Zeile mit Daten:1,Ein Kommentar:0,Ein Monitor:0,Ein Kabel:0}
+Was ist eine Spalte in einer Tabelle?:{Ein bestimmtes Datenfeld:1,Ein Compiler:0,Ein Datentyp immer:0,Ein Passwort:0}
+Was ist ein Primärschlüssel?:{Eindeutige Kennung eines Datensatzes:1,Ein Passwort für WLAN:0,Ein Compiler:0,Ein Kommentar:0}
+Was ist ein Fremdschlüssel?:{Verweis auf Datensatz einer anderen Tabelle:1,Ein Dateiformat:0,Ein Monitor:0,Ein Router:0}
+Was ist Normalisierung grob?:{Daten sinnvoll strukturieren:1,Daten löschen:0,Code einfärben:0,PC neustarten:0}
+Was ist eine Abfrage?:{Eine Anfrage an Daten:1,Ein Compilerfehler:0,Ein Kommentar:0,Ein Bild:0}
+Was ist HTML?:{Sprache für Webseitenstruktur:1,Eine Datenbank:0,Ein Betriebssystem:0,Ein Compiler:0}
+Was ist CSS?:{Sprache für Webseiten-Design:1,Eine Datenbank:0,Ein Router:0,Ein Virenscanner:0}
+Was ist JavaScript?:{Programmiersprache für Interaktivität im Web:1,Ein Monitor:0,Ein Dateiformat:0,Ein Kabel:0}
+Was macht HTML?:{Strukturiert Inhalte einer Webseite:1,Stylt alleine alles:0,Speichert Datenbanken:0,Kompiliert C#:0}
+Was macht CSS?:{Gestaltet Webseiten:1,Erstellt Datenbanken:0,Löscht HTML:0,Startet Server:0}
+Was macht JavaScript?:{Macht Webseiten interaktiv:1,Ersetzt HTML komplett:0,Erstellt nur Bilder:0,Schaltet CPU aus:0}
+Was ist ein HTML-Tag?:{Ein Baustein in HTML:1,Ein Compiler:0,Ein Datentyp:0,Ein Router:0}
+Was ist ein div?:{Ein HTML-Container:1,Ein C# Datentyp:0,Ein Compiler:0,Ein Netzwerkgerät:0}
+Was ist ein Button in HTML?:{Eine anklickbare Schaltfläche:1,Ein Array:0,Ein Datenbankfeld:0,Ein Betriebssystem:0}
+Was ist ein CSS-Selektor?:{Wählt Elemente zum Gestalten aus:1,Löscht HTML:0,Kompiliert JS:0,Startet Server:0}
+Was ist eine CSS-Klasse?:{Wiederverwendbarer Stilname:1,Eine C# Klasse immer:0,Ein Router:0,Ein Fehler:0}
+Was ist eine ID in HTML?:{Eindeutiger Name eines Elements:1,Ein Compilerfehler:0,Ein Kommentar:0,Ein Passwort immer:0}
+Was ist DOM?:{Struktur einer Webseite als Objekte:1,Ein Betriebssystem:0,Ein Datentyp:0,Ein Compiler:0}
+Was ist ein Event Listener?:{Code der auf ein Ereignis wartet:1,Ein Monitor:0,Ein Kabel:0,Ein Datenbankfeld:0}
+Was ist Frontend?:{Der sichtbare Teil einer Anwendung:1,Der Serverraum immer:0,Die Datenbank allein:0,Der Compiler:0}
+Was ist Backend?:{Der serverseitige Teil einer Anwendung:1,Der sichtbare Button:0,Das CSS allein:0,Der Monitor:0}
+Was ist Fullstack?:{Frontend und Backend zusammen:1,Nur CSS:0,Nur Datenbank:0,Nur Hardware:0}
+Was ist ein Server?:{Ein Computer oder Programm das Dienste anbietet:1,Ein Button:0,Ein Datentyp:0,Ein Kommentar:0}
+Was ist ein Client?:{Programm oder Gerät das Dienste nutzt:1,Ein Compilerfehler:0,Ein Datentyp:0,Ein Kabel:0}
+Was ist localhost?:{Der eigene Computer als Serveradresse:1,Eine Internetseite immer:0,Ein Compiler:0,Ein Array:0}
+Was ist ein Port?:{Nummer für einen Netzwerkdienst:1,Ein Datentyp:0,Ein Kommentar:0,Ein Monitoranschluss immer:0}
+Was ist ein Framework?:{Sammlung von Werkzeugen und Struktur für Programme:1,Ein Monitor:0,Ein Kabel:0,Ein Passwort:0}
+Was ist eine Library?:{Sammlung fertiger Funktionen:1,Ein Betriebssystem:0,Ein Router:0,Ein Kommentar:0}
+Was ist der Unterschied zwischen Framework und Library grob?:{Framework gibt oft mehr Struktur vor:1,Library ist immer Hardware:0,Framework ist immer ein Virus:0,Es gibt keinen Unterschied in der Nutzung:0}
+Was ist NuGet?:{Paketverwaltung für .NET:1,Ein Bildformat:0,Ein Monitor:0,Ein Netzwerkprotokoll:0}
+Was ist ein Paket in Programmierung?:{Wiederverwendbarer Code:1,Ein Druckerpaket:0,Ein Monitor:0,Ein Passwort:0}
+Was ist eine Dependency?:{Eine Abhängigkeit von anderem Code:1,Ein Kommentar:0,Ein Bildschirm:0,Ein Router:0}
+Was ist Build?:{Programm aus Code erstellen:1,Code löschen:0,Monitor starten:0,Datenbank leeren:0}
+Was ist Run?:{Programm ausführen:1,Code löschen:0,Datei komprimieren:0,Array sortieren:0}
+Was ist Deploy?:{Software auf Zielsystem bereitstellen:1,Code auskommentieren:0,Variablen löschen:0,Monitor verbinden:0}
+Was ist Release?:{Veröffentlichte Version:1,Ein Kommentar:0,Ein Compilerfehler:0,Ein Datentyp:0}
+Was ist Debug-Version?:{Version zum Testen mit Debug-Infos:1,Endgültige Verkaufsversion immer:0,Ein Bildformat:0,Ein Monitor:0}
+Was ist Release-Version?:{Optimierte Version für Nutzung:1,Version mit nur Kommentaren:0,Ein Compilerfehler:0,Ein Array:0}
+Was ist ein Projekt in Visual Studio?:{Sammlung von Code und Einstellungen:1,Ein einzelner Monitor:0,Ein Router:0,Ein Passwort:0}
+Was ist eine Solution in Visual Studio?:{Sammlung von Projekten:1,Eine einzelne Variable:0,Ein Monitor:0,Ein Dateityp für Bilder:0}
+Was ist eine .cs-Datei?:{C# Quellcodedatei:1,Bilddatei:0,Audiodatei:0,Netzwerkkabel:0}
+Was ist eine .xaml-Datei?:{Datei für WPF-Oberfläche:1,C# Compiler:0,Bildformat:0,Datenbank:0}
+Was ist eine .exe-Datei?:{Ausführbares Programm:1,Textdatei:0,Bilddatei:0,Kommentar:0}
+Was ist ein Projektordner?:{Ordner mit Projektdateien:1,Ein Compiler:0,Ein Datentyp:0,Ein Monitor:0}
+Was ist ein relativer Pfad?:{Pfad relativ zum aktuellen Ort:1,Immer komplette Internetadresse:0,Ein Compilerfehler:0,Ein Datentyp:0}
+Was ist ein absoluter Pfad?:{Vollständiger Pfad zu einer Datei:1,Nur Dateiname:0,Ein Kommentar:0,Ein Array:0}
+Was ist Datei-I/O?:{Lesen und Schreiben von Dateien:1,Zeichnen von Bildern nur:0,Code löschen:0,Monitor steuern:0}
+Was macht File.ReadAllText?:{Liest eine ganze Textdatei:1,Löscht eine Textdatei:0,Erstellt ein Bild:0,Kompiliert Code:0}
+Was macht File.WriteAllText?:{Schreibt Text in eine Datei:1,Liest nur Text:0,Löscht Code:0,Startet Debugging:0}
+Was ist StreamReader?:{Klasse zum Lesen von Textdaten:1,Ein Monitor:0,Ein Compiler:0,Ein Datentyp für Zahlen:0}
+Was ist StreamWriter?:{Klasse zum Schreiben von Textdaten:1,Ein Datentyp für bool:0,Ein Router:0,Ein Kommentar:0}
+Was ist eine Textdatei?:{Datei mit lesbarem Text:1,Ein Compiler:0,Ein Array:0,Ein Event:0}
+Was ist Serialisierung?:{Objekte in speicherbare Form umwandeln:1,Code löschen:0,Datei öffnen:0,Monitor starten:0}
+Was ist Deserialisierung?:{Daten wieder in Objekte umwandeln:1,Objekte löschen:0,Text ausdrucken:0,Compiler starten:0}
+Welche Binärzahl entspricht dezimal 0?:{0:1,1:0,10:0,11:0}
+Welche Binärzahl entspricht dezimal 1?:{1:1,10:0,11:0,100:0}
+Welche Binärzahl entspricht dezimal 2?:{10:1,11:0,01:0,100:0}
+Welche Binärzahl entspricht dezimal 3?:{11:1,10:0,100:0,101:0}
+Welche Binärzahl entspricht dezimal 4?:{100:1,101:0,110:0,11:0}
+Welche Binärzahl entspricht dezimal 5?:{101:1,100:0,110:0,111:0}
+Welche Binärzahl entspricht dezimal 6?:{110:1,101:0,111:0,1000:0}
+Welche Binärzahl entspricht dezimal 7?:{111:1,110:0,101:0,1000:0}
+Welche Binärzahl entspricht dezimal 8?:{1000:1,111:0,1001:0,1100:0}
+Welche Binärzahl entspricht dezimal 9?:{1001:1,1000:0,1010:0,1111:0}
+Welche Binärzahl entspricht dezimal 10?:{1010:1,1001:0,1011:0,1100:0}
+Welche Binärzahl entspricht dezimal 11?:{1011:1,1010:0,1100:0,1110:0}
+Welche Binärzahl entspricht dezimal 12?:{1100:1,1011:0,1110:0,1001:0}
+Welche Binärzahl entspricht dezimal 13?:{1101:1,1100:0,1111:0,1010:0}
+Welche Binärzahl entspricht dezimal 14?:{1110:1,1101:0,1111:0,10000:0}
+Welche Binärzahl entspricht dezimal 15?:{1111:1,1110:0,1101:0,10000:0}
+Welche Binärzahl entspricht dezimal 16?:{10000:1,1111:0,10001:0,11000:0}
+Welche Dezimalzahl entspricht binär 0?:{0:1,1:0,2:0,10:0}
+Welche Dezimalzahl entspricht binär 1?:{1:1,0:0,2:0,3:0}
+Welche Dezimalzahl entspricht binär 10?:{2:1,10:0,1:0,3:0}
+Welche Dezimalzahl entspricht binär 11?:{3:1,2:0,4:0,11:0}
+Welche Dezimalzahl entspricht binär 100?:{4:1,3:0,5:0,100:0}
+Welche Dezimalzahl entspricht binär 101?:{5:1,4:0,6:0,101:0}
+Welche Dezimalzahl entspricht binär 110?:{6:1,5:0,7:0,110:0}
+Welche Dezimalzahl entspricht binär 111?:{7:1,6:0,8:0,111:0}
+Welche Dezimalzahl entspricht binär 1000?:{8:1,7:0,9:0,1000:0}
+Welche Dezimalzahl entspricht binär 1001?:{9:1,8:0,10:0,1001:0}
+Welche Dezimalzahl entspricht binär 1010?:{10:1,9:0,11:0,1010:0}
+Welche Dezimalzahl entspricht binär 1011?:{11:1,10:0,12:0,1011:0}
+Welche Dezimalzahl entspricht binär 1100?:{12:1,11:0,13:0,1100:0}
+Welche Dezimalzahl entspricht binär 1101?:{13:1,12:0,14:0,1101:0}
+Welche Dezimalzahl entspricht binär 1110?:{14:1,13:0,15:0,1110:0}
+Welche Dezimalzahl entspricht binär 1111?:{15:1,14:0,16:0,1111:0}
+Welche Dezimalzahl entspricht binär 10000?:{16:1,15:0,17:0,10000:0}
+Was ist 1 + 1 in Binär?:{10:1,2:0,11:0,1:0}
+Was ist 10 + 1 in Binär?:{11:1,10:0,100:0,101:0}
+Was ist 11 + 1 in Binär?:{100:1,11:0,101:0,10:0}
+Was ist 100 + 1 in Binär?:{101:1,100:0,110:0,111:0}
+Was ist 101 + 1 in Binär?:{110:1,101:0,111:0,1000:0}
+Was ist 110 + 1 in Binär?:{111:1,110:0,1000:0,101:0}
+Was ist 111 + 1 in Binär?:{1000:1,111:0,1001:0,1100:0}
+Was ist 1000 + 1 in Binär?:{1001:1,1000:0,1010:0,1111:0}
+Was ist 1010 + 1 in Binär?:{1011:1,1010:0,1100:0,1110:0}
+Was ist 1111 + 1 in Binär?:{10000:1,1111:0,1110:0,10001:0}
+Welche Zahl ist größer?:{1010:1,1001:0,1000:0,0111:0}
+Welche Zahl ist größer?:{1111:1,1110:0,1101:0,1011:0}
+Welche Zahl ist kleiner?:{0010:1,0100:0,0110:0,1000:0}
+Welche Zahl ist kleiner?:{0101:1,0110:0,0111:0,1001:0}
+Welche Binärzahl hat den Wert 10?:{1010:1,1001:0,1111:0,1100:0}
+Welche Binärzahl hat den Wert 15?:{1111:1,1110:0,1101:0,1011:0}
+Welche Binärzahl hat den Wert 8?:{1000:1,0111:0,1001:0,1010:0}
+Welche Binärzahl hat den Wert 12?:{1100:1,1010:0,1110:0,1001:0}
+Welche Binärzahl hat den Wert 3?:{11:1,10:0,100:0,101:0}
+Welche Binärzahl hat den Wert 6?:{110:1,101:0,111:0,1000:0}
+Welche Dezimalzahl ist 0101?:{5:1,4:0,6:0,7:0}
+Welche Dezimalzahl ist 0011?:{3:1,2:0,4:0,5:0}
+Welche Dezimalzahl ist 0110?:{6:1,5:0,7:0,8:0}
+Welche Dezimalzahl ist 0111?:{7:1,6:0,8:0,9:0}
+Welche Dezimalzahl ist 0001?:{1:1,0:0,2:0,4:0}
+Welche Dezimalzahl ist 0010?:{2:1,1:0,3:0,4:0}
+Was bedeutet Binärsystem?:{Zahlensystem mit 0 und 1:1,Zahlensystem mit 10 Zeichen:0,Zahlensystem nur für Text:0,Zahlensystem mit Buchstaben:0}
+Welche Ziffern gibt es im Binärsystem?:{0 und 1:1,0 bis 9:0,1 bis 9:0,A bis F:0}
+Wie viele Zustände hat ein Bit?:{2:1,1:0,8:0,10:0}
+Wie viele Bits hat ein Nibble?:{4:1,2:0,8:0,16:0}
+Wie viele Bits hat ein Byte?:{8:1,4:0,10:0,16:0}
+Was ist der größte Wert mit 4 Bits ohne Vorzeichen?:{15:1,16:0,8:0,10:0}
+Was ist der größte Wert mit 3 Bits ohne Vorzeichen?:{7:1,8:0,6:0,10:0}
+Was ist der größte Wert mit 2 Bits ohne Vorzeichen?:{3:1,2:0,4:0,1:0}
+Was ist der größte Wert mit 1 Bit ohne Vorzeichen?:{1:1,2:0,0:0,10:0}
+Welche Binärzahl ist 4 Bit lang?:{1010:1,101:0,10:0,10000:0}
+Welche Binärzahl ist 8 Bit lang?:{00001010:1,1010:0,100:0,111:0}
+Welche 8-Bit-Darstellung entspricht dezimal 1?:{00000001:1,00000010:0,00000100:0,10000000:0}
+Welche 8-Bit-Darstellung entspricht dezimal 2?:{00000010:1,00000001:0,00000100:0,00001000:0}
+Welche 8-Bit-Darstellung entspricht dezimal 4?:{00000100:1,00000010:0,00001000:0,00000011:0}
+Welche 8-Bit-Darstellung entspricht dezimal 8?:{00001000:1,00000100:0,00010000:0,00001111:0}
+Welche 8-Bit-Darstellung entspricht dezimal 15?:{00001111:1,00001010:0,00010000:0,00000111:0}
+Welche 8-Bit-Darstellung entspricht dezimal 16?:{00010000:1,00001111:0,00001000:0,00100000:0}
+Was ist 2 im Binärsystem?:{10:1,2:0,01:0,11:0}
+Was ist 4 im Binärsystem?:{100:1,11:0,101:0,10:0}
+Was ist 8 im Binärsystem?:{1000:1,111:0,1001:0,1100:0}
+Was ist 16 im Binärsystem?:{10000:1,1111:0,10001:0,1000:0}
+Was ist 32 im Binärsystem?:{100000:1,11111:0,10000:0,101000:0}
