@@ -33,6 +33,8 @@ namespace _5_Jahre_Hoelle.classes
         public char Type { get; private set; }
 
         private static Random random = new Random();
+        public List<Enemy> Enemies { get; set; } = new List<Enemy>();
+
 
         public Room(int ypos, int xpos, char type)
         {
@@ -121,7 +123,27 @@ namespace _5_Jahre_Hoelle.classes
 
         public void SpawnEnemies()
         {
+            if (Type == 'X' && !ExamRoom)
+            { 
+                Random rand = new Random();
+                int count = rand.Next(1, 4);
 
+                for (int i = 0; i < count; i++)
+                {
+                    Enemy enemy = new Enemy(
+                        damage: 1,
+                        speed: 110,
+                        range: 500,
+                        firerate: 2.0,
+                        health: 3
+                    );
+
+                    enemy.X_Pos = rand.Next(200, 1400);
+                    enemy.Y_Pos = rand.Next(200, 600);
+
+                    Enemies.Add(enemy);
+                }
+            }
         }
 
         private void PlaceObjects()

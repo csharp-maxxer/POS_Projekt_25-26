@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="assets\Achievments.png" />
+    <None Remove="assets\ammo_coin.png" />
     <None Remove="assets\ammo_pencil.png" />
     <None Remove="assets\ammo_rubber.png" />
     <None Remove="assets\arrow_back.png" />
@@ -31,6 +32,14 @@
     <None Remove="assets\door_left.png" />
     <None Remove="assets\door_right.png" />
     <None Remove="assets\door_up.png" />
+    <None Remove="assets\enemy_back_1.png" />
+    <None Remove="assets\enemy_back_2.png" />
+    <None Remove="assets\enemy_front_1.png" />
+    <None Remove="assets\enemy_front_2.png" />
+    <None Remove="assets\enemy_left_1.png" />
+    <None Remove="assets\enemy_left_2.png" />
+    <None Remove="assets\enemy_right_1.png" />
+    <None Remove="assets\enemy_right_2.png" />
     <None Remove="assets\menue.png" />
     <None Remove="assets\Pause %282%29.png" />
     <None Remove="assets\Pause.png" />
@@ -64,6 +73,7 @@
     <Content Include="assets\Stats.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="assets\ammo_coin.png" />
     <Resource Include="assets\ammo_pencil.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -72,6 +82,14 @@
     </Resource>
     <Resource Include="assets\arrow_back.png" />
     <Resource Include="assets\book.png" />
+    <Resource Include="assets\enemy_back_1.png" />
+    <Resource Include="assets\enemy_back_2.png" />
+    <Resource Include="assets\enemy_front_1.png" />
+    <Resource Include="assets\enemy_front_2.png" />
+    <Resource Include="assets\enemy_left_1.png" />
+    <Resource Include="assets\enemy_left_2.png" />
+    <Resource Include="assets\enemy_right_1.png" />
+    <Resource Include="assets\enemy_right_2.png" />
     <Resource Include="assets\front_1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

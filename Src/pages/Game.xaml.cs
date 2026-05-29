@@ -46,7 +46,7 @@ namespace _5_Jahre_Hoelle.pages
         double bulletRotationTimer = 0;
         private double shootTimer = 0;
         private usercontrols.Pausescreen pauseScreen;
-
+        private List<Rectangle> enemyRects = new List<Rectangle>();
 
 
         //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -139,8 +139,62 @@ namespace _5_Jahre_Hoelle.pages
         private ImageBrush bullet2 = new ImageBrush
         {
             ImageSource = new BitmapImage(
-                new Uri("pack://application:,,,/assets/ammo_rubber.png")
+                new Uri("pack://application:,,,/assets/ammo_rubber.png") // new Uri ("/assets", uri kind relative)
             ),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_front1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_front_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_front2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_front_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_back1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_back_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_back2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_back_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_left1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_left_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_left2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_left_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_right1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_right_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_right2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_right_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush ammo_coin = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/ammo_coin.png")),
             Stretch = Stretch.Uniform
         };
 
@@ -149,9 +203,9 @@ namespace _5_Jahre_Hoelle.pages
         public Game()
         {
             InitializeComponent();
-
+            
             player = new Player(1.0, 250.0, 4.5, 0.5, 1, 1.0);
-
+            Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
 
@@ -320,6 +374,20 @@ namespace _5_Jahre_Hoelle.pages
                     }
                 }
 
+                foreach (Enemy enemy in currentRoom.Enemies)
+                {
+                    foreach (Bullets bullet in enemy.Bullets)
+                    {
+                        bullet.rotation += 45;
+
+                        if (bullet.rotation >= 360)
+                        {
+                            bullet.rotation = 0;
+                        }
+                    }
+                }
+
+
                 bulletRotationTimer = 0.04;
             }
 
@@ -328,6 +396,7 @@ namespace _5_Jahre_Hoelle.pages
                 player_bullet_collision_obstacle(obstacle);
             }
             move();
+            UpdateEnemies();
             player_bullet_move();
             DrawGame();
         }
@@ -578,6 +647,67 @@ namespace _5_Jahre_Hoelle.pages
             else
             {
                 TxtShopHint.Visibility = Visibility.Collapsed;
+            }
+
+
+            // OPS
+            foreach (Rectangle rect in enemyRects)
+            {
+                CanvasGame.Children.Remove(rect);
+            }
+            enemyRects.Clear();
+
+            foreach (Enemy enemy in currentRoom.Enemies)
+            {
+                enemy.animationTimer += deltaTime;
+
+                ImageBrush currentFrame;
+
+                if (enemy.lastDirection == "front")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_front1 : enemy_front2;
+                }
+                else if (enemy.lastDirection == "up")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_back1 : enemy_back2;
+                }
+                else if (enemy.lastDirection == "left")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_left1 : enemy_left2;
+                }
+                else
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_right1 : enemy_right2;
+                }
+
+                if (enemy.animationTimer >= 0.3)
+                {
+                    enemy.animationTimer = 0;
+                }
+
+                Rectangle enemyRect = new Rectangle();
+                enemyRect.Width = 120;
+                enemyRect.Height = 90;
+                enemyRect.Fill = currentFrame; // TODO here sprite
+                Canvas.SetLeft(enemyRect, enemy.X_Pos);
+                Canvas.SetTop(enemyRect, enemy.Y_Pos);
+                Panel.SetZIndex(enemyRect, 5);
+                CanvasGame.Children.Add(enemyRect);
+                enemyRects.Add(enemyRect);
+
+                foreach (Bullets bullet in enemy.Bullets)
+                {
+                    Rectangle bulletRect = new Rectangle();
+                    bulletRect.Width = 25;
+                    bulletRect.Height = 25;
+                    bulletRect.Fill = ammo_coin;
+                    bulletRect.RenderTransform = new RotateTransform(bullet.rotation, 12.5, 12.5);
+                    Canvas.SetLeft(bulletRect, bullet.X_pos);
+                    Canvas.SetTop(bulletRect, bullet.Y_pos);
+                    Panel.SetZIndex(bulletRect, 10);
+                    CanvasGame.Children.Add(bulletRect);
+                    enemyRects.Add(bulletRect); 
+                }
             }
         }
 
@@ -885,6 +1015,7 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Remove(room_from.RoomCanvas);
 
             currentRoom = room_to;
+            currentRoom.SpawnEnemies();
             Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
         }
@@ -1129,6 +1260,64 @@ namespace _5_Jahre_Hoelle.pages
             gamePaused = false;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
+        }
+
+        private void UpdateEnemies()
+        {
+            for (int i = currentRoom.Enemies.Count - 1; i >= 0; i--)
+            {
+                Enemy enemy = currentRoom.Enemies[i];
+
+                enemy.Move(player, deltaTime, currentRoom.Enemies);
+                enemy.Shoot(player, deltaTime);
+
+                // move bullets
+                for (int j = enemy.Bullets.Count - 1; j >= 0; j--)
+                {
+                    Bullets bullet = enemy.Bullets[j];
+
+                    bullet.X_pos += bullet.Direction.X;
+                    bullet.Y_pos += bullet.Direction.Y;
+
+                    // hitbox room
+                    if (bullet.X_pos >= 1680 || bullet.Y_pos <= 0 || bullet.X_pos <= 0 || bullet.Y_pos >= 840)
+                    {
+                        enemy.Bullets.RemoveAt(j);
+                        continue;
+                    }
+
+                    // Bullet hit player
+                    Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
+                    Rect playerRect = new Rect(player.X_Pos + 30, player.Y_Pos + 50, 43, 50);
+
+                    if (bulletRect.IntersectsWith(playerRect))
+                    {
+                        player.Grade -= bullet.Damage;
+                        enemy.Bullets.RemoveAt(j);
+                        break;
+                    }
+                }
+
+                //player hit enemy
+                for (int j = player.Bullets.Count - 1; j >= 0; j--)
+                {
+                    Bullets bullet = player.Bullets[j];
+                    Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
+                    Rect enemyRect = new Rect(enemy.X_Pos, enemy.Y_Pos, 50, 50);
+
+                    if (bulletRect.IntersectsWith(enemyRect))
+                    {
+                        enemy.Health -= bullet.Damage;
+                        player.Bullets.RemoveAt(j);
+
+                        if (enemy.Health <= 0)
+                        {
+                            currentRoom.Enemies.RemoveAt(i);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

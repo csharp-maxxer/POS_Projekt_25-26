@@ -21,7 +21,9 @@ namespace _5_Jahre_Hoelle.usercontrols
     /// </summary>
     public partial class Pausescreen : UserControl
     {
+        // cbatgpt anfang: Mach mir den ContinueButton das er funktioniert(code)
         public event Action ContinueClicked;
+        // chatgpt ende
 
         public Pausescreen()
         {
