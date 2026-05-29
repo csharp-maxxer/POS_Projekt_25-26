@@ -144,6 +144,60 @@ namespace _5_Jahre_Hoelle.pages
             Stretch = Stretch.Uniform
         };
 
+        private ImageBrush enemy_front1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_front_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_front2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_front_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_back1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_back_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_back2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_back_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_left1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_left_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_left2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_left_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_right1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_right_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush enemy_right2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/enemy_right_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush ammo_coin = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/ammo_coin.png")),
+            Stretch = Stretch.Uniform
+        };
+
         Dictionary<(int y, int x), Room> cllted_rooms;
 
         public Game()
@@ -304,6 +358,20 @@ namespace _5_Jahre_Hoelle.pages
                         bullet.rotation = 0;
                     }
                 }
+
+                foreach (Enemy enemy in currentRoom.Enemies)
+                {
+                    foreach (Bullets bullet in enemy.Bullets)
+                    {
+                        bullet.rotation += 45;
+
+                        if (bullet.rotation >= 360)
+                        {
+                            bullet.rotation = 0;
+                        }
+                    }
+                }
+
 
                 bulletRotationTimer = 0.04;
             }
@@ -573,10 +641,36 @@ namespace _5_Jahre_Hoelle.pages
 
             foreach (Enemy enemy in currentRoom.Enemies)
             {
+                enemy.animationTimer += deltaTime;
+
+                ImageBrush currentFrame;
+
+                if (enemy.lastDirection == "front")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_front1 : enemy_front2;
+                }
+                else if (enemy.lastDirection == "up")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_back1 : enemy_back2;
+                }
+                else if (enemy.lastDirection == "left")
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_left1 : enemy_left2;
+                }
+                else
+                {
+                    currentFrame = enemy.animationTimer < 0.15 ? enemy_right1 : enemy_right2;
+                }
+
+                if (enemy.animationTimer >= 0.3)
+                {
+                    enemy.animationTimer = 0;
+                }
+
                 Rectangle enemyRect = new Rectangle();
-                enemyRect.Width = 50;
-                enemyRect.Height = 50;
-                enemyRect.Fill = new SolidColorBrush(Colors.Red); // TODO here sprite
+                enemyRect.Width = 120;
+                enemyRect.Height = 90;
+                enemyRect.Fill = currentFrame; // TODO here sprite
                 Canvas.SetLeft(enemyRect, enemy.X_Pos);
                 Canvas.SetTop(enemyRect, enemy.Y_Pos);
                 Panel.SetZIndex(enemyRect, 5);
@@ -588,7 +682,8 @@ namespace _5_Jahre_Hoelle.pages
                     Rectangle bulletRect = new Rectangle();
                     bulletRect.Width = 25;
                     bulletRect.Height = 25;
-                    bulletRect.Fill = new SolidColorBrush(Colors.OrangeRed);
+                    bulletRect.Fill = ammo_coin;
+                    bulletRect.RenderTransform = new RotateTransform(bullet.rotation, 12.5, 12.5);
                     Canvas.SetLeft(bulletRect, bullet.X_pos);
                     Canvas.SetTop(bulletRect, bullet.Y_pos);
                     Panel.SetZIndex(bulletRect, 10);
@@ -1139,6 +1234,7 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         player.Grade -= bullet.Damage;
                         enemy.Bullets.RemoveAt(j);
+                        break;
                     }
                 }
 

@@ -10,6 +10,9 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Enemy
     {
+        public double animationTimer { get; set; } = 0;
+        public int animationFrame { get; set; } = 0;
+        public string lastDirection { get; set; } = "front";
         public List<Bullets> Bullets { get; set; } = new List<Bullets>();
         public double Damage { get; set; }
         public double Speed { get; set; }
@@ -66,6 +69,19 @@ namespace _5_Jahre_Hoelle.classes
 
             X_Pos += move_direction.X * Speed * deltaTime;
             Y_Pos += move_direction.Y * Speed * deltaTime;
+
+            // KI Claude
+            // Prompt: kannst du bitte die animations machen?
+            // KI Start
+            if (Math.Abs(move_direction.X) > Math.Abs(move_direction.Y))
+            {
+                lastDirection = move_direction.X > 0 ? "right" : "left";
+            }
+            else
+            {
+                lastDirection = move_direction.Y > 0 ? "front" : "up";
+            }
+            // KI Ende
         }
 
         public void Shoot(Player player, double deltaTime)
