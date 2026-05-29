@@ -107,7 +107,9 @@ namespace _5_Jahre_Hoelle.classes
                 Damage,
                 Firerate,
                 Range,
-                shoot_direction * 6
+                shoot_direction * 6,
+                0,
+                0
             );
 
             bullet.X_pos = X_Pos + 25;
