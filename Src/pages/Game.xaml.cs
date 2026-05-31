@@ -43,6 +43,7 @@ namespace _5_Jahre_Hoelle.pages
         bool shootright;
         bool shootleft;
         bool shootdown;
+        double difficulty;
         double bulletRotationTimer = 0;
         private double shootTimer = 0;
         private usercontrols.Pausescreen pauseScreen;
@@ -200,11 +201,12 @@ namespace _5_Jahre_Hoelle.pages
 
         Dictionary<(int y, int x), Room> cllted_rooms;
 
-        public Game()
+        public Game(double difficulty)
         {
+            this.difficulty = difficulty;
             InitializeComponent();
             
-            player = new Player(1.0, 250.0, 4.5, 0.5, 70, 1.0);
+            player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 1.0);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
@@ -1210,7 +1212,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             PauseGame();
 
-            question_ask exam = new question_ask(player);
+            question_ask exam = new question_ask(player,difficulty);
             exam.ShowDialog();
 
 
@@ -1274,13 +1276,13 @@ namespace _5_Jahre_Hoelle.pages
 
                     if (bulletRect.IntersectsWith(playerRect))
                     {
-                        if (player.Grade - bullet.Damage <= 0)
+                        if (player.Grade - bullet.Damage / difficulty  <= 0)
                         {
                             player.Grade = 0;
                         }
                         else
                         {
-                            player.Grade -= bullet.Damage;
+                            player.Grade -= bullet.Damage / difficulty;
                         }
                         GradeDisplay.SetNote(player.Grade);
                         enemy.Bullets.RemoveAt(j);
@@ -1299,13 +1301,13 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         enemy.Health -= bullet.Damage;
                         player.Bullets.RemoveAt(j);
-                        if (player.Grade + 2 >= 100)
+                        if (player.Grade + 2 * difficulty >= 100)
                         {
                             player.Grade = 100;
                         }
                         else
                         {
-                            player.Grade += 2;
+                            player.Grade += 2 * difficulty;
                         }
                         GradeDisplay.SetNote(player.Grade);
                         if (enemy.Health <= 0)

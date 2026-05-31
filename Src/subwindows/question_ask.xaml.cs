@@ -26,9 +26,11 @@ namespace _5_Jahre_Hoelle.subwindows
         private int antwort3;
         private int antwort4;
         private Player player;
-        public question_ask(Player player)
+        public double difficulty;
+        public question_ask(Player player, double difficulty)
         {
             InitializeComponent();
+            this.difficulty = difficulty;
 
             this.player = player;
 
@@ -122,25 +124,25 @@ namespace _5_Jahre_Hoelle.subwindows
             if (value == 1)
             {
                 clickedBorder.Background = Brushes.Green;
-                if (player.Grade + 5 >= 100)
+                if (player.Grade + 5 * difficulty >= 100)
                 {
                     player.Grade = 100;
                 }
                 else
                 {
-                    player.Grade += 10;
+                    player.Grade += 5 * difficulty;
                 }
             }   
             else
             {
                 clickedBorder.Background = Brushes.Red;
-                if (player.Grade - 20 <= 0)
+                if (player.Grade - 20 /difficulty <= 0)
                 {
                     player.Grade = 0;
                 }
                 else
                 {
-                    player.Grade -= 20;
+                    player.Grade -= 20 / difficulty ;
                 }
             }
 

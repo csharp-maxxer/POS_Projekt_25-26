@@ -30,7 +30,7 @@
                    FontSize="28"
                    FontWeight="Bold"
                    Foreground="White"/>
-
+            
             <Canvas x:Name="Grade1" Canvas.Left="145" Canvas.Top="10" Visibility="Collapsed">
                 <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="0" Fill="LimeGreen"/>
                 <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="LimeGreen"/>
