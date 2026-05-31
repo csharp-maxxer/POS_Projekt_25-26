@@ -204,7 +204,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
             
-            player = new Player(1.0, 250.0, 4.5, 0.5, 1, 1.0);
+            player = new Player(1.0, 250.0, 4.5, 0.5, 70, 1.0);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
@@ -1158,27 +1158,7 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
-        private void UpdatePlayerAnimation(ImageBrush frame1, ImageBrush frame2)
-        {
-            animationTick++;
-
-            if (animationTick >= 10)
-            {
-                animationTick = 0;
-
-                if (animationFrame == 0)
-                {
-                    Rect_Player.Fill = frame1;
-                    animationFrame = 1;
-                }
-                else
-                {
-                    Rect_Player.Fill = frame2;
-                    animationFrame = 0;
-                }
-            }
-        }
-
+     
      
 
         private void CheckShopCollision()
@@ -1233,6 +1213,8 @@ namespace _5_Jahre_Hoelle.pages
             question_ask exam = new question_ask(player);
             exam.ShowDialog();
 
+
+            GradeDisplay.SetNote(player.Grade);
             ResumeGame();
         }
 
@@ -1292,7 +1274,15 @@ namespace _5_Jahre_Hoelle.pages
 
                     if (bulletRect.IntersectsWith(playerRect))
                     {
-                        player.Grade -= bullet.Damage;
+                        if (player.Grade - bullet.Damage <= 0)
+                        {
+                            player.Grade = 0;
+                        }
+                        else
+                        {
+                            player.Grade -= bullet.Damage;
+                        }
+                        GradeDisplay.SetNote(player.Grade);
                         enemy.Bullets.RemoveAt(j);
                         break;
                     }
@@ -1309,7 +1299,15 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         enemy.Health -= bullet.Damage;
                         player.Bullets.RemoveAt(j);
-
+                        if (player.Grade + 2 >= 100)
+                        {
+                            player.Grade = 100;
+                        }
+                        else
+                        {
+                            player.Grade += 2;
+                        }
+                        GradeDisplay.SetNote(player.Grade);
                         if (enemy.Health <= 0)
                         {
                             currentRoom.Enemies.RemoveAt(i);

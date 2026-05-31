@@ -25,9 +25,12 @@ namespace _5_Jahre_Hoelle.subwindows
         private int antwort2;
         private int antwort3;
         private int antwort4;
+        private Player player;
         public question_ask(Player player)
         {
             InitializeComponent();
+
+            this.player = player;
 
             Tuple<string, Dictionary<string, int>> test = ParseQuestion(choose_question());
 
@@ -119,12 +122,26 @@ namespace _5_Jahre_Hoelle.subwindows
             if (value == 1)
             {
                 clickedBorder.Background = Brushes.Green;
-                MessageBox.Show("add grading");
+                if (player.Grade + 5 >= 100)
+                {
+                    player.Grade = 100;
+                }
+                else
+                {
+                    player.Grade += 10;
+                }
             }   
             else
             {
                 clickedBorder.Background = Brushes.Red;
-                MessageBox.Show("RM Grading");
+                if (player.Grade - 20 <= 0)
+                {
+                    player.Grade = 0;
+                }
+                else
+                {
+                    player.Grade -= 20;
+                }
             }
 
             await Task.Delay(300);

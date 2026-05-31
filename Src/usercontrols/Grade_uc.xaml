@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="_5_Jahre_Hoelle.usercontrols.Grade_uc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_5_Jahre_Hoelle.usercontrols"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="230"
+             Width="230"
+             Height="80">
+
+    <Canvas Width="230" Height="80">
+
+        <Rectangle Width="230"
+                   Height="80"
+                   Fill="DarkGreen"
+                   Stroke="SaddleBrown"
+                   StrokeThickness="5"/>
+
+        <Canvas x:Name="MainCanvas"
+                Width="220"
+                Height="70"
+                Canvas.Left="5"
+                Canvas.Top="5">
+
+            <Label x:Name="GradeText"
+                   Content="GRADE"
+                   Canvas.Left="10"
+                   Canvas.Top="10"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="White"/>
+
+            <Canvas x:Name="Grade1" Canvas.Left="145" Canvas.Top="10" Visibility="Collapsed">
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="0" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="10" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="20" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="30" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="40" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="50" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="50" Fill="LimeGreen"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="50" Fill="LimeGreen"/>
+            </Canvas>
+
+            <Canvas x:Name="Grade2" Canvas.Left="145" Canvas.Top="10" Visibility="Collapsed">
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="0" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="0" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="0" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="10" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="20" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="30" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="40" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="50" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="50" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="50" Fill="GreenYellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="50" Fill="GreenYellow"/>
+            </Canvas>
+
+            <Canvas x:Name="Grade3" Canvas.Left="145" Canvas.Top="10" Visibility="Collapsed">
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="0" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="0" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="0" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="10" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="20" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="20" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="30" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="40" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="50" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="50" Fill="Yellow"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="50" Fill="Yellow"/>
+            </Canvas>
+
+            <Canvas x:Name="Grade4" Canvas.Left="145" Canvas.Top="10" Visibility="Collapsed">
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="0" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="20" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="0" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="10" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="20" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="30" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="30" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="30" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="40" Fill="Orange"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="50" Fill="Orange"/>
+            </Canvas>
+
+            <Canvas x:Name="Grade5" Canvas.Left="145" Canvas.Top="5" Visibility="Collapsed">
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="0" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="0" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="0" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="0" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="10" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="20" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="30" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="30" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="30" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="40" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="40" Canvas.Top="50" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="10" Canvas.Top="60" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="20" Canvas.Top="60" Fill="Red"/>
+                <Rectangle Width="10" Height="10" Canvas.Left="30" Canvas.Top="60" Fill="Red"/>
+            </Canvas>
+
+        </Canvas>
+    </Canvas>
+</UserControl>
