@@ -439,17 +439,12 @@ namespace _5_Jahre_Hoelle.pages
             palyer_rect.Width = 73;
             palyer_rect.Height = 100;
 
-            foreach (Rect obstacle in currentRoom.obstacles)
-            {
-
-            }
-
 
             Vector direction = new Vector(0, 0);
 
             if (moveLeft && player.X_Pos  >= 0)
             {
-                if (currentRoom.DoorLeft && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos <= 2)
+                if (currentRoom.DoorLeft && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos <= 2 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)
                     {
@@ -484,7 +479,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (moveRight && player.X_Pos + 73 <= 1680)
             {
-                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1580)
+                if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1580 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)   
                     {
@@ -515,7 +510,7 @@ namespace _5_Jahre_Hoelle.pages
             if (moveUp && player.Y_Pos >= -10)
             {
                 
-                if (currentRoom.DoorTop && player.Y_Pos <= 15 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                if (currentRoom.DoorTop && player.Y_Pos <= 15 && player.X_Pos >= 760 && player.X_Pos <= 900 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)
                     {
@@ -546,7 +541,7 @@ namespace _5_Jahre_Hoelle.pages
             if (moveDown && player.Y_Pos + 100
                 <= 840)
             {
-                if (currentRoom.DoorBottom && player.Y_Pos >= 730 && player.X_Pos >= 760 && player.X_Pos <= 900)
+                if (currentRoom.DoorBottom && player.Y_Pos >= 730 && player.X_Pos >= 760 && player.X_Pos <= 900 && currentRoom.IsCleared) 
                 {
                     if (!isTransitioning)
                     {
@@ -1017,7 +1012,10 @@ namespace _5_Jahre_Hoelle.pages
             CanvasGame.Children.Remove(room_from.RoomCanvas);
 
             currentRoom = room_to;
-            currentRoom.SpawnEnemies();
+            if (currentRoom.IsCleared == false)
+            {
+                currentRoom.SpawnEnemies();
+            }
             Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
         }
@@ -1215,7 +1213,7 @@ namespace _5_Jahre_Hoelle.pages
             question_ask exam = new question_ask(player,difficulty);
             exam.ShowDialog();
 
-
+            currentRoom.IsCleared = true;
             GradeDisplay.SetNote(player.Grade);
             ResumeGame();
         }
@@ -1318,6 +1316,12 @@ namespace _5_Jahre_Hoelle.pages
                     }
                 }
             }
+
+            if (currentRoom.Enemies.Count == 0 && !currentRoom.ExamRoom)
+            {
+                currentRoom.IsCleared = true;
+            }
+
         }
     }
 }

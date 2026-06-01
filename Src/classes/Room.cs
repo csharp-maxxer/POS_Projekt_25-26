@@ -27,7 +27,7 @@ namespace _5_Jahre_Hoelle.classes
         // 14x7 mit je 120px
         private List<List<char>> room_matrix { get; set; }
         //public List<enemy> { get; private set; }
-        public bool IsCleared { get; private set; }
+        public bool IsCleared { get; set; }
         public bool ExamRoom { get; private set; }
         public Canvas RoomCanvas { get; private set; }
         public char Type { get; private set; }
@@ -56,7 +56,10 @@ namespace _5_Jahre_Hoelle.classes
             RoomCanvas.Height = 840;
 
             room_matrix = new List<List<char>>();
-
+            if (Type == 'O' || Type == 'S')
+            {
+                IsCleared = true;
+            }
             if (Type == 'X')
             {
                 Exam_Enemy_Room();
