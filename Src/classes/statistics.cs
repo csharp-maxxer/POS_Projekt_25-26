@@ -11,11 +11,12 @@ namespace _5_Jahre_Hoelle.classes
         private static int _attemps;
         private static int _wins;
         private static int _achievment_numer;
+        // chatgpt anfang, warum kommt beim speichern und laden ein error und wie fixxe ich das (code von dem file)
         private static string folderPath = Path.GetFullPath(
     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "saves")
 );
         private static string filePath = Path.Combine(folderPath, "statistics.json");
-        
+        // ende
 
         public static int Attemps
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,14 @@ namespace _5_Jahre_Hoelle.pages
     {
         public Stats()
         {
+            
             InitializeComponent();
+
+            statistics.init();
+
+            Label_attemps.Content = $"Attemps: {statistics.Attemps}";
+            Label_Wins.Content = $"Wins: {statistics.Wins}";
+            Label_acheavments.Content = $"Acheavments: {statistics.Achievments}";
         }
 
         private void Button_Zurück_Click(object sender, RoutedEventArgs e)
