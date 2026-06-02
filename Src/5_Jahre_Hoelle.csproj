@@ -149,7 +149,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="saves\" />
     <Folder Include="questions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="saves\statistics.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

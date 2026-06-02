@@ -203,6 +203,7 @@ namespace _5_Jahre_Hoelle.pages
 
         public Game(double difficulty)
         {
+            statistics.init();
             this.difficulty = difficulty;
             InitializeComponent();
             
