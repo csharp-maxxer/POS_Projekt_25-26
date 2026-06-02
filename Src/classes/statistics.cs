@@ -68,10 +68,7 @@ namespace _5_Jahre_Hoelle.classes
 
             string json = JsonSerializer.Serialize(data);
 
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                writer.Write(json);
-            }
+            File.WriteAllText(filePath, json);
         }
 
         private static void Load()
@@ -79,21 +76,38 @@ namespace _5_Jahre_Hoelle.classes
             if (!File.Exists(filePath))
             {
                 MessageBox.Show("File Gibt es nicht");
+                File.Create(filePath);
+                
+                Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+
+                data_NULL.Add("Attemps", 0);
+                data_NULL.Add("Wins", 0);
+                data_NULL.Add("Achievments", 0);
+
+                string json_NULL = JsonSerializer.Serialize(data_NULL);
+                File.WriteAllText(filePath, json_NULL);
                 return;
             }
 
             string json;
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                json = reader.ReadToEnd();
-            }
+            json = File.ReadAllText(filePath);
 
             Dictionary<string, int> data = JsonSerializer.Deserialize<Dictionary<string, int>>(json);
 
             if (data == null)
             {
                 MessageBox.Show("File ist leer");
+                File.Create(filePath);
+
+                Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+
+                data_NULL.Add("Attemps", 0);
+                data_NULL.Add("Wins", 0);
+                data_NULL.Add("Achievments", 0);
+
+                string json_NULL = JsonSerializer.Serialize(data_NULL);
+                File.WriteAllText(filePath, json_NULL);
                 return;
             }
 
