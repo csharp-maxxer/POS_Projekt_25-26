@@ -149,6 +149,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="saves\" />
     <Folder Include="questions\" />
   </ItemGroup>
 
