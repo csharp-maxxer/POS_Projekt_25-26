@@ -11,8 +11,11 @@ namespace _5_Jahre_Hoelle.classes
         private static int _attemps;
         private static int _wins;
         private static int _achievment_numer;
-
-        private static string filePath = "saves/statistics.json";
+        private static string folderPath = Path.GetFullPath(
+    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "saves")
+);
+        private static string filePath = Path.Combine(folderPath, "statistics.json");
+        
 
         public static int Attemps
         {
@@ -58,8 +61,31 @@ namespace _5_Jahre_Hoelle.classes
             Load();
         }
 
+        private static void CreateDefaultSaveFile()
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+
+            data_NULL.Add("Attemps", 0);
+            data_NULL.Add("Wins", 0);
+            data_NULL.Add("Achievments", 0);
+
+            string json_NULL = JsonSerializer.Serialize(data_NULL);
+
+            File.WriteAllText(filePath, json_NULL);
+        }
+
         private static void Save()
         {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
             Dictionary<string, int> data = new Dictionary<string, int>();
 
             data.Add("Attemps", _attemps);
@@ -73,41 +99,51 @@ namespace _5_Jahre_Hoelle.classes
 
         private static void Load()
         {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("File Gibt es nicht");
-                File.Create(filePath);
-                
-                Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+                MessageBox.Show("File gibt es nicht");
 
-                data_NULL.Add("Attemps", 0);
-                data_NULL.Add("Wins", 0);
-                data_NULL.Add("Achievments", 0);
+                CreateDefaultSaveFile();
 
-                string json_NULL = JsonSerializer.Serialize(data_NULL);
-                File.WriteAllText(filePath, json_NULL);
+                _attemps = 0;
+                _wins = 0;
+                _achievment_numer = 0;
+
                 return;
             }
 
-            string json;
+            string json = File.ReadAllText(filePath);
 
-            json = File.ReadAllText(filePath);
+            if (json == "")
+            {
+                MessageBox.Show("File ist leer");
+
+                CreateDefaultSaveFile();
+
+                _attemps = 0;
+                _wins = 0;
+                _achievment_numer = 0;
+
+                return;
+            }
 
             Dictionary<string, int> data = JsonSerializer.Deserialize<Dictionary<string, int>>(json);
 
             if (data == null)
             {
-                MessageBox.Show("File ist leer");
-                File.Create(filePath);
+                MessageBox.Show("File ist kaputt");
 
-                Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+                CreateDefaultSaveFile();
 
-                data_NULL.Add("Attemps", 0);
-                data_NULL.Add("Wins", 0);
-                data_NULL.Add("Achievments", 0);
+                _attemps = 0;
+                _wins = 0;
+                _achievment_numer = 0;
 
-                string json_NULL = JsonSerializer.Serialize(data_NULL);
-                File.WriteAllText(filePath, json_NULL);
                 return;
             }
 
@@ -115,15 +151,27 @@ namespace _5_Jahre_Hoelle.classes
             {
                 _attemps = data["Attemps"];
             }
+            else
+            {
+                _attemps = 0;
+            }
 
             if (data.ContainsKey("Wins"))
             {
                 _wins = data["Wins"];
             }
+            else
+            {
+                _wins = 0;
+            }
 
             if (data.ContainsKey("Achievments"))
             {
                 _achievment_numer = data["Achievments"];
+            }
+            else
+            {
+                _achievment_numer = 0;
             }
         }
     }
