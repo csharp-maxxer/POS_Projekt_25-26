@@ -134,7 +134,7 @@ namespace _5_Jahre_Hoelle.classes
                 for (int i = 0; i < count; i++)
                 {
                     Enemy enemy = new Enemy(
-                        damage: 1,
+                        damage: 4,
                         speed: 110,
                         range: 500,
                         firerate: 2.0,
