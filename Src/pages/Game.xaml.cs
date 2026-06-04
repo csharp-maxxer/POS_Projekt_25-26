@@ -256,10 +256,11 @@ namespace _5_Jahre_Hoelle.pages
 
         private void GameLoop(object? sender, EventArgs e)
         {
+            // chatgpt anfang: wie mache ich bei diesem code das die bullets nur 4 mal in der sekunde geschossen werden (ganzer code)
             DateTime now = DateTime.Now;
             deltaTime = (now - lastFrameTime).TotalSeconds;
             lastFrameTime = now;
-
+            //chatgpt ende
             if (deltaTime > 0.05) deltaTime = 0.05;
 
             if (gamePaused || isTransitioning)
@@ -279,6 +280,19 @@ namespace _5_Jahre_Hoelle.pages
                 energyTimer = 1;
             }
 
+            if (player.Energy == 0)
+            {
+                PauseGame();
+
+                this.Content = new Frame
+                {
+                    Content = new pages.menue_page()
+                };
+
+                return;
+            }
+
+
 
             //chatgpt andang: fixe den bug das ich wenn ich schießen anfange nicht mehr aufhören kann und ich mich nicht bewegen kann
             moveLeft = Keyboard.IsKeyDown(Key.A);
@@ -294,6 +308,7 @@ namespace _5_Jahre_Hoelle.pages
             // chatgpt anfang: wie mache ich bei diesem code das die bullets nur 4 mal in der sekunde geschossen werden (ganzer code)
             shootTimer -= deltaTime;
 
+           
             if (shootTimer <= 0)
             {
                 shootrangecheck();

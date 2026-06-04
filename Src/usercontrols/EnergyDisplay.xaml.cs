@@ -37,9 +37,10 @@ namespace _5_Jahre_Hoelle.usercontrols
                 energy = 0;
             }
 
-            EnergyNumber.Content = energy.ToString();
+            EnergyNumber.Content = $"{energy}";
+            // chatgpt anfang: gib mir die rechnung mit der ich die progressbar richtig anzeige
             EnergyBar.Width = 216 * energy / 100;
-
+            // chatgpt ende
             if (energy > 60)
             {
                 EnergyBar.Fill = Brushes.Green;

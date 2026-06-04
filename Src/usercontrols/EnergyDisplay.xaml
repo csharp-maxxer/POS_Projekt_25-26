@@ -9,6 +9,7 @@
              Width="280"
              Height="90">
 
+    <!-- chatgpt anfang: mach mir eine Energy anzeige in dem style (code von Grade_uc) mit einer Progress bar -->
     <Canvas Width="280" Height="90">
 
         <Rectangle Width="280"
@@ -120,4 +121,5 @@
                    Opacity="0.25"/>
 
     </Canvas>
+    <!-- chatgpt ende -->
 </UserControl>
