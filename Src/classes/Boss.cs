@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _5_Jahre_Hoelle.classes
 {
@@ -32,9 +32,20 @@ namespace _5_Jahre_Hoelle.classes
             QuestionCount = 0;
         }
 
-        public void Move()
+        public void Move(Player player, double deltaTime)
         {
+            double direction_x = player.X_Pos - X_Pos;
+            double direction_y = player.Y_Pos - Y_Pos;
 
+            Vector move_direction = new Vector(direction_x, direction_y);
+
+            if (move_direction.Length > 0)
+            {
+                move_direction.Normalize();
+            }
+
+            X_Pos += move_direction.X * Speed * deltaTime;
+            Y_Pos += move_direction.Y * Speed * deltaTime;
         }
 
         public void Attack(Player player, double deltaTime)
