@@ -48,6 +48,8 @@ namespace _5_Jahre_Hoelle.pages
         private double shootTimer = 0;
         private usercontrols.Pausescreen pauseScreen;
         private List<Rectangle> enemyRects = new List<Rectangle>();
+        private List<Rectangle> bossRects = new List<Rectangle>();
+        private Boss currentBoss = null;
 
 
         //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -196,6 +198,12 @@ namespace _5_Jahre_Hoelle.pages
         private ImageBrush ammo_coin = new ImageBrush
         {
             ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/ammo_coin.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_sprite = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss.png")),
             Stretch = Stretch.Uniform
         };
 
@@ -399,6 +407,7 @@ namespace _5_Jahre_Hoelle.pages
             }
             move();
             UpdateEnemies();
+            UpdateBoss();
             player_bullet_move();
             DrawGame();
         }
@@ -704,6 +713,39 @@ namespace _5_Jahre_Hoelle.pages
                     Panel.SetZIndex(bulletRect, 10);
                     CanvasGame.Children.Add(bulletRect);
                     enemyRects.Add(bulletRect); 
+                }
+            }
+            // Boss grafics
+            foreach (Rectangle rect in bossRects)
+            {
+                CanvasGame.Children.Remove(rect);
+            }
+            bossRects.Clear();
+
+            if (currentBoss != null && currentRoom.Type == 'B')
+            {
+                Rectangle bossRect = new Rectangle();
+                bossRect.Width = 120;
+                bossRect.Height = 120;
+                bossRect.Fill = boss_sprite;
+                Canvas.SetLeft(bossRect, currentBoss.X_Pos);
+                Canvas.SetTop(bossRect, currentBoss.Y_Pos);
+                Panel.SetZIndex(bossRect, 5);
+                CanvasGame.Children.Add(bossRect);
+                bossRects.Add(bossRect);
+
+                foreach (Bullets bullet in currentBoss.Bullets)
+                {
+                    Rectangle bulletRect = new Rectangle();
+                    bulletRect.Width = 25;
+                    bulletRect.Height = 25;
+                    bulletRect.Fill = ammo_coin;
+                    bulletRect.RenderTransform = new RotateTransform(bullet.rotation, 12.5, 12.5);
+                    Canvas.SetLeft(bulletRect, bullet.X_pos);
+                    Canvas.SetTop(bulletRect, bullet.Y_pos);
+                    Panel.SetZIndex(bulletRect, 10);
+                    CanvasGame.Children.Add(bulletRect);
+                    bossRects.Add(bulletRect);
                 }
             }
         }
@@ -1014,7 +1056,28 @@ namespace _5_Jahre_Hoelle.pages
             currentRoom = room_to;
             if (currentRoom.IsCleared == false)
             {
-                currentRoom.SpawnEnemies();
+                if (currentRoom.Type == 'B')
+                {
+                    currentBoss = new Boss(
+                        damage: 2,
+                        speed: 100,
+                        range: 500,
+                        firerate: 1.5,
+                        this
+                    );
+
+                    currentBoss.X_Pos = 750;
+                    currentBoss.Y_Pos = 200;
+                }
+                else
+                {
+                    currentBoss = null;
+                    currentRoom.SpawnEnemies();
+                }
+            }
+            else
+            {
+                currentBoss = null;
             }
             Rect_Player.Visibility = Visibility.Visible;
             isTransitioning = false;
@@ -1218,7 +1281,7 @@ namespace _5_Jahre_Hoelle.pages
             ResumeGame();
         }
 
-        private void PauseGame()
+        public void PauseGame()
         {
             gamePaused = true;
 
@@ -1235,7 +1298,7 @@ namespace _5_Jahre_Hoelle.pages
             shootright = false;
         }
 
-        private void ResumeGame()
+        public void ResumeGame()
         {
             if (!gamePaused) return;
 
@@ -1322,6 +1385,63 @@ namespace _5_Jahre_Hoelle.pages
                 currentRoom.IsCleared = true;
             }
 
+        }
+
+        private void UpdateBoss()
+        {
+            if (currentRoom.Type != 'B') 
+                return;
+            if (currentBoss == null)
+            {
+                return;
+            }
+            currentRoom.IsCleared = false;
+
+            currentBoss.Move(player, deltaTime);
+            currentBoss.Attack(player, deltaTime);
+            if (currentBoss.QuestionCount >= 5)
+            {
+                currentBoss.Bullets.Clear();
+                currentBoss = null;
+                currentRoom.IsCleared = true;
+                return;
+            }
+
+            // Boss bullet move
+            for (int j = currentBoss.Bullets.Count - 1; j >= 0; j--)
+            {
+                Bullets bullet = currentBoss.Bullets[j];
+
+                bullet.X_pos += bullet.Direction.X;
+                bullet.Y_pos += bullet.Direction.Y;
+
+                if (bullet.X_pos >= 1680 || bullet.Y_pos <= 0 ||
+                    bullet.X_pos <= 0 || bullet.Y_pos >= 840)
+                {
+                    currentBoss.Bullets.RemoveAt(j);
+                    continue;
+                }
+
+                // Boss hit player
+                Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
+                Rect playerRect = new Rect(player.X_Pos + 30, player.Y_Pos + 50, 43, 50);
+
+                if (bulletRect.IntersectsWith(playerRect))
+                {
+                    if (player.Grade - bullet.Damage / difficulty <= 0)
+                    {
+                        player.Grade = 0;
+                    }
+                    else
+                    {
+                        player.Grade -= bullet.Damage / difficulty;
+                    }
+
+                    GradeDisplay.SetNote(player.Grade);
+                    currentBoss.Bullets.RemoveAt(j);
+                    continue;
+                }
+            }
         }
     }
 }

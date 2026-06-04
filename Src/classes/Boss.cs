@@ -1,4 +1,5 @@
-﻿using _5_Jahre_Hoelle.subwindows;
+﻿using _5_Jahre_Hoelle.pages;
+using _5_Jahre_Hoelle.subwindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +21,18 @@ namespace _5_Jahre_Hoelle.classes
         private double Firerate { get; set; }
         private double shootTimer = 0;
         private double attackChoiceTimer = 0;        
-        private Random random = new Random();  
+        private Random random = new Random();
+        private Game game;
 
 
-        public Boss(double damage, double speed, double range, double firerate)
+        public Boss(double damage, double speed, double range, double firerate, Game game)
         {
             Damage = damage;
             Speed = speed;
             Range = range;
             Firerate = firerate;
             QuestionCount = 0;
+            this.game = game;
         }
 
         public void Move(Player player, double deltaTime)
@@ -58,13 +61,15 @@ namespace _5_Jahre_Hoelle.classes
             if (attackChoiceTimer > 0)
                 return;
 
-            attackChoiceTimer = Firerate * 3;
+            attackChoiceTimer = Firerate * 1.5;
 
             int decide_attack_question = random.Next(4);
 
             if (decide_attack_question == 0)
             {
+                game.PauseGame();
                 QuestionAttack(player);
+                game.ResumeGame();
             }
             else
             {
@@ -76,7 +81,7 @@ namespace _5_Jahre_Hoelle.classes
                 }
                 else
                 {
-                    NormalAttack(player, deltaTime);
+                    NormalAttack(player);
                 }
             }
 
@@ -92,15 +97,8 @@ namespace _5_Jahre_Hoelle.classes
             }
         }
 
-        private void NormalAttack(Player player, double deltaTime)
+        private void NormalAttack(Player player)
         {
-            shootTimer -= deltaTime;
-
-            if (shootTimer > 0)
-                return;
-
-            shootTimer = Firerate;
-
             double direction_x = player.X_Pos - X_Pos;
             double direction_y = player.Y_Pos - Y_Pos;
 
