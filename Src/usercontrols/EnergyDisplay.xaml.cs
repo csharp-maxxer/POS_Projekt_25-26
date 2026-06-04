@@ -25,6 +25,36 @@ namespace _5_Jahre_Hoelle.usercontrols
             InitializeComponent();
         }
 
-       
+        public void SetEnergy(double energy)
+        {
+            if (energy > 100)
+            {
+                energy = 100;
+            }
+
+            if (energy < 0)
+            {
+                energy = 0;
+            }
+
+            EnergyNumber.Content = energy.ToString();
+            EnergyBar.Width = 216 * energy / 100;
+
+            if (energy > 60)
+            {
+                EnergyBar.Fill = Brushes.Green;
+                EnergyNumber.Foreground = Brushes.White;
+            }
+            else if (energy > 30)
+            {
+                EnergyBar.Fill = Brushes.Yellow;
+                EnergyNumber.Foreground = Brushes.Yellow;
+            }
+            else
+            {
+                EnergyBar.Fill = Brushes.Red;
+                EnergyNumber.Foreground = Brushes.Red;
+            }
+        }
     }
 }

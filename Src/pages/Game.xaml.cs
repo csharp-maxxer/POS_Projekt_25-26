@@ -32,6 +32,7 @@ namespace _5_Jahre_Hoelle.pages
         private bool moveRight;
         private bool moveUp;
         private bool moveDown;
+        private double energyTimer = 1;
         private Player player;
         private bool playerNearShop = false;
         private bool shopOpen = false;
@@ -207,7 +208,8 @@ namespace _5_Jahre_Hoelle.pages
             this.difficulty = difficulty;
             InitializeComponent();
             
-            player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 1.0);
+            player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
+            EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
             CompositionTarget.Rendering += GameLoop;
@@ -263,7 +265,21 @@ namespace _5_Jahre_Hoelle.pages
             if (gamePaused || isTransitioning)
                 return;
 
-            
+            energyTimer -= deltaTime;
+
+            if (energyTimer <= 0)
+            {
+                if (player.Energy > 0)
+                {
+                    player.Energy -= 1;
+                }
+
+                EnergyDisplay.SetEnergy(player.Energy);
+
+                energyTimer = 1;
+            }
+
+
             //chatgpt andang: fixe den bug das ich wenn ich schießen anfange nicht mehr aufhören kann und ich mich nicht bewegen kann
             moveLeft = Keyboard.IsKeyDown(Key.A);
             moveRight = Keyboard.IsKeyDown(Key.D);

@@ -14,7 +14,30 @@ namespace _5_Jahre_Hoelle.classes
         public double Speed { get; set; }
         public double Range { get; set; }
         public double Grade { get; set; }
-        public double Energy { get; set; }
+        private double _energy;
+
+        public double Energy
+        {
+            get
+            {
+                return _energy;
+            }
+            set
+            {
+                if (value > 100)
+                {
+                    _energy = 100;
+                }
+                else if (value < 0)
+                {
+                    _energy = 0;
+                }
+                else
+                {
+                    _energy = value;
+                }
+            }
+        }
         public double Firerate { get; set; }
         public double X_Pos { get; set; } 
         public double Y_Pos { get; set; }
