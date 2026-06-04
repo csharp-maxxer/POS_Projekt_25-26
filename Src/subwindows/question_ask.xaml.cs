@@ -21,6 +21,7 @@ namespace _5_Jahre_Hoelle.subwindows
     /// </summary>
     public partial class question_ask : Window
     {
+        public bool AwnserCorrect;
         private int antwort1;
         private int antwort2;
         private int antwort3;
@@ -132,6 +133,7 @@ namespace _5_Jahre_Hoelle.subwindows
                 {
                     player.Grade += 5 * difficulty;
                 }
+                AwnserCorrect = true;
             }   
             else
             {
@@ -144,6 +146,7 @@ namespace _5_Jahre_Hoelle.subwindows
                 {
                     player.Grade -= 20 / difficulty ;
                 }
+                AwnserCorrect = false;
             }
 
             await Task.Delay(300);
