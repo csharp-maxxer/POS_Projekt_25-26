@@ -32,7 +32,7 @@ namespace _5_Jahre_Hoelle.pages
         private bool moveRight;
         private bool moveUp;
         private bool moveDown;
-        private double energyTimer = 1;
+        private double energyTimer = 4;
         private Player player;
         private bool playerNearShop = false;
         private bool shopOpen = false;
@@ -213,6 +213,7 @@ namespace _5_Jahre_Hoelle.pages
         public Game(double difficulty)
         {
             statistics.init();
+            Acheavments.init();
             this.difficulty = difficulty;
             InitializeComponent();
             

@@ -1,58 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace _5_Jahre_Hoelle.classes
 {
-    public static class statistics
+    public static class Acheavments
     {
-        private static int _attemps;
-        private static int _wins;
-        private static int _achievment_numer;
+        private static int _acheavment1;
+        private static int _acheavment2;
+        private static int _acheavment3;
         // chatgpt anfang, warum kommt beim speichern und laden ein error und wie fixxe ich das (code von dem file)
         private static string folderPath = Path.GetFullPath(
     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "saves")
 );
-        private static string filePath = Path.Combine(folderPath, "statistics.json");
+        private static string filePath = Path.Combine(folderPath, "acheavments.json");
         // ende
 
-        public static int Attemps
+        public static int Acheavment1
         {
             get
             {
-                return _attemps;
+                return _acheavment1;
             }
             set
             {
-                _attemps = value;
+                _acheavment1 = value;
                 Save();
             }
         }
 
-        public static int Wins
+        public static int Acheavment2
         {
             get
             {
-                return _wins;
+                return _acheavment2;
             }
             set
             {
-                _wins = value;
+                _acheavment2 = value;
                 Save();
             }
         }
 
-        public static int Achievments
+        public static int Acheavment3
         {
             get
             {
-                return _achievment_numer;
+                return _acheavment3;
             }
             set
             {
-                _achievment_numer = value;
+                _acheavment3 = value;
                 Save();
             }
         }
@@ -72,9 +75,9 @@ namespace _5_Jahre_Hoelle.classes
             // ende
             Dictionary<string, int> data_nix = new Dictionary<string, int>();
 
-            data_nix.Add("Attemps", 0);
-            data_nix.Add("Wins", 0);
-            data_nix.Add("Achievments", 0);
+            data_nix.Add("Acheavment1", 0);
+            data_nix.Add("Acheavment2", 0);
+            data_nix.Add("Acheavment3", 0);
 
             string json_nix = JsonSerializer.Serialize(data_nix);
 
@@ -91,9 +94,9 @@ namespace _5_Jahre_Hoelle.classes
             // ende
             Dictionary<string, int> data = new Dictionary<string, int>();
 
-            data.Add("Attemps", _attemps);
-            data.Add("Wins", _wins);
-            data.Add("Achievments", _achievment_numer);
+            data.Add("Acheavment1", _acheavment1);
+            data.Add("Acheavment2", _acheavment2);
+            data.Add("Acheavment3", _acheavment3);
 
             string json = JsonSerializer.Serialize(data);
 
@@ -113,9 +116,9 @@ namespace _5_Jahre_Hoelle.classes
 
                 CreateDefaultSaveFile();
 
-                _attemps = 0;
-                _wins = 0;
-                _achievment_numer = 0;
+                _acheavment1 = 0;
+                _acheavment2 = 0;
+                _acheavment3 = 0;
 
                 return;
             }
@@ -128,9 +131,9 @@ namespace _5_Jahre_Hoelle.classes
 
                 CreateDefaultSaveFile();
 
-                _attemps = 0;
-                _wins = 0;
-                _achievment_numer = 0;
+                _acheavment1 = 0;
+                _acheavment2 = 0;
+                _acheavment3 = 0;
 
                 return;
             }
@@ -143,38 +146,38 @@ namespace _5_Jahre_Hoelle.classes
 
                 CreateDefaultSaveFile();
 
-                _attemps = 0;
-                _wins = 0;
-                _achievment_numer = 0;
+                _acheavment1 = 0;
+                _acheavment2 = 0;
+                _acheavment3 = 0;
 
                 return;
             }
 
-            if (data.ContainsKey("Attemps"))
+            if (data.ContainsKey("Acheavment1"))
             {
-                _attemps = data["Attemps"];
+                _acheavment1 = data["Acheavment1"];
             }
             else
             {
-                _attemps = 0;
+                _acheavment1 = 0;
             }
 
-            if (data.ContainsKey("Wins"))
+            if (data.ContainsKey("Acheavment2"))
             {
-                _wins = data["Wins"];
+                _acheavment2 = data["Acheavment2"];
             }
             else
             {
-                _wins = 0;
+                _acheavment2 = 0;
             }
 
-            if (data.ContainsKey("Achievments"))
+            if (data.ContainsKey("Acheavment3"))
             {
-                _achievment_numer = data["Achievments"];
+                _acheavment3 = data["Acheavment3"];
             }
             else
             {
-                _achievment_numer = 0;
+                _acheavment3 = 0;
             }
         }
     }
