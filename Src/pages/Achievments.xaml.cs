@@ -25,34 +25,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
             Acheavments.init();
-            
-
-            if (Acheavments.Acheavment1 == 1)
-            {
-                Icon_attemps.Text = "☑";
-            }
-            else
-            {
-                Icon_attemps.Text = "☐";
-            }
-
-            if (Acheavments.Acheavment2 == 1)
-            {
-                Icon_Wins.Text = "☑";
-            }
-            else
-            {
-                Icon_Wins.Text = "☐";
-            }
-
-            if (Acheavments.Acheavment3 == 1)
-            {
-                Icon_acheavments.Text = "☑";
-            }
-            else
-            {
-                Icon_acheavments.Text = "☐";
-            }
+        
         }
 
         private void Button_Zurück_Click(object sender, RoutedEventArgs e)

@@ -8,6 +8,45 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Achievments">
 
+    <!-- ChatGPT Anfang: mach das die labels richtig geil aussehen die schrift wäre nice wenn es so pixelart mässig wäre also den code halt ändern kein bilder erstellen -->
+    <Page.Resources>
+        <Style x:Key="PixelStatsLabel" TargetType="Label">
+            <Setter Property="Panel.ZIndex" Value="99"/>
+            <Setter Property="Width" Value="682"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+            <Setter Property="Foreground" Value="#FF2A1605"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#FFD9B45F" Direction="315" ShadowDepth="2" BlurRadius="0" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PixelAchievementIcon" TargetType="TextBlock">
+            <Setter Property="Panel.ZIndex" Value="99"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+            <Setter Property="Foreground" Value="#FF2A1605"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#FFD9B45F" Direction="315" ShadowDepth="2" BlurRadius="0" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <!-- ChatGPT Ende -->
 
 
     <Canvas>
@@ -16,6 +55,43 @@
         <Button Name="Button_Zurück" Content="Button" Canvas.Left="1333" Canvas.Top="846" Height="41" Width="112" Opacity="0" Click="Button_Zurück_Click" MouseEnter="Button_Zurück_MouseEnter" MouseLeave="Button_Zurück_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         <Line Name="Line_Zurück" X1="100" X2="200" Y1="200" Y2="200" Stroke="Black" StrokeThickness="3" Opacity="0" Canvas.Left="1235" Canvas.Top="693"/>
+
+        <!-- ChatGPT Anfang: mach das die labels richtig geil aussehen die schrift wäre nice wenn es so pixelart mässig wäre also den code halt ändern kein bilder erstellen -->
+        <Label Name="Label_acheavment1" Style="{StaticResource PixelStatsLabel}" Content="START A GAME" Canvas.Left="619" Canvas.Top="360"/>
+
+        <Label Name="Label_acheavment2" Style="{StaticResource PixelStatsLabel}" Content="BLA BLA BLA" Canvas.Left="619" Canvas.Top="458"/>
+
+        <Label Name="Label_acheavment3" Style="{StaticResource PixelStatsLabel}" Content="BLA BLA BLA BLA" Canvas.Left="619" Canvas.Top="556"/>
+
+        <!-- ChatGPT Ende -->
+
+        <!-- ChatGPT Anfang: formatiere die Achievements wie in einer Reihe mit Symbol links und Text rechts -->
+
+        <TextBlock Name="Acheavment_1"
+                   Style="{StaticResource PixelAchievementIcon}"
+                   Text="☐"
+                   Canvas.Left="565"
+                   Canvas.Top="376"/>
+
+        
+
+        <TextBlock Name="Acheavment_2"
+                   Style="{StaticResource PixelAchievementIcon}"
+                   Text="☐"
+                   Canvas.Left="565"
+                   Canvas.Top="474"/>
+
+       
+
+        <TextBlock Name="_Acheavment_3"
+                   Style="{StaticResource PixelAchievementIcon}"
+                   Text="☐"
+                   Canvas.Left="565"
+                   Canvas.Top="572"/>
+
+       
+
+        <!-- ChatGPT Ende -->
 
     </Canvas>
 </Page>
