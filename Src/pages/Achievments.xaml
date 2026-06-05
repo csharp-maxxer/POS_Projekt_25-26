@@ -8,15 +8,14 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Achievments">
 
-    <Canvas>
-        <Image Source="/assets/Achievments.png"
-    Width="1920"
-    Height="1080"
-    Stretch="Fill"
-    Canvas.Left="0"
-    Canvas.Top="0"/>
 
-        <Button Name="Button_Zurück" Content="Button" Canvas.Left="1333" Opacity="0" Click="Button_Zurück_Click" MouseEnter="Button_Zurück_MouseEnter" MouseLeave="Button_Zurück_MouseLeave" Canvas.Top="846" Height="41" Width="112" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Line Name="Line_Zurück" X1="100" X2="200" Y1="200" Y2="200" Stroke="Black" StrokeThickness="3" Opacity="0" Canvas.Left="1235" Canvas.Top="693"></Line>
+
+    <Canvas>
+        <Image Source="/assets/Achievments.png" Width="1920" Height="1080" Stretch="Fill" Canvas.Left="0" Canvas.Top="0"/>
+
+        <Button Name="Button_Zurück" Content="Button" Canvas.Left="1333" Canvas.Top="846" Height="41" Width="112" Opacity="0" Click="Button_Zurück_Click" MouseEnter="Button_Zurück_MouseEnter" MouseLeave="Button_Zurück_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <Line Name="Line_Zurück" X1="100" X2="200" Y1="200" Y2="200" Stroke="Black" StrokeThickness="3" Opacity="0" Canvas.Left="1235" Canvas.Top="693"/>
+
     </Canvas>
 </Page>
