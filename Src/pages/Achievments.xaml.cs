@@ -25,7 +25,32 @@ namespace _5_Jahre_Hoelle.pages
         {
             InitializeComponent();
             Acheavments.init();
-        
+            if (Acheavments.Acheavment1 == 1)
+            {
+                Acheavment_1.Text = "☑";
+            }
+            else
+            {
+                Acheavment_1.Text = "☐";
+            }
+
+            if (Acheavments.Acheavment2 == 1)
+            {
+                Acheavment_2.Text = "☑";
+            }
+            else
+            {
+                Acheavment_2.Text = "☐";
+            }
+
+            if (Acheavments.Acheavment3 == 1)
+            {
+                _Acheavment_3.Text = "☑";
+            }
+            else
+            {
+                _Acheavment_3.Text = "☐";
+            }
         }
 
         private void Button_Zurück_Click(object sender, RoutedEventArgs e)
