@@ -73,15 +73,15 @@ namespace _5_Jahre_Hoelle.classes
                 Directory.CreateDirectory(folderPath);
             }
             // ende
-            Dictionary<string, int> data_NULL = new Dictionary<string, int>();
+            Dictionary<string, int> data_nix = new Dictionary<string, int>();
 
-            data_NULL.Add("Acheavment1", 0);
-            data_NULL.Add("Acheavment2", 0);
-            data_NULL.Add("Acheavment3", 0);
+            data_nix.Add("Acheavment1", 0);
+            data_nix.Add("Acheavment2", 0);
+            data_nix.Add("Acheavment3", 0);
 
-            string json_NULL = JsonSerializer.Serialize(data_NULL);
+            string json_nix = JsonSerializer.Serialize(data_nix);
 
-            File.WriteAllText(filePath, json_NULL);
+            File.WriteAllText(filePath, json_nix);
         }
 
         private static void Save()
