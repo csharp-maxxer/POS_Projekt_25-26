@@ -1,9 +1,12 @@
 ﻿using _5_Jahre_Hoelle.classes;
+using _5_Jahre_Hoelle.subwindows;
+using _5_Jahre_Hoelle.usercontrols;
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,13 +14,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using _5_Jahre_Hoelle.usercontrols;
-using _5_Jahre_Hoelle.subwindows;
 
 namespace _5_Jahre_Hoelle.pages
 {
@@ -237,6 +238,36 @@ namespace _5_Jahre_Hoelle.pages
             this.Loaded += Game_Loaded;
             this.Unloaded += Game_Unloaded;
             //chatgpt ende
+        }
+        
+
+        public Game()
+        {
+            statistics.init();
+            this.difficulty = difficulty;
+            InitializeComponent();
+
+            player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
+            EnergyDisplay.SetEnergy(player.Energy);
+            Rect_Player.Fill = front1;
+            lastFrameTime = DateTime.Now;
+            CompositionTarget.Rendering += GameLoop;
+
+            List<List<char>> matrix_rooms = new List<List<char>>();
+            matrix_rooms = CreateMapMatrix(10, 15);
+            cllted_rooms = Collect_Rooms(matrix_rooms);
+            assing_doors_to_rooms(cllted_rooms);
+
+            currentRoom = cllted_rooms[(5, 5)];
+            currentRoom.DrawRoom();
+            CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+            this.Focusable = true;
+            // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
+            this.Loaded += Game_Loaded;
+            this.Unloaded += Game_Unloaded;
+            //chatgpt ende
+            LoadGame();
         }
 
         // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
@@ -1152,7 +1183,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (pauseScreen == null)
             {
-                pauseScreen = new usercontrols.Pausescreen();
+                pauseScreen = new usercontrols.Pausescreen(SaveGame());
 
                 pauseScreen.Width = 600;
                 pauseScreen.Height = 700;
@@ -1213,7 +1244,6 @@ namespace _5_Jahre_Hoelle.pages
 
         private void shootrangecheck()
         {
-
             for (int i = player.Bullets.Count - 1; i >= 0; i--)
             {
                 Bullets bullet = player.Bullets[i];
@@ -1476,5 +1506,163 @@ namespace _5_Jahre_Hoelle.pages
                 }
             }
         }
+        // KI: Chatgpt
+        // Promt: Bitte mach mir eine Funktion wo das hier speichert
+        // KI Anfang
+        private string SaveGame()
+        {
+            SaveGame save = new SaveGame();
+
+            // Player
+            save.PlayerDamage = player.Damage;
+            save.PlayerSpeed = player.Speed;
+            save.PlayerRange = player.Range;
+            save.PlayerFirerate = player.Firerate;
+            save.PlayerGrade = player.Grade;
+            save.PlayerEnergy = player.Energy;
+            save.PlayerX = player.X_Pos;
+            save.PlayerY = player.Y_Pos;
+
+            // aktueller Raum
+            save.CurrentRoomX = currentRoom.Xpos;
+            save.CurrentRoomY = currentRoom.Ypos;
+
+            // Räume - nur die wichtigen Daten
+            save.Rooms = cllted_rooms.Values.Select(r => new RoomSaveData
+            {
+                Xpos = r.Xpos,
+                Ypos = r.Ypos,
+                Type = r.Type,
+                IsCleared = r.IsCleared,
+                DoorTop = r.DoorTop,
+                DoorRight = r.DoorRight,
+                DoorBottom = r.DoorBottom,
+                DoorLeft = r.DoorLeft,
+                ExamRoom = r.ExamRoom,
+                ExamTriggered = r.ExamTriggered,
+                room_matrix = r.room_matrix,
+                Enemies = r.Enemies.Select(enemy => new EnemySaveData
+                {
+                    X_Pos = enemy.X_Pos,
+                    Y_Pos = enemy.Y_Pos,
+                    Health = enemy.Health,
+                    Damage = enemy.Damage,
+                    Speed = enemy.Speed,
+                    Range = enemy.Range,
+                    Firerate = enemy.Firerate
+                }).ToList()
+            }).ToList();
+
+            // Boss
+            if (currentBoss != null)
+            {
+                save.HasBoss = true;
+                save.BossX = currentBoss.X_Pos;
+                save.BossY = currentBoss.Y_Pos;
+                save.QuestionCount = currentBoss.QuestionCount;
+            }
+            else
+            {
+                save.HasBoss = false;
+            }
+
+            return JsonSerializer.Serialize(save, new JsonSerializerOptions { WriteIndented = true });
+        }
+
+        private void LoadGame()
+        {
+            try
+            {
+                if (!File.Exists("save.txt"))
+                    return;
+
+                string json = File.ReadAllText("save.txt");
+                SaveGame save = JsonSerializer.Deserialize<SaveGame>(json);
+
+                
+
+                // Räume wiederherstellen
+                cllted_rooms.Clear();
+
+                foreach (RoomSaveData rd in save.Rooms)
+                {
+                    Room room = new Room(rd.Ypos, rd.Xpos, rd.Type);
+
+                    room.IsCleared = rd.IsCleared;
+                    room.DoorTop = rd.DoorTop;
+                    room.DoorRight = rd.DoorRight;
+                    room.DoorBottom = rd.DoorBottom;
+                    room.DoorLeft = rd.DoorLeft;
+                    room.ExamRoom = rd.ExamRoom;
+                    room.ExamTriggered = rd.ExamTriggered;
+                    room.room_matrix = rd.room_matrix;
+
+                    foreach (EnemySaveData ed in rd.Enemies)
+                    {
+                        Enemy enemy = new Enemy(
+                            damage: ed.Damage,
+                            speed: ed.Speed,
+                            range: ed.Range,
+                            firerate: ed.Firerate,
+                            health: ed.Health
+                        );
+
+                        enemy.X_Pos = ed.X_Pos;
+                        enemy.Y_Pos = ed.Y_Pos;
+
+                        room.Enemies.Add(enemy);
+                    }
+
+                    cllted_rooms.Add((rd.Ypos, rd.Xpos), room);
+                }
+
+                // aktuellen Raum setzen
+                currentRoom = cllted_rooms[(save.CurrentRoomY, save.CurrentRoomX)];
+                currentRoom.DrawRoom();
+
+
+                // Canvas updaten
+                List<UIElement> elements = new List<UIElement>();
+                foreach (UIElement obj in CanvasGame.Children)
+                {
+                    elements.Add(obj);
+                }
+                foreach (UIElement obj in elements)
+                {
+                    if (obj != Rect_Player)
+                    {
+                        CanvasGame.Children.Remove(obj);
+                    }
+                }
+                CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+                // Player wiederherstellen
+                player.Damage = save.PlayerDamage;
+                player.Speed = save.PlayerSpeed;
+                player.Range = save.PlayerRange;
+                player.Firerate = save.PlayerFirerate;
+                player.Grade = save.PlayerGrade;
+                player.Energy = save.PlayerEnergy;
+                player.X_Pos = save.PlayerX;
+                player.Y_Pos = save.PlayerY;
+
+                // Boss wiederherstellen
+                if (save.HasBoss)
+                {
+                    currentBoss = new Boss(2, 100, 500, 1.5, this);
+                    currentBoss.X_Pos = save.BossX;
+                    currentBoss.Y_Pos = save.BossY;
+                    currentBoss.QuestionCount = save.QuestionCount;
+                }
+
+                GradeDisplay.SetNote(player.Grade);
+                EnergyDisplay.SetEnergy(player.Energy);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler: " + ex.Message + "\n\n" + ex.StackTrace);
+            }
+        }
+        // KI ENDE
     }
 }

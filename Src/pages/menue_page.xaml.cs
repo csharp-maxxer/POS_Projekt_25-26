@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,11 @@ namespace _5_Jahre_Hoelle.pages
 
         private void Button_Load_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Load");
+            statistics.Attemps += 1;
+            this.Content = new Frame
+            {
+                Content = new pages.Game()
+            };
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)

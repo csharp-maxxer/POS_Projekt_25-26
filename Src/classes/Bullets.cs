@@ -10,7 +10,7 @@ namespace _5_Jahre_Hoelle.classes
 {
     public class Bullets
     {
-        public Vector Direction {  get; private set; }
+        public Vector Direction {  get; set; }
         public double Damage { get; private set; }
 
         public double Speed {  get; private set; }
@@ -40,6 +40,8 @@ namespace _5_Jahre_Hoelle.classes
             X_pos_created = x_create;
             Y_pos_created = y_created;
         }
+
+        public Bullets() { }
 
 
     } 

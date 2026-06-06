@@ -3,32 +3,39 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 
 namespace _5_Jahre_Hoelle.classes
 {
     public class Room
     {
+        [JsonIgnore]
         public Rect ExamBookRect { get; private set; }
         public bool ExamTriggered { get; set; } = false;
         public bool DoorTop { get; set; }
         public bool DoorRight { get; set; }
         public bool DoorBottom { get; set; }
         public bool DoorLeft { get; set; }
+        [JsonIgnore]
         public List<Rect> obstacles {  get; set; }
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
         // 14x7 mit je 120px
-        private List<List<char>> room_matrix { get; set; }
+        public List<List<char>> room_matrix { get; set; }
         //public List<enemy> { get; private set; }
         public bool IsCleared { get; set; }
-        public bool ExamRoom { get; private set; }
+        public bool ExamRoom { get; set; }
+        // Chatgpt: wie kann ich machen dass manche sachen nicht gespeichert werden?
+        [JsonIgnore]
+        // gpt ende.
         public Canvas RoomCanvas { get; private set; }
         public char Type { get; private set; }
 
@@ -295,6 +302,15 @@ namespace _5_Jahre_Hoelle.classes
 
                 RoomCanvas.Children.Add(door); 
             }
+        }
+
+        public string Serialize()
+        {
+            // chatgpt: wie kann ich machen dass es rekursiv in klassen serialisiert?
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
         }
     }
 }
