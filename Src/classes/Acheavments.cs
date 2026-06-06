@@ -14,12 +14,7 @@ namespace _5_Jahre_Hoelle.classes
         private static int _acheavment1;
         private static int _acheavment2;
         private static int _acheavment3;
-        // chatgpt anfang, warum kommt beim speichern und laden ein error und wie fixxe ich das (code von dem file)
-        private static string folderPath = Path.GetFullPath(
-    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "saves")
-);
-        private static string filePath = Path.Combine(folderPath, "acheavments.json");
-        // ende
+       
 
         public static int Acheavment1
         {
@@ -67,12 +62,7 @@ namespace _5_Jahre_Hoelle.classes
 
         private static void CreateDefaultSaveFile()
         {
-            // chatgpt anfang: wie teste ich ob ein ordner existiert und wenn nicht soll er erstellt werden (code)
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-            // ende
+            
             Dictionary<string, int> data_nix = new Dictionary<string, int>();
 
             data_nix.Add("Acheavment1", 0);
@@ -81,17 +71,13 @@ namespace _5_Jahre_Hoelle.classes
 
             string json_nix = JsonSerializer.Serialize(data_nix);
 
-            File.WriteAllText(filePath, json_nix);
+            File.WriteAllText("achievments.json", json_nix);
         }
 
         private static void Save()
         {
-            // chatgpt anfang: wie teste ich ob ein ordner existiert und wenn nicht soll er erstellt werden (code)
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-            // ende
+            
+         
             Dictionary<string, int> data = new Dictionary<string, int>();
 
             data.Add("Acheavment1", _acheavment1);
@@ -100,17 +86,13 @@ namespace _5_Jahre_Hoelle.classes
 
             string json = JsonSerializer.Serialize(data);
 
-            File.WriteAllText(filePath, json);
+            File.WriteAllText("achievments.json", json);
         }
 
         private static void Load()
         {
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            if (!File.Exists(filePath))
+           
+            if (!File.Exists("achievments.json"))
             {
                 MessageBox.Show("File gibt es nicht");
 
@@ -123,7 +105,7 @@ namespace _5_Jahre_Hoelle.classes
                 return;
             }
 
-            string json = File.ReadAllText(filePath);
+            string json = File.ReadAllText("achievments.json");
 
             if (json == "")
             {
