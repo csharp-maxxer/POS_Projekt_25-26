@@ -1,8 +1,12 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.IO;
 using System.Linq;
 
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +32,13 @@ namespace _5_Jahre_Hoelle.usercontrols
         public Pausescreen()
         {
             InitializeComponent();
+        }
+        private string _savedata;
+
+        public Pausescreen(string savedata)
+        { 
+            InitializeComponent();
+            _savedata = savedata;
         }
 
         private void Button_continue_Click(object sender, RoutedEventArgs e)
@@ -65,6 +76,7 @@ namespace _5_Jahre_Hoelle.usercontrols
                 Content = new pages.menue_page()
             };
             // chatgpt ende
+            File.WriteAllText("save.txt", _savedata);
         }
 
         private void Button_Exit_MouseEnter(object sender, MouseEventArgs e)

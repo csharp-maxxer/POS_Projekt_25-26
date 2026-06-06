@@ -58,7 +58,12 @@ namespace _5_Jahre_Hoelle.classes
             Bullets = new List<Bullets>();
         }
 
-        
+        public Player()
+        {
+
+        }
+
+
         public void Attack(Bullets bullet)
         {
             Bullets.Add(bullet);

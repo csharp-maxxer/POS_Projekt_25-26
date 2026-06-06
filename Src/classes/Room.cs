@@ -29,10 +29,10 @@ namespace _5_Jahre_Hoelle.classes
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
         // 14x7 mit je 120px
-        private List<List<char>> room_matrix { get; set; }
+        public List<List<char>> room_matrix { get; set; }
         //public List<enemy> { get; private set; }
         public bool IsCleared { get; set; }
-        public bool ExamRoom { get; private set; }
+        public bool ExamRoom { get; set; }
         // Chatgpt: wie kann ich machen dass manche sachen nicht gespeichert werden?
         [JsonIgnore]
         // gpt ende.

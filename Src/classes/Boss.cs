@@ -13,7 +13,7 @@ namespace _5_Jahre_Hoelle.classes
     public class Boss
     {
         public List<Bullets> Bullets = new List<Bullets>();
-        public int QuestionCount {  get; private set; }
+        public int QuestionCount {  get; set; }
         public double X_Pos { get; set; }
         public double Y_Pos { get; set; }
         private double Damage {  get; set; }
