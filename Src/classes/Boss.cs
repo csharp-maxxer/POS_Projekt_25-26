@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -161,6 +162,14 @@ namespace _5_Jahre_Hoelle.classes
 
                 Bullets.Add(bullet);
             }
+        }
+
+        public string Serialize()
+        {
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
         }
     }
 }

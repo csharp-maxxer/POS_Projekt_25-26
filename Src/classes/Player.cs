@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _5_Jahre_Hoelle.classes
 {
@@ -59,6 +62,14 @@ namespace _5_Jahre_Hoelle.classes
         public void Attack(Bullets bullet)
         {
             Bullets.Add(bullet);
+        }
+
+        public string Serialize()
+        {
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
         }
     }
 }
