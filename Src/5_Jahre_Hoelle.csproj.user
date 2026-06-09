@@ -11,10 +11,16 @@
     <Compile Update="pages\Game.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="pages\Loosescreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="pages\menue_page.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="pages\Stats.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\Winscreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="subwindows\question_ask.xaml.cs">
