@@ -326,7 +326,7 @@ namespace _5_Jahre_Hoelle.pages
 
                 this.Content = new Frame
                 {
-                    Content = new pages.menue_page()
+                    Content = new pages.Loosescreen()
                 };
 
                 return;

@@ -1,0 +1,18 @@
+﻿<Page x:Class="_5_Jahre_Hoelle.pages.Winscreen"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_5_Jahre_Hoelle.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Winscreen">
+
+    <Canvas>
+        <Image Source="/assets/Wonscreen.png" Width="1920" Height="1080" Stretch="Fill" Canvas.Left="0" Canvas.Top="0"/>
+
+        <Button Name="Button_Zurück" Content="Button" Canvas.Left="709" Canvas.Top="648" Height="59" Width="484" Opacity="0" Click="Button_Zurück_Click" MouseEnter="Button_Zurück_MouseEnter" MouseLeave="Button_Zurück_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <Polygon Name="polygon_zurück" Points="35,20 0,0 0,40" Fill="Black" Opacity="0" Canvas.Left="709" Canvas.Top="658"/>
+    </Canvas>
+</Page>

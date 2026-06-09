@@ -41,6 +41,7 @@
     <None Remove="assets\enemy_left_2.png" />
     <None Remove="assets\enemy_right_1.png" />
     <None Remove="assets\enemy_right_2.png" />
+    <None Remove="assets\LooseScreen.png" />
     <None Remove="assets\menue.png" />
     <None Remove="assets\Pause %282%29.png" />
     <None Remove="assets\Pause.png" />
@@ -59,6 +60,7 @@
     <None Remove="assets\rechts_2.png" />
     <None Remove="assets\shop_items.png" />
     <None Remove="assets\Stats.png" />
+    <None Remove="assets\WonScreen.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -119,6 +121,9 @@
     <Resource Include="assets\door_left.png" />
     <Resource Include="assets\door_right.png" />
     <Resource Include="assets\door_up.png" />
+    <Resource Include="assets\LooseScreen.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\Pause.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -139,6 +144,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\shop_items.png" />
+    <Resource Include="assets\WonScreen.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
