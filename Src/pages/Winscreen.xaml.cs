@@ -23,6 +23,26 @@ namespace _5_Jahre_Hoelle.pages
         public Winscreen()
         {
             InitializeComponent();
+
+
+        }
+        private void Button_Zurück_Click(object sender, RoutedEventArgs e)
+        {
+            this.Content = new Frame
+            {
+
+                Content = new pages.menue_page()
+            };
+        }
+
+        private void Button_Zurück_MouseEnter(object sender, MouseEventArgs e)
+        {
+            polygon_zurück.Opacity = 1;
+        }
+
+        private void Button_Zurück_MouseLeave(object sender, MouseEventArgs e)
+        {
+            polygon_zurück.Opacity = 0;
         }
     }
 }
