@@ -1626,7 +1626,7 @@ namespace _5_Jahre_Hoelle.pages
                 }
                 foreach (UIElement obj in elements)
                 {
-                    if (obj != Rect_Player && obj != EnergyDisplay)
+                    if (obj != Rect_Player && obj != EnergyDisplay && obj != TxtShopHint)
                     {
                         CanvasGame.Children.Remove(obj);
                     }
