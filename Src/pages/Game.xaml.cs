@@ -1153,12 +1153,11 @@ namespace _5_Jahre_Hoelle.pages
         {
             if (e.Key == Key.Escape)
             {
-                e.Handled = true;
+                
 
-                if (!gamePaused)
-                {
-                    ShowPauseScreen();
-                }
+                
+                ShowPauseScreen();
+                
 
                 return;
             }
@@ -1181,8 +1180,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             PauseGame();
 
-            if (pauseScreen == null)
-            {
+            
                 pauseScreen = new usercontrols.Pausescreen(SaveGame());
 
                 pauseScreen.Width = 600;
@@ -1195,14 +1193,13 @@ namespace _5_Jahre_Hoelle.pages
                 pauseScreen.ContinueClicked += () =>
                 {
                     CanvasGame.Children.Remove(pauseScreen);
-                    pauseScreen = null;
-
+                  
                     ResumeGame();
                     this.Focus();
                 };
                 // ende
                 CanvasGame.Children.Add(pauseScreen);
-            }
+            
         }
 
         private void player_bullet_collision_obstacle(Rect obstacle)
