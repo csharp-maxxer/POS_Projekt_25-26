@@ -1,6 +1,7 @@
 ﻿using _5_Jahre_Hoelle.classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -29,6 +30,9 @@ namespace _5_Jahre_Hoelle.pages
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
+            File.WriteAllText("GameTracer.txt", "1");
+            GameTracer.LevelNumber = 1;
+            
             this.Content = new Frame
             {
                 Content = new pages.choose_difficulty()
@@ -53,6 +57,17 @@ namespace _5_Jahre_Hoelle.pages
 
         private void Button_Load_Click(object sender, RoutedEventArgs e)
         {
+            if (!File.Exists("save.txt"))
+            {
+                MessageBox.Show("Bitte speichern Sie zuerst einen Spielstand bevor sie probieren einen zu laden.");
+                return;
+            }
+            else
+            {
+                string currentFloor = File.ReadAllText("GameTracer.txt");
+                GameTracer.LevelNumber = Convert.ToInt32(currentFloor);
+            }
+
             statistics.Attemps += 1;
             this.Content = new Frame
             {

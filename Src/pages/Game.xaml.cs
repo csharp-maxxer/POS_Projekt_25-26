@@ -222,16 +222,18 @@ namespace _5_Jahre_Hoelle.pages
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
-            CompositionTarget.Rendering += GameLoop;
 
             List<List<char>> matrix_rooms = new List<List<char>>();
-            matrix_rooms = CreateMapMatrix(10, 15);
+            //MessageBox.Show($"{GameTracer.RoomsNumber}");
+            matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
             cllted_rooms = Collect_Rooms(matrix_rooms);
             assing_doors_to_rooms(cllted_rooms);
 
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+            CompositionTarget.Rendering += GameLoop;
 
             this.Focusable = true;
             // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
@@ -251,16 +253,17 @@ namespace _5_Jahre_Hoelle.pages
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
-            CompositionTarget.Rendering += GameLoop;
 
             List<List<char>> matrix_rooms = new List<List<char>>();
-            matrix_rooms = CreateMapMatrix(10, 15);
+            matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
             cllted_rooms = Collect_Rooms(matrix_rooms);
             assing_doors_to_rooms(cllted_rooms);
 
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
+            CompositionTarget.Rendering += GameLoop;
+
 
             this.Focusable = true;
             // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
@@ -881,141 +884,150 @@ namespace _5_Jahre_Hoelle.pages
 
         private static List<List<char>> CreateMapMatrix(int size_matrix, int anzahl_rooms)
         {
-            if (anzahl_rooms > size_matrix * size_matrix)
-                throw new Exception("zuviele Räume, es kann keine Sackgassen geben weil die ganze map voll ist..");
-
-            int size = size_matrix;
-
-            Dictionary<int, string> directions = new Dictionary<int, string>();
-            directions.Add(0, "North");
-            directions.Add(1, "East");
-            directions.Add(2, "South");
-            directions.Add(3, "West");
-
-            List<List<char>> feld = new List<List<char>>(); // mitte 5,5
-
-            for (int i = 0; i < size; i++)
-            {
-                List<char> zwsch_speicher = new List<char>();
-                for (int j = 0; j < size; j++)
-                {
-                    zwsch_speicher.Add('-');
-                }
-                feld.Add(zwsch_speicher);
-            }
-
-            // mitte adden
-            int startX = size / 2;
-            int startY = size / 2;
-
-            feld[startY][startX] = 'O';
-
-            Random rand = new Random();
-
-            // KI: ChatGPT
-            // Promt: kannst du es vllt so machen dass die räume nicht so in clustern spawnen sondern eher so wie eben in isaac in einer schöneren struktur weißt du?
-            // KI-Start
-
-            static int CountNeighbors(List<List<char>> feld, int x, int y)
-            {
-                int count = 0;
-
-                int[,] dirs = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
-
-                for (int i = 0; i < 4; i++)
-                {
-                    int nx = x + dirs[i, 0];
-                    int ny = y + dirs[i, 1];
-
-                    if (nx >= 0 && nx < feld.Count && ny >= 0 && ny < feld.Count)
-                    {
-                        if (feld[ny][nx] != '-')
-                            count++;
-                    }
-                }
-
-                return count;
-            }
-
-            List<(int x, int y)> rooms = new List<(int, int)>();
-            List<(int x, int y)> frontier = new List<(int, int)>(); // WICHTIG!
-            List<(int x, int y)> deadEnds = new List<(int, int)>();
-
-            rooms.Add((startX, startY));
-            frontier.Add((startX, startY));
-
-            int maxRooms = anzahl_rooms;
-
-            while (rooms.Count < maxRooms && frontier.Count > 0)
-            {
-
-
-                foreach ((int x, int y) room in rooms)
-                {
-                    int n = CountNeighbors(feld, room.x, room.y);
-
-                    if (n == 1) // Sackgasse
-                        deadEnds.Add(room);
-                }
-
-                // 👉 Bevorzuge neue Räume (letzte = natürlicher Pfad)
-                (int x, int y) current = frontier[rand.Next(Math.Min(3, frontier.Count))];
-
-                List<(int dx, int dy)> dirs = new List<(int, int)>()
-                {
-                    (0,-1),(1,0),(0,1),(-1,0)
-                };
-
-                // mischen
-                dirs.Sort((a, b) => rand.Next(-1, 2));
-
-                foreach ((int dx, int dy) d in dirs)
-                {
-                    int newX = current.x + d.dx;
-                    int newY = current.y + d.dy;
-
-                    if (newX < 0 || newX >= size || newY < 0 || newY >= size)
-                        continue;
-
-                    if (feld[newY][newX] != '-')
-                        continue;
-
-                    // 👉 Nachbarn zählen (ANTI-CLUSTER!)
-                    int neighbors = CountNeighbors(feld, newX, newY);
-
-                    if (neighbors > 1)
-                        continue;
-
-                    feld[newY][newX] = 'X';
-                    rooms.Add((newX, newY));
-                    frontier.Add((newX, newY));
-
-                    break; // nur EIN Raum pro Schritt
-                }
-
-                // 👉 manchmal entfernen → erzeugt Sackgassen
-                if (rand.NextDouble() < 0.3)
-                    frontier.Remove(current);
-            }
-
-            //KI-Ende
-
             List<(int, int)> possible_rooms = new List<(int, int)>();
-
-            for (int i = 0; i < size; i++)
+            List<List<char>> feld = new List<List<char>>();
+            Random rand = new Random();
+            while (true)
             {
-                for (int j = 0; j < size; j++)
+
+                if (anzahl_rooms > size_matrix * size_matrix)
+                    throw new Exception("zuviele Räume, es kann keine Sackgassen geben weil die ganze map voll ist..");
+
+                int size = size_matrix;
+
+                Dictionary<int, string> directions = new Dictionary<int, string>();
+                directions.Add(0, "North");
+                directions.Add(1, "East");
+                directions.Add(2, "South");
+                directions.Add(3, "West");
+
+                feld.Clear(); // mitte 5,5
+
+                for (int i = 0; i < size; i++)
                 {
-                    if (feld[i][j] == 'X')
+                    List<char> zwsch_speicher = new List<char>();
+                    for (int j = 0; j < size; j++)
                     {
-                        if (CountNeighbors(feld, j, i) == 1)
+                        zwsch_speicher.Add('-');
+                    }
+                    feld.Add(zwsch_speicher);
+                }
+
+                // mitte adden
+                int startX = size / 2;
+                int startY = size / 2;
+
+                feld[startY][startX] = 'O';
+
+                
+
+                // KI: ChatGPT
+                // Promt: kannst du es vllt so machen dass die räume nicht so in clustern spawnen sondern eher so wie eben in isaac in einer schöneren struktur weißt du?
+                // KI-Start
+
+                static int CountNeighbors(List<List<char>> feld, int x, int y)
+                {
+                    int count = 0;
+
+                    int[,] dirs = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        int nx = x + dirs[i, 0];
+                        int ny = y + dirs[i, 1];
+
+                        if (nx >= 0 && nx < feld.Count && ny >= 0 && ny < feld.Count)
                         {
-                            possible_rooms.Add((j, i));
+                            if (feld[ny][nx] != '-')
+                                count++;
+                        }
+                    }
+
+                    return count;
+                }
+
+                List<(int x, int y)> rooms = new List<(int, int)>();
+                List<(int x, int y)> frontier = new List<(int, int)>(); // WICHTIG!
+                List<(int x, int y)> deadEnds = new List<(int, int)>();
+
+                rooms.Add((startX, startY));
+                frontier.Add((startX, startY));
+
+                int maxRooms = anzahl_rooms;
+
+                while (rooms.Count < maxRooms && frontier.Count > 0)
+                {
+
+
+                    foreach ((int x, int y) room in rooms)
+                    {
+                        int n = CountNeighbors(feld, room.x, room.y);
+
+                        if (n == 1) // Sackgasse
+                            deadEnds.Add(room);
+                    }
+
+                    // 👉 Bevorzuge neue Räume (letzte = natürlicher Pfad)
+                    (int x, int y) current = frontier[rand.Next(Math.Min(3, frontier.Count))];
+
+                    List<(int dx, int dy)> dirs = new List<(int, int)>()
+                    {
+                        (0,-1),(1,0),(0,1),(-1,0)
+                    };
+
+                    // mischen
+                    dirs.Sort((a, b) => rand.Next(-1, 2));
+
+                    foreach ((int dx, int dy) d in dirs)
+                    {
+                        int newX = current.x + d.dx;
+                        int newY = current.y + d.dy;
+
+                        if (newX < 0 || newX >= size || newY < 0 || newY >= size)
+                            continue;
+
+                        if (feld[newY][newX] != '-')
+                            continue;
+
+                        // 👉 Nachbarn zählen (ANTI-CLUSTER!)
+                        int neighbors = CountNeighbors(feld, newX, newY);
+
+                        if (neighbors > 1)
+                            continue;
+
+                        feld[newY][newX] = 'X';
+                        rooms.Add((newX, newY));
+                        frontier.Add((newX, newY));
+
+                        break; // nur EIN Raum pro Schritt
+                    }
+
+                    // 👉 manchmal entfernen → erzeugt Sackgassen
+                    if (rand.NextDouble() < 0.3)
+                        frontier.Remove(current);
+                }
+
+                //KI-Ende
+
+                possible_rooms.Clear();
+
+                for (int i = 0; i < size; i++)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (feld[i][j] == 'X')
+                        {
+                            if (CountNeighbors(feld, j, i) == 1)
+                            {
+                                possible_rooms.Add((j, i));
+                            }
                         }
                     }
                 }
+                if (possible_rooms.Count < 2)
+                    continue;
+                break;
             }
-
             int random_int = rand.Next(possible_rooms.Count);
             (int shop_x, int shop_y) shop = possible_rooms[random_int];
             possible_rooms.Remove(shop);
@@ -1464,6 +1476,34 @@ namespace _5_Jahre_Hoelle.pages
                 currentBoss.Bullets.Clear();
                 currentBoss = null;
                 currentRoom.IsCleared = true;
+                if (player.Grade < 50)
+                {
+                    MessageBox.Show("level nicht geschafft... animation added!!!");
+                    this.Content = new Frame
+                    {
+                        Content = new pages.Loosescreen()
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("animation added --> <--");
+                    GameTracer.LevelNumber++;
+                    if (GameTracer.LevelNumber <= 5)
+                    {
+                        this.Content = new Frame
+                        {
+                            Content = new pages.Game(difficulty)
+                        };
+                    }
+                    else
+                    {
+                        this.Content = new Frame
+                        {
+                            Content = new pages.Winscreen()
+                        };
+                    }
+                    
+                }
                 return;
             }
 
@@ -1519,6 +1559,7 @@ namespace _5_Jahre_Hoelle.pages
             save.PlayerEnergy = player.Energy;
             save.PlayerX = player.X_Pos;
             save.PlayerY = player.Y_Pos;
+            save.Difficulty = difficulty;
 
             // aktueller Raum
             save.CurrentRoomX = currentRoom.Xpos;
@@ -1642,6 +1683,7 @@ namespace _5_Jahre_Hoelle.pages
                 player.Energy = save.PlayerEnergy;
                 player.X_Pos = save.PlayerX;
                 player.Y_Pos = save.PlayerY;
+                difficulty = save.Difficulty;
 
                 // Boss wiederherstellen
                 if (save.HasBoss)
