@@ -77,6 +77,7 @@ namespace _5_Jahre_Hoelle.usercontrols
             };
             // chatgpt ende
             File.WriteAllText("save.txt", _savedata);
+            File.WriteAllText("GameTracer.txt", $"{GameTracer.LevelNumber}");
         }
 
         private void Button_Exit_MouseEnter(object sender, MouseEventArgs e)

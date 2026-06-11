@@ -9,7 +9,7 @@ namespace _5_Jahre_Hoelle.classes
 {
     public static class GameTracer
     {
-        public static int LevelNumber { private get; set; }
+        public static int LevelNumber { get; set; }
 
         public static int RoomsNumber
         {
@@ -25,6 +25,8 @@ namespace _5_Jahre_Hoelle.classes
                     return 10;
                 if (LevelNumber == 5)
                     return 11;
+                if (LevelNumber == -10)
+                    return 15;
                 MessageBox.Show("error, keine stage existiert");
                 return -1;
             }

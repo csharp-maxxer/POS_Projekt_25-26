@@ -17,7 +17,7 @@ Welche Erweiterung gehört zu einer Textdatei?:{.exe:0,.txt:1,.mp3:0,.png:0}
 Was macht ein Switch im Netzwerk?:{Speichert Webseiten:0,Verbindet Geräte im LAN:1,Übersetzt Code:0,Ersetzt RAM:0}
 Was ist ein Algorithmus?:{Ein Prozessor:0,Eine Schritt-für-Schritt-Anweisung:1,Ein Kabeltyp:0,Eine Bilddatei:0}
 Welche Schleife hat typischerweise Initialisierung, Bedingung und Änderung?:{if:0,class:0,for:1,switch:0}
-Welche Aussage zu Arrays ist richtig? #21:{Sie sind Netzwerkgeräte:0,Elemente sind typischerweise indexiert:1,Sie speichern nur Text:0,Sie ersetzen Funktionen:0}
+Welche Aussage zu Arrays ist richtig?:{Sie sind Netzwerkgeräte:0,Elemente sind typischerweise indexiert:1,Sie speichern nur Text:0,Sie ersetzen Funktionen:0}
 Was ist ein Byte?:{1 Bit:0,8 Bit:1,16 Bit:0,4 Bit:0}
 Wofür dient SQL?:{Audioaufnahme:0,Abfrage und Verwaltung von Datenbanken:1,Bildbearbeitung:0,Netzwerkkühlung:0}
 Was macht ein if-Statement?:{Startet das Betriebssystem:0,Prüft Bedingungen:1,Speichert Dateien:0,Erhöht RAM:0}
