@@ -16,6 +16,7 @@ namespace _5_Jahre_Hoelle.classes
         public double PlayerEnergy { get; set; }
         public double PlayerX { get; set; }
         public double PlayerY { get; set; }
+        public double Difficulty { get; set; }
 
         public int CurrentRoomX { get; set; }
         public int CurrentRoomY { get; set; }

@@ -224,7 +224,7 @@ namespace _5_Jahre_Hoelle.pages
             lastFrameTime = DateTime.Now;
 
             List<List<char>> matrix_rooms = new List<List<char>>();
-            MessageBox.Show($"{GameTracer.RoomsNumber}");
+            //MessageBox.Show($"{GameTracer.RoomsNumber}");
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
             cllted_rooms = Collect_Rooms(matrix_rooms);
             assing_doors_to_rooms(cllted_rooms);
@@ -1476,7 +1476,34 @@ namespace _5_Jahre_Hoelle.pages
                 currentBoss.Bullets.Clear();
                 currentBoss = null;
                 currentRoom.IsCleared = true;
-                GameTracer.LevelNumber++;
+                if (player.Grade < 50)
+                {
+                    MessageBox.Show("level nicht geschafft... animation added!!!");
+                    this.Content = new Frame
+                    {
+                        Content = new pages.Loosescreen()
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("animation added --> <--");
+                    GameTracer.LevelNumber++;
+                    if (GameTracer.LevelNumber <= 5)
+                    {
+                        this.Content = new Frame
+                        {
+                            Content = new pages.Game(difficulty)
+                        };
+                    }
+                    else
+                    {
+                        this.Content = new Frame
+                        {
+                            Content = new pages.Winscreen()
+                        };
+                    }
+                    
+                }
                 return;
             }
 
@@ -1532,6 +1559,7 @@ namespace _5_Jahre_Hoelle.pages
             save.PlayerEnergy = player.Energy;
             save.PlayerX = player.X_Pos;
             save.PlayerY = player.Y_Pos;
+            save.Difficulty = difficulty;
 
             // aktueller Raum
             save.CurrentRoomX = currentRoom.Xpos;
@@ -1655,6 +1683,7 @@ namespace _5_Jahre_Hoelle.pages
                 player.Energy = save.PlayerEnergy;
                 player.X_Pos = save.PlayerX;
                 player.Y_Pos = save.PlayerY;
+                difficulty = save.Difficulty;
 
                 // Boss wiederherstellen
                 if (save.HasBoss)
