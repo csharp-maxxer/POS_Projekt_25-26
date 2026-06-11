@@ -1476,7 +1476,7 @@ namespace _5_Jahre_Hoelle.pages
                 currentBoss.Bullets.Clear();
                 currentBoss = null;
                 currentRoom.IsCleared = true;
-                if (player.Grade < 50)
+                if (player.Grade < 60)
                 {
                     MessageBox.Show("level nicht geschafft... animation added!!!");
                     this.Content = new Frame
