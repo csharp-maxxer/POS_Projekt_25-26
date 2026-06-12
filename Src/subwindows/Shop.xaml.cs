@@ -20,24 +20,40 @@ namespace _5_Jahre_Hoelle.subwindows
     /// </summary>
     public partial class Shop : Window
     {
+        Player player;
+
+        private void UpdateLabels()
+        {
+            lbl_energy_current.Content = $"current Energy: {player.Energy}";
+            Lbl_grading_current.Content = $"current Grading: {player.Grade}%";
+        }
+
         public Shop(Player player)
         {
             InitializeComponent();
+            this.player = player;
+            UpdateLabels();
         }
 
         private void Button_Monster_Click(object sender, RoutedEventArgs e)
         {
-            // Noten abziehen buff adden oder was halt auch immer der macht
+            player.Energy += 15;
+            player.Grade -= 20;
+            UpdateLabels();
         }
 
         private void Button_Redbull_Click(object sender, RoutedEventArgs e)
         {
-            // Noten abziehen buff adden oder was halt auch immer der macht
+            player.Grade += 15;
+            player.Energy -= 20;
+            UpdateLabels();
         }
 
         private void Button_Leberkase_Click(object sender, RoutedEventArgs e)
         {
-            // Noten abziehen buff adden oder was halt auch immer der macht
+            player.Energy += 25;
+            player.Grade -= 30;
+            UpdateLabels();
         }
 
         private void Button_Monster_MouseEnter(object sender, MouseEventArgs e)
@@ -67,7 +83,7 @@ namespace _5_Jahre_Hoelle.subwindows
 
         private void Button_Leberkase_MouseLeave(object sender, MouseEventArgs e)
         {
-            TxtBlock_LeberkaseDescription.Foreground= Brushes.Transparent;
+            TxtBlock_LeberkaseDescription.Foreground = Brushes.Transparent;
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
