@@ -241,8 +241,8 @@ namespace _5_Jahre_Hoelle.pages
             this.Unloaded += Game_Unloaded;
             //chatgpt ende
         }
-        
 
+       
         public Game()
         {
             statistics.init();
