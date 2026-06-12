@@ -358,7 +358,7 @@ namespace _5_Jahre_Hoelle.pages
 
             }
 
-            if (shootup && shootTimer <= 0)
+            if (shootup && shootTimer <= 0 && currentRoom.Type != 'B')
             {
                 Bullets bullet = new Bullets(
                     player.Damage,
@@ -378,7 +378,7 @@ namespace _5_Jahre_Hoelle.pages
                 shootTimer = player.Firerate;
             }
             // chatgpt ende
-            if (shootleft && shootTimer <= 0)
+            if (shootleft && shootTimer <= 0 && currentRoom.Type != 'B')
             {
                 Bullets bullet = new Bullets(
                     player.Damage,
@@ -397,7 +397,7 @@ namespace _5_Jahre_Hoelle.pages
                 shootTimer = player.Firerate;
             }
 
-            if (shootright && shootTimer <= 0)
+            if (shootright && shootTimer <= 0 && currentRoom.Type != 'B')
             {
                 Bullets bullet = new Bullets(
                     player.Damage,
@@ -416,7 +416,7 @@ namespace _5_Jahre_Hoelle.pages
                 shootTimer = player.Firerate;
             }
 
-            if (shootdown && shootTimer <= 0)
+            if (shootdown && shootTimer <= 0 && currentRoom.Type != 'B')
             {
                 Bullets bullet = new Bullets(
                     player.Damage,
