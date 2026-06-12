@@ -255,7 +255,7 @@ namespace _5_Jahre_Hoelle.pages
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
-
+            _ = animation_fromblack(CanvasTotalGamescreen, 1);
             List<List<char>> matrix_rooms = new List<List<char>>();
             //MessageBox.Show($"{GameTracer.RoomsNumber}");
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
@@ -286,7 +286,7 @@ namespace _5_Jahre_Hoelle.pages
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
-
+            _ = animation_fromblack(CanvasTotalGamescreen, 1);
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
             cllted_rooms = Collect_Rooms(matrix_rooms);
