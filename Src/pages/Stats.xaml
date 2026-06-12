@@ -32,7 +32,7 @@
     </Page.Resources>
     <!-- ChatGPT Ende -->
 
-    <Canvas>
+    <Canvas x:Name="Canva_Stats">
         <Image Source="/assets/Stats.png"
        Width="1920"
        Height="1080"

@@ -24,12 +24,14 @@ namespace _5_Jahre_Hoelle.pages
         public choose_difficulty()
         {
             InitializeComponent();
+            Game.animation_fromblack(Diff_can, 2);
         }
 
-        private void Button_Normal_Click(object sender, RoutedEventArgs e)
+        private async void Button_Normal_Click(object sender, RoutedEventArgs e)
         {
             statistics.Attemps += 1;
             Acheavments.Acheavment1 = 1;
+            await Game.animation_Toblack(Diff_can, 1);
             this.Content = new Frame
             {
                 Content = new pages.Game(1)
@@ -47,10 +49,11 @@ namespace _5_Jahre_Hoelle.pages
             polygon_Normal.Opacity = 0;
         }
 
-        private void Button_Hard_Click(object sender, RoutedEventArgs e)
+        private async void  Button_Hard_Click(object sender, RoutedEventArgs e)
         {
             statistics.Attemps += 1; 
             Acheavments.Acheavment1 = 1;
+            await Game.animation_Toblack(Diff_can, 1);
             this.Content = new Frame
             {
                 Content = new pages.Game(0.75)
@@ -67,8 +70,9 @@ namespace _5_Jahre_Hoelle.pages
             polygon_Hard.Opacity = 0;
         }
 
-        private void Button_Zurück_Click(object sender, RoutedEventArgs e)
+        private async void Button_Zurück_Click(object sender, RoutedEventArgs e)
         {
+            await Game.animation_Toblack(Diff_can, 1);
             this.Content = new Frame
             {
                 Content = new pages.menue_page()

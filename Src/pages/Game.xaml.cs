@@ -213,11 +213,12 @@ namespace _5_Jahre_Hoelle.pages
 
         public Game(double difficulty)
         {
+            
             statistics.init();
             Acheavments.init();
             this.difficulty = difficulty;
             InitializeComponent();
-            
+            _ = animation_fromblack(CanvasTotalGamescreen, 4);
             player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
@@ -303,6 +304,8 @@ namespace _5_Jahre_Hoelle.pages
             this.Unloaded += Game_Unloaded;
             //chatgpt ende
             LoadGame();
+
+
         }
 
         // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
@@ -1610,6 +1613,51 @@ namespace _5_Jahre_Hoelle.pages
         // KI: Chatgpt
         // Promt: Bitte mach mir eine Funktion wo das hier speichert
         // KI Anfang
+        public static async Task animation_fromblack(Canvas canvas, int time)
+        {
+            Rectangle rect_anima = new Rectangle();
+            rect_anima.Width = 1920;
+            rect_anima.Height = 1080;
+            rect_anima.StrokeThickness = 0;
+            rect_anima.Fill = Brushes.Black;
+            Panel.SetZIndex(rect_anima, 9999);
+
+
+            canvas.Children.Add(rect_anima);
+            Canvas.SetLeft(rect_anima, 0);
+            Canvas.SetTop(rect_anima, 0);
+
+            for (int i = 0; i < 250; i++)
+            {
+                rect_anima.Opacity -= 0.004;
+                await Task.Delay(time);
+            }
+            canvas.Children.Remove(rect_anima);
+        }
+
+        public static async Task animation_Toblack(Canvas canvas,int time) 
+        {
+            Rectangle rect_anima = new Rectangle();
+            rect_anima.Width = 1920;
+            rect_anima.Height = 1080;
+            rect_anima.Opacity = 0;
+            rect_anima.StrokeThickness = 0;
+            rect_anima.Fill = Brushes.Black;
+            Panel.SetZIndex(rect_anima, 9999);
+
+
+            canvas.Children.Add(rect_anima);
+            Canvas.SetLeft(rect_anima,0);
+            Canvas.SetTop(rect_anima,0);
+
+            for (int i = 0; i < 250; i++)
+            {
+                rect_anima.Opacity +=  0.004;
+                await Task.Delay(time);
+            }
+            canvas.Children.Remove(rect_anima);
+        }
+
         private string SaveGame()
         {
             SaveGame save = new SaveGame();

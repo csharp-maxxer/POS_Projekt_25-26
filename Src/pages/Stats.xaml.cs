@@ -27,14 +27,15 @@ namespace _5_Jahre_Hoelle.pages
             InitializeComponent();
 
             statistics.init();
-
+            Game.animation_fromblack(Canva_Stats, 1);
             Label_attemps.Content = $"Attemps: {statistics.Attemps}";
             Label_Wins.Content = $"Wins: {statistics.Wins}";
             Label_acheavments.Content = $"Acheavments: {statistics.Achievments}";
         }
 
-        private void Button_Zurück_Click(object sender, RoutedEventArgs e)
+        private async void Button_Zurück_Click(object sender, RoutedEventArgs e)
         {
+            await Game.animation_Toblack(Canva_Stats, 1);
             this.Content = new Frame
             {
 

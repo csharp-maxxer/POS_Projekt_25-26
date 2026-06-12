@@ -24,6 +24,7 @@ namespace _5_Jahre_Hoelle.pages
         public Achievments()
         {
             InitializeComponent();
+            Game.animation_fromblack(Canva_acheavments,1);
             Acheavments.init();
             if (Acheavments.Acheavment1 == 1)
             {
@@ -53,11 +54,11 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
-        private void Button_Zurück_Click(object sender, RoutedEventArgs e)
+        private async void Button_Zurück_Click(object sender, RoutedEventArgs e)
         {
+            await Game.animation_Toblack(Canva_acheavments,1);
             this.Content = new Frame
             {
-
                 Content = new pages.menue_page()
             };
         }

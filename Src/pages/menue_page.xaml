@@ -8,7 +8,7 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="menue_page">
 
-    <Canvas>
+    <Canvas x:Name="Menu_canva">
         <Image Source="/assets/menue.png" Width="1920" Height="1080" Stretch="Fill" Canvas.Left="0" Canvas.Top="0"/>
 
         <Button Name="Button_Start" Content="Button" Opacity="0"  Canvas.Left="857" Canvas.Top="433" Height="70" Width="207" HorizontalAlignment="Center" VerticalAlignment="Top" MouseLeave="Button_Start_MouseLeave" MouseEnter="Button_Start_MouseEnter" Click="Button_Start_Click"/>
