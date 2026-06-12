@@ -1180,8 +1180,12 @@ namespace _5_Jahre_Hoelle.pages
 
                 shopOpen = true;
 
+                PauseGame();
+
                 Shop shop = new Shop(player);
                 shop.ShowDialog();
+
+                ResumeGame();
 
                 shopOpen = false;
                 this.Focus();
