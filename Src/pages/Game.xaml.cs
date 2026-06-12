@@ -252,6 +252,8 @@ namespace _5_Jahre_Hoelle.pages
             _ = animation_fromblack(CanvasTotalGamescreen, 4);
 
             player = player_Konst;
+            player.X_Pos = 803;
+            player.Y_Pos = 370;
            
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
@@ -1500,7 +1502,7 @@ namespace _5_Jahre_Hoelle.pages
 
         }
 
-        private void UpdateBoss()
+        private async void UpdateBoss()
         {
             if (currentRoom.Type != 'B') 
                 return;
@@ -1519,7 +1521,7 @@ namespace _5_Jahre_Hoelle.pages
                 currentRoom.IsCleared = true;
                 if (player.Grade < 60)
                 {
-                    MessageBox.Show("level nicht geschafft... animation added!!!");
+                    await animation_Toblack(CanvasTotalGamescreen, 4);
                     this.Content = new Frame
                     {
                         Content = new pages.Loosescreen()
@@ -1527,7 +1529,7 @@ namespace _5_Jahre_Hoelle.pages
                 }
                 else
                 {
-                    MessageBox.Show("animation added --> <--");
+                    await animation_Toblack(CanvasTotalGamescreen, 4);
                     GameTracer.LevelNumber++;
                     if (GameTracer.LevelNumber <= 5)
                     {
