@@ -241,7 +241,38 @@ namespace _5_Jahre_Hoelle.pages
             this.Unloaded += Game_Unloaded;
             //chatgpt ende
         }
-        
+
+        public Game(double difficulty,Player player_Konst)
+        {
+            statistics.init();
+            Acheavments.init();
+            this.difficulty = difficulty;
+            InitializeComponent();
+
+            player = player_Konst;
+           
+            EnergyDisplay.SetEnergy(player.Energy);
+            Rect_Player.Fill = front1;
+            lastFrameTime = DateTime.Now;
+
+            List<List<char>> matrix_rooms = new List<List<char>>();
+            //MessageBox.Show($"{GameTracer.RoomsNumber}");
+            matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
+            cllted_rooms = Collect_Rooms(matrix_rooms);
+            assing_doors_to_rooms(cllted_rooms);
+
+            currentRoom = cllted_rooms[(5, 5)];
+            currentRoom.DrawRoom();
+            CanvasGame.Children.Add(currentRoom.RoomCanvas);
+
+            CompositionTarget.Rendering += GameLoop;
+
+            this.Focusable = true;
+            // chatgpt anfang: warum kann ich wenn ich schieße nicht pause drücken (code)
+            this.Loaded += Game_Loaded;
+            this.Unloaded += Game_Unloaded;
+            //chatgpt ende
+        }
 
         public Game()
         {
@@ -1490,9 +1521,37 @@ namespace _5_Jahre_Hoelle.pages
                     GameTracer.LevelNumber++;
                     if (GameTracer.LevelNumber <= 5)
                     {
+                        if (player.Grade >= 90)
+                        {
+                            
+                            player.Range += 0.5;
+                            player.Speed += 30;
+                            player.Damage += 0.2;
+                            
+
+                        }
+                        else if (player.Grade >= 80)
+                        {
+                            player.Range += 0.25;
+                            player.Speed += 15;
+                            player.Damage += 0.1;
+                        }
+                        else if (player.Grade >= 70)
+                        {
+                            player.Range += 0;
+                            player.Speed += 0;
+                            player.Damage += 0;
+
+                        }
+                        else if (player.Grade >= 60)
+                        {
+                            player.Range -= 0.5;
+                            player.Speed -= 30;
+                            player.Damage -= 0.2;
+                        }
                         this.Content = new Frame
                         {
-                            Content = new pages.Game(difficulty)
+                            Content = new pages.Game(difficulty,player)
                         };
                     }
                     else
