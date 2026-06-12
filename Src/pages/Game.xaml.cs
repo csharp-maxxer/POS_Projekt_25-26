@@ -1225,6 +1225,8 @@ namespace _5_Jahre_Hoelle.pages
                 shop.ShowDialog();
 
                 ResumeGame();
+                GradeDisplay.SetNote(player.Grade);
+
 
                 shopOpen = false;
                 this.Focus();
