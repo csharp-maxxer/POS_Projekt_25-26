@@ -25,37 +25,43 @@ namespace _5_Jahre_Hoelle.pages
     {
         public menue_page()
         {
+            
             InitializeComponent();
+            Game.animation_fromblack(Menu_canva, 1);
         }
 
-        private void Button_Start_Click(object sender, RoutedEventArgs e)
+        private async void Button_Start_Click(object sender, RoutedEventArgs e)
         {
             File.WriteAllText("GameTracer.txt", "1");
             GameTracer.LevelNumber = 1;
-            
+            await Game.animation_Toblack(Menu_canva, 1);
+           
             this.Content = new Frame
             {
                 Content = new pages.choose_difficulty()
             };
+            
         }
 
-        private void Button_Stats_Click(object sender, RoutedEventArgs e)
+        private async void Button_Stats_Click(object sender, RoutedEventArgs e)
         {
+            await Game.animation_Toblack(Menu_canva, 1);
             this.Content = new Frame
             {
                 Content = new pages.Stats()
             };
         }
 
-        private void Button_Acheavments_Click(object sender, RoutedEventArgs e)
+        private async void Button_Acheavments_Click(object sender, RoutedEventArgs e)
         {
+            await Game.animation_Toblack(Menu_canva, 1);
             this.Content = new Frame
             {
                 Content = new pages.Achievments()
             };
         }
 
-        private void Button_Load_Click(object sender, RoutedEventArgs e)
+        private async void Button_Load_Click(object sender, RoutedEventArgs e)
         {
             if (!File.Exists("save.txt"))
             {
@@ -69,6 +75,8 @@ namespace _5_Jahre_Hoelle.pages
             }
 
             statistics.Attemps += 1;
+
+            await Game.animation_Toblack(Menu_canva, 1);
             this.Content = new Frame
             {
                 Content = new pages.Game()

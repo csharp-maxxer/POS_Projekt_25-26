@@ -8,7 +8,7 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="choose_difficulty">
 
-    <Canvas Background="Black">
+    <Canvas Background="Black" x:Name="Diff_can">
         <Image Source="/assets/Difficulty_Image.png"
                Width="1920"
                Height="1080"
