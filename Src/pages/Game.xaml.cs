@@ -209,6 +209,63 @@ namespace _5_Jahre_Hoelle.pages
             Stretch = Stretch.Uniform
         };
 
+        private ImageBrush boss_attack_wide = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_attack_wide.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_down_1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_down_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_down_2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_down_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_left_1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_left_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_left_2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_left_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_right_1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_right_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_right_2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_right_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_up_1 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_up_1.png")),
+            Stretch = Stretch.Uniform
+        };
+
+        private ImageBrush boss_up_2 = new ImageBrush
+        {
+            ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/boss_up_2.png")),
+            Stretch = Stretch.Uniform
+        };
+
+
+
+
         Dictionary<(int y, int x), Room> cllted_rooms;
 
         public Game(double difficulty)
@@ -254,6 +311,7 @@ namespace _5_Jahre_Hoelle.pages
             player = player_Konst;
             player.X_Pos = 803;
             player.Y_Pos = 370;
+            player.Energy = 100;
            
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
@@ -775,6 +833,9 @@ namespace _5_Jahre_Hoelle.pages
 
                 ImageBrush currentFrame;
 
+                // KI Chatgpt
+                // Prompt: bitte reparier die animationen
+                // KI Anfang
                 if (enemy.lastDirection == "front")
                 {
                     currentFrame = enemy.animationTimer < 0.15 ? enemy_front1 : enemy_front2;
@@ -791,6 +852,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     currentFrame = enemy.animationTimer < 0.15 ? enemy_right1 : enemy_right2;
                 }
+                // KI Ende
 
                 if (enemy.animationTimer >= 0.3)
                 {
@@ -821,6 +883,7 @@ namespace _5_Jahre_Hoelle.pages
                     enemyRects.Add(bulletRect); 
                 }
             }
+
             // Boss grafics
             foreach (Rectangle rect in bossRects)
             {
@@ -830,10 +893,36 @@ namespace _5_Jahre_Hoelle.pages
 
             if (currentBoss != null && currentRoom.Type == 'B')
             {
+                currentBoss.animationTimer += deltaTime;
+
+                ImageBrush currentFrame;
+
+                if (currentBoss.lastDirection == "front")
+                {
+                    currentFrame = currentBoss.animationTimer < 0.15 ? boss_down_1 : boss_down_2;
+                }
+                else if (currentBoss.lastDirection == "up")
+                {
+                    currentFrame = currentBoss.animationTimer < 0.15 ? boss_up_1 : boss_up_2;
+                }
+                else if (currentBoss.lastDirection == "left")
+                {
+                    currentFrame = currentBoss.animationTimer < 0.15 ? boss_left_1 : boss_left_2;
+                }
+                else
+                {
+                    currentFrame = currentBoss.animationTimer < 0.15 ? boss_right_1 : boss_right_2;
+                }
+
+                if (currentBoss.animationTimer >= 0.3)
+                {
+                    currentBoss.animationTimer = 0;
+                }
+
                 Rectangle bossRect = new Rectangle();
                 bossRect.Width = 120;
                 bossRect.Height = 120;
-                bossRect.Fill = boss_sprite;
+                bossRect.Fill = currentFrame;
                 Canvas.SetLeft(bossRect, currentBoss.X_Pos);
                 Canvas.SetTop(bossRect, currentBoss.Y_Pos);
                 Panel.SetZIndex(bossRect, 5);
@@ -1524,6 +1613,7 @@ namespace _5_Jahre_Hoelle.pages
                 if (player.Grade < 60)
                 {
                     await animation_Toblack(CanvasTotalGamescreen, 4);
+                    CompositionTarget.Rendering -= GameLoop;
                     this.Content = new Frame
                     {
                         Content = new pages.Loosescreen()
@@ -1563,6 +1653,7 @@ namespace _5_Jahre_Hoelle.pages
                             player.Speed -= 30;
                             player.Damage -= 0.2;
                         }
+                        CompositionTarget.Rendering -= GameLoop;
                         this.Content = new Frame
                         {
                             Content = new pages.Game(difficulty,player)
@@ -1570,6 +1661,7 @@ namespace _5_Jahre_Hoelle.pages
                     }
                     else
                     {
+                        CompositionTarget.Rendering -= GameLoop;
                         this.Content = new Frame
                         {
                             Content = new pages.Winscreen()

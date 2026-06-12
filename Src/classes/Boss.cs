@@ -24,6 +24,9 @@ namespace _5_Jahre_Hoelle.classes
         private double attackChoiceTimer = 0;        
         private Random random = new Random();
         private Game game;
+        public string lastDirection { get; set; } = "front";
+        public double animationTimer { get; set; } = 0;
+        public int animationFrame { get; set; } = 0;
 
 
         public Boss(double damage, double speed, double range, double firerate, Game game)
@@ -50,6 +53,15 @@ namespace _5_Jahre_Hoelle.classes
 
             X_Pos += move_direction.X * Speed * deltaTime;
             Y_Pos += move_direction.Y * Speed * deltaTime;
+
+            if (Math.Abs(move_direction.X) > Math.Abs(move_direction.Y))
+            {
+                lastDirection = move_direction.X > 0 ? "right" : "left";
+            }
+            else
+            {
+                lastDirection = move_direction.Y > 0 ? "front" : "up";
+            }
         }
 
         public void Attack(Player player, double deltaTime)
