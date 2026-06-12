@@ -249,6 +249,7 @@ namespace _5_Jahre_Hoelle.pages
             Acheavments.init();
             this.difficulty = difficulty;
             InitializeComponent();
+            _ = animation_fromblack(CanvasTotalGamescreen, 4);
 
             player = player_Konst;
            
@@ -281,6 +282,7 @@ namespace _5_Jahre_Hoelle.pages
             statistics.init();
             this.difficulty = difficulty;
             InitializeComponent();
+            _ = animation_fromblack(CanvasTotalGamescreen, 4);
 
             player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
             EnergyDisplay.SetEnergy(player.Energy);

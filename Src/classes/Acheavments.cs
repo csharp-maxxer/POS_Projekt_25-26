@@ -94,7 +94,7 @@ namespace _5_Jahre_Hoelle.classes
            
             if (!File.Exists("achievments.json"))
             {
-                MessageBox.Show("File gibt es nicht");
+                //MessageBox.Show("File gibt es nicht");
 
                 CreateDefaultSaveFile();
 
@@ -109,7 +109,7 @@ namespace _5_Jahre_Hoelle.classes
 
             if (json == "")
             {
-                MessageBox.Show("File ist leer");
+                //MessageBox.Show("File ist leer");
 
                 CreateDefaultSaveFile();
 

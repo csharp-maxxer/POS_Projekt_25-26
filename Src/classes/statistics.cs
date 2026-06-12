@@ -90,7 +90,7 @@ namespace _5_Jahre_Hoelle.classes
             
             if (!File.Exists("statistics.json"))
             {
-                MessageBox.Show("File gibt es nicht");
+                //MessageBox.Show("File gibt es nicht");
 
                 CreateDefaultSaveFile();
 
