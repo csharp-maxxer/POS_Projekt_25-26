@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace _5_Jahre_Hoelle.pages
 {
@@ -62,6 +63,10 @@ namespace _5_Jahre_Hoelle.pages
         private int animationFrame = 0;
         //chatgpt Anfang: wie kann ich im xmal.cs in C# in wpf ein Rectangle mit einem bild fillen
 
+        static DispatcherTimer timer;
+        static Rectangle rect_animation;
+        static int schritt = 0;
+        static int maxSchritte = 100;
 
 
         private ImageBrush links1 = new ImageBrush
@@ -1708,9 +1713,7 @@ namespace _5_Jahre_Hoelle.pages
                 }
             }
         }
-        // KI: Chatgpt
-        // Promt: Bitte mach mir eine Funktion wo das hier speichert
-        // KI Anfang
+
         public static async Task animation_fromblack(Canvas canvas, int time)
         {
             Rectangle rect_anima = new Rectangle();
@@ -1718,44 +1721,46 @@ namespace _5_Jahre_Hoelle.pages
             rect_anima.Height = 1080;
             rect_anima.StrokeThickness = 0;
             rect_anima.Fill = Brushes.Black;
+            rect_anima.Opacity = 1;
             Panel.SetZIndex(rect_anima, 9999);
-
-
             canvas.Children.Add(rect_anima);
-            Canvas.SetLeft(rect_anima, 0);
-            Canvas.SetTop(rect_anima, 0);
 
-            for (int i = 0; i < 250; i++)
-            {
-                rect_anima.Opacity -= 0.004;
-                await Task.Delay(time);
-            }
+            // KI: Chatgpt
+            // Prompt: kannst du bitte die animation reparieren?
+            // KI anfang:
+            DoubleAnimation fade = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(time));
+
+            rect_anima.BeginAnimation(UIElement.OpacityProperty, fade);
+
+            await Task.Delay(TimeSpan.FromSeconds(time));
+            // KI ENDE
+
             canvas.Children.Remove(rect_anima);
         }
 
         public static async Task animation_Toblack(Canvas canvas,int time) 
         {
-            Rectangle rect_anima = new Rectangle();
-            rect_anima.Width = 1920;
-            rect_anima.Height = 1080;
-            rect_anima.Opacity = 0;
-            rect_anima.StrokeThickness = 0;
-            rect_anima.Fill = Brushes.Black;
-            Panel.SetZIndex(rect_anima, 9999);
+            rect_animation = new Rectangle();
+            rect_animation.Width = 1920;
+            rect_animation.Height = 1080;
+            rect_animation.Opacity = 0;
+            rect_animation.StrokeThickness = 0;
+            rect_animation.Fill = Brushes.Black;
+            Panel.SetZIndex(rect_animation, 9999);
 
+            canvas.Children.Add(rect_animation);
+            schritt = 0;
 
-            canvas.Children.Add(rect_anima);
-            Canvas.SetLeft(rect_anima,0);
-            Canvas.SetTop(rect_anima,0);
+            DoubleAnimation fade = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(time));
+            rect_animation.BeginAnimation(UIElement.OpacityProperty, fade);
 
-            for (int i = 0; i < 250; i++)
-            {
-                rect_anima.Opacity +=  0.004;
-                await Task.Delay(time);
-            }
-            canvas.Children.Remove(rect_anima);
+            await Task.Delay(TimeSpan.FromSeconds(time));
         }
 
+
+        // KI: Chatgpt
+        // Promt: Bitte mach mir eine Funktion wo das hier speichert
+        // KI Anfang
         private string SaveGame()
         {
             SaveGame save = new SaveGame();
