@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -191,19 +192,39 @@ namespace _5_Jahre_Hoelle.classes
                             double mittelpunkt_y = 120 * y + 60;
                             double draw_at_x = mittelpunkt_x - (selected_grafic.Item2 / 2);
                             double draw_at_y = mittelpunkt_y - (selected_grafic.Item3 / 2);
-                            Rect obstacle = new Rect();
-                            obstacle.Width = 120;
-                            obstacle.Height = 120;
-                            obstacle.X = mittelpunkt_x -(selected_grafic.Item2 / 2);
-                            obstacle.Y = mittelpunkt_y - (selected_grafic.Item3 / 2);
-                           
-                            
+                            Rect obstacle = new Rect(
+                                draw_at_x,
+                                draw_at_y,
+                                selected_grafic.Item2,
+                                selected_grafic.Item3
+                            );
+                            //obstacle.Width = 120;
+                            //obstacle.Height = 120;
+                            //obstacle.X = mittelpunkt_x -(selected_grafic.Item2 / 2);
+                            //obstacle.Y = mittelpunkt_y - (selected_grafic.Item3 / 2);
 
                             Canvas.SetLeft(image, draw_at_x);
                             Canvas.SetTop(image, draw_at_y);
                             obstacles.Add(obstacle);
-                          
                             RoomCanvas.Children.Add(image);
+
+
+                            if (Game.ShowHitboxes)
+                            {
+                                Rectangle hitbox = new Rectangle();
+
+                                hitbox.Width = obstacle.Width;
+                                hitbox.Height = obstacle.Height;
+
+                                hitbox.Stroke = Brushes.Red;
+                                hitbox.StrokeThickness = 2;
+                                hitbox.Fill = Brushes.Transparent;
+
+                                Canvas.SetLeft(hitbox, obstacle.X);
+                                Canvas.SetTop(hitbox, obstacle.Y);
+
+                                RoomCanvas.Children.Add(hitbox);
+                            }
                         }
                     }
                 }

@@ -53,6 +53,7 @@ namespace _5_Jahre_Hoelle.pages
         private List<Rectangle> enemyRects = new List<Rectangle>();
         private List<Rectangle> bossRects = new List<Rectangle>();
         private Boss currentBoss = null;
+        public static bool ShowHitboxes = false;
 
 
         //chatgpt anfang: wie mache ich hier einen Deltatimer
@@ -1296,14 +1297,17 @@ namespace _5_Jahre_Hoelle.pages
         //chatgpt anfang: warum kann ich wenn ich schieße nicht mehr pause drücken(code)
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.H)
+            {
+                if (ShowHitboxes)
+                    ShowHitboxes = false;
+                else
+                    ShowHitboxes = true;
+            }
+
             if (e.Key == Key.Escape)
             {
-                
-
-                
                 ShowPauseScreen();
-                
-
                 return;
             }
 
