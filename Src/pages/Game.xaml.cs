@@ -1672,6 +1672,7 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         CompositionTarget.Rendering -= GameLoop;
                         Acheavments.Acheavment3 = 1;
+                        statistics.Wins += 1;
                         this.Content = new Frame
                         {
                             Content = new pages.Winscreen()
