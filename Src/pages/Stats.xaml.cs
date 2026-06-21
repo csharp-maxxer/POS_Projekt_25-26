@@ -1,8 +1,11 @@
 ﻿using _5_Jahre_Hoelle.classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Printing;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +33,22 @@ namespace _5_Jahre_Hoelle.pages
             Game.animation_fromblack(Canva_Stats, 1);
             Label_attemps.Content = $"Attemps: {statistics.Attemps}";
             Label_Wins.Content = $"Wins: {statistics.Wins}";
+            int nr_achievments = 0;
+            if (!File.Exists("achievments.json"))
+            {
+                statistics.Achievments = 0;
+            }
+            else
+            {
+                string json = File.ReadAllText("achievments.json");
+                Dictionary<string, int> data = JsonSerializer.Deserialize<Dictionary<string, int>>(json);
+                foreach (KeyValuePair<string, int> item in data)
+                {
+                    if (item.Value == 1)
+                        nr_achievments++;
+                }
+                statistics.Achievments = nr_achievments;
+            }
             Label_acheavments.Content = $"Acheavments: {statistics.Achievments}";
         }
 
@@ -38,7 +57,6 @@ namespace _5_Jahre_Hoelle.pages
             await Game.animation_Toblack(Canva_Stats, 1);
             this.Content = new Frame
             {
-
                 Content = new pages.menue_page()
             };
         }
