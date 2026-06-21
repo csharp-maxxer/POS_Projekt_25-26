@@ -59,9 +59,9 @@
         <!-- ChatGPT Anfang: mach das die labels richtig geil aussehen die schrift wäre nice wenn es so pixelart mässig wäre also den code halt ändern kein bilder erstellen -->
         <Label Name="Label_acheavment1" Style="{StaticResource PixelStatsLabel}" Content="START A GAME" Canvas.Left="619" Canvas.Top="360"/>
 
-        <Label Name="Label_acheavment2" Style="{StaticResource PixelStatsLabel}" Content="BLA BLA BLA" Canvas.Left="619" Canvas.Top="458"/>
+        <Label Name="Label_acheavment2" Style="{StaticResource PixelStatsLabel}" Content="Buy something in the Shop" Canvas.Left="619" Canvas.Top="458"/>
 
-        <Label Name="Label_acheavment3" Style="{StaticResource PixelStatsLabel}" Content="BLA BLA BLA BLA" Canvas.Left="619" Canvas.Top="556"/>
+        <Label Name="Label_acheavment3" Style="{StaticResource PixelStatsLabel}" Content="Win the Game" Canvas.Left="619" Canvas.Top="556"/>
 
         <!-- ChatGPT Ende -->
 

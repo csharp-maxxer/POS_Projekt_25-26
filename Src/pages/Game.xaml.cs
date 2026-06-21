@@ -1667,6 +1667,7 @@ namespace _5_Jahre_Hoelle.pages
                     else
                     {
                         CompositionTarget.Rendering -= GameLoop;
+                        Acheavments.Acheavment3 = 1;
                         this.Content = new Frame
                         {
                             Content = new pages.Winscreen()
@@ -1826,10 +1827,10 @@ namespace _5_Jahre_Hoelle.pages
         {
             try
             {
-                if (!File.Exists("save.txt"))
+                if (!File.Exists("save.json"))
                     return;
 
-                string json = File.ReadAllText("save.txt");
+                string json = File.ReadAllText("save.json");
                 SaveGame save = JsonSerializer.Deserialize<SaveGame>(json);
 
                 
