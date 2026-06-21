@@ -40,6 +40,7 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Energy += 15;
             player.Grade -= 20;
             UpdateLabels();
+            Acheavments.Acheavment2 = 1;
         }
 
         private void Button_Redbull_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,7 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Grade += 15;
             player.Energy -= 20;
             UpdateLabels();
+            Acheavments.Acheavment2 = 1;
         }
 
         private void Button_Leberkase_Click(object sender, RoutedEventArgs e)
@@ -54,6 +56,7 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Energy += 25;
             player.Grade -= 30;
             UpdateLabels();
+            Acheavments.Acheavment2 = 1;
         }
 
         private void Button_Monster_MouseEnter(object sender, MouseEventArgs e)

@@ -63,7 +63,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void Button_Load_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists("save.txt"))
+            if (!File.Exists("save.json"))
             {
                 MessageBox.Show("Bitte speichern Sie zuerst einen Spielstand bevor sie probieren einen zu laden.");
                 return;
