@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,12 +26,15 @@ namespace _5_Jahre_Hoelle.usercontrols
         public Grade_uc()
         {
             InitializeComponent();
+            Logger.logger.Debug("Grade_uc initialized");
+
             SetNote(70);
         }
 
         public void SetNote(double newNote)
         {
             note = newNote;
+            Logger.logger.Debug("Grade was updated");
 
             Grade1.Visibility = Visibility.Collapsed;
             Grade2.Visibility = Visibility.Collapsed;
