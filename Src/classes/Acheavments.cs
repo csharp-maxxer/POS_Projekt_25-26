@@ -14,7 +14,7 @@ namespace _5_Jahre_Hoelle.classes
         private static int _acheavment1;
         private static int _acheavment2;
         private static int _acheavment3;
-       
+
 
         public static int Acheavment1
         {
@@ -25,6 +25,7 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _acheavment1 = value;
+                Logger.logger.Debug("acheavment1 got changed");
                 Save();
             }
         }
@@ -38,6 +39,7 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _acheavment2 = value;
+                Logger.logger.Debug("acheavment2 got changed");
                 Save();
             }
         }
@@ -51,18 +53,21 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _acheavment3 = value;
+                Logger.logger.Debug("acheavment3 got changed");
                 Save();
             }
         }
 
         public static void init()
         {
+            Logger.logger.Debug("acheavments class is getting initialized");
             Load();
         }
 
         private static void CreateDefaultSaveFile()
         {
-            
+            Logger.logger.Debug("default acheavment file gets created");
+
             Dictionary<string, int> data_nix = new Dictionary<string, int>();
 
             data_nix.Add("Acheavment1", 0);
@@ -72,12 +77,14 @@ namespace _5_Jahre_Hoelle.classes
             string json_nix = JsonSerializer.Serialize(data_nix);
 
             File.WriteAllText("achievments.json", json_nix);
+            Logger.logger.Debug("default acheavment file got created");
         }
 
         private static void Save()
         {
-            
-         
+            Logger.logger.Debug("acheavments are getting saved");
+
+
             Dictionary<string, int> data = new Dictionary<string, int>();
 
             data.Add("Acheavment1", _acheavment1);
@@ -87,13 +94,16 @@ namespace _5_Jahre_Hoelle.classes
             string json = JsonSerializer.Serialize(data);
 
             File.WriteAllText("achievments.json", json);
+            Logger.logger.Debug("acheavments got saved");
         }
 
         private static void Load()
         {
-           
+            Logger.logger.Debug("acheavments are getting loaded");
+
             if (!File.Exists("achievments.json"))
             {
+                Logger.logger.Debug("acheavments file does not exist");
                 //MessageBox.Show("File gibt es nicht");
 
                 CreateDefaultSaveFile();
@@ -102,13 +112,17 @@ namespace _5_Jahre_Hoelle.classes
                 _acheavment2 = 0;
                 _acheavment3 = 0;
 
+                Logger.logger.Debug("acheavments are set to 0");
+
                 return;
             }
 
             string json = File.ReadAllText("achievments.json");
+            Logger.logger.Debug("acheavments file got readed");
 
             if (json == "")
             {
+                Logger.logger.Debug("acheavments file is empty");
                 //MessageBox.Show("File ist leer");
 
                 CreateDefaultSaveFile();
@@ -117,13 +131,17 @@ namespace _5_Jahre_Hoelle.classes
                 _acheavment2 = 0;
                 _acheavment3 = 0;
 
+                Logger.logger.Debug("acheavments are set to 0");
+
                 return;
             }
 
             Dictionary<string, int> data = JsonSerializer.Deserialize<Dictionary<string, int>>(json);
+            Logger.logger.Debug("acheavments file got deserialized");
 
             if (data == null)
             {
+                Logger.logger.Debug("acheavments file is broken");
                 MessageBox.Show("File ist kaputt");
 
                 CreateDefaultSaveFile();
@@ -131,6 +149,8 @@ namespace _5_Jahre_Hoelle.classes
                 _acheavment1 = 0;
                 _acheavment2 = 0;
                 _acheavment3 = 0;
+
+                Logger.logger.Debug("acheavments are set to 0");
 
                 return;
             }
@@ -161,6 +181,8 @@ namespace _5_Jahre_Hoelle.classes
             {
                 _acheavment3 = 0;
             }
+
+            Logger.logger.Debug("acheavments got loaded");
         }
     }
 }
