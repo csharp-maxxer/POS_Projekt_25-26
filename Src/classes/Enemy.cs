@@ -31,9 +31,11 @@ namespace _5_Jahre_Hoelle.classes
             Firerate = firerate;
             Health = health;
             Bullets = new List<Bullets>();
+
+            Logger.logger.Debug("enemy got created");
         }
 
-        public void Move(Player player, double deltaTime, List<Enemy>AllEnemies)
+        public void Move(Player player, double deltaTime, List<Enemy> AllEnemies)
         {
             double direction_x = player.X_Pos - X_Pos;
             double direction_y = player.Y_Pos - Y_Pos;
@@ -82,6 +84,8 @@ namespace _5_Jahre_Hoelle.classes
                 lastDirection = move_direction.Y > 0 ? "front" : "up";
             }
             // KI Ende
+
+            Logger.logger.Debug("enemy moves");
         }
 
         public void Shoot(Player player, double deltaTime)
@@ -116,6 +120,8 @@ namespace _5_Jahre_Hoelle.classes
             bullet.Y_pos = Y_Pos + 25;
 
             Bullets.Add(bullet);
+
+            Logger.logger.Debug("enemy shoots");
         }
     }
 }
