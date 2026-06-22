@@ -23,8 +23,10 @@ namespace _5_Jahre_Hoelle.pages
     {
         public Achievments()
         {
+           
             InitializeComponent();
             Game.animation_fromblack(Canva_acheavments,1);
+            Logger.init("Logger");
             Acheavments.init();
             if (Acheavments.Acheavment1 == 1)
             {
@@ -52,6 +54,7 @@ namespace _5_Jahre_Hoelle.pages
             {
                 _Acheavment_3.Text = "☐";
             }
+
         }
 
         private async void Button_Zurück_Click(object sender, RoutedEventArgs e)
