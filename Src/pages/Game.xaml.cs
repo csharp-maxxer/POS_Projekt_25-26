@@ -273,30 +273,37 @@ namespace _5_Jahre_Hoelle.pages
 
 
         Dictionary<(int y, int x), Room> cllted_rooms;
-
+        
         public Game(double difficulty)
         {
-            
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
+            Logger.logger.Debug("statistics class is getting initialized");
             Acheavments.init();
+            Logger.logger.Debug("Acheavments class is getting initialized");
             this.difficulty = difficulty;
             InitializeComponent();
             _ = animation_fromblack(CanvasTotalGamescreen, 4);
             player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
+            Logger.logger.Debug("Player with stats got created");
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
+          
 
             List<List<char>> matrix_rooms = new List<List<char>>();
             //MessageBox.Show($"{GameTracer.RoomsNumber}");
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
+            Logger.logger.Debug("Map Matrix was created");
             cllted_rooms = Collect_Rooms(matrix_rooms);
+            Logger.logger.Debug("Rooms are created");
             assing_doors_to_rooms(cllted_rooms);
-
+            Logger.logger.Debug("Rooms are getting Doors assigned");
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
             this.Focusable = true;
@@ -308,13 +315,17 @@ namespace _5_Jahre_Hoelle.pages
 
         public Game(double difficulty,Player player_Konst)
         {
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
+            Logger.logger.Debug("statistics class is getting initialized");
             Acheavments.init();
+            Logger.logger.Debug("Acheavments class is getting initialized");
             this.difficulty = difficulty;
             InitializeComponent();
             _ = animation_fromblack(CanvasTotalGamescreen, 4);
 
             player = player_Konst;
+            Logger.logger.Debug("Player with stats got created");
             player.X_Pos = 803;
             player.Y_Pos = 370;
             player.Energy = 100;
@@ -326,13 +337,17 @@ namespace _5_Jahre_Hoelle.pages
             List<List<char>> matrix_rooms = new List<List<char>>();
             //MessageBox.Show($"{GameTracer.RoomsNumber}");
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
+            Logger.logger.Debug("Map Matrix was created");
             cllted_rooms = Collect_Rooms(matrix_rooms);
+            Logger.logger.Debug("Rooms are created");
             assing_doors_to_rooms(cllted_rooms);
+            Logger.logger.Debug("Rooms are getting Doors assigned");
 
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
             this.Focusable = true;
@@ -345,24 +360,33 @@ namespace _5_Jahre_Hoelle.pages
        
         public Game()
         {
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
+            Logger.logger.Debug("statistics class is getting initialized");
+            Acheavments.init();
+            Logger.logger.Debug("Acheavments class is getting initialized");
             this.difficulty = difficulty;
             InitializeComponent();
             _ = animation_fromblack(CanvasTotalGamescreen, 4);
 
             player = new Player(1.0 * difficulty, 250.0 * difficulty, 4.5 * difficulty, 0.5 * difficulty, 70, 100);
+
             EnergyDisplay.SetEnergy(player.Energy);
             Rect_Player.Fill = front1;
             lastFrameTime = DateTime.Now;
 
             List<List<char>> matrix_rooms = new List<List<char>>();
             matrix_rooms = CreateMapMatrix(10, GameTracer.RoomsNumber);
+            Logger.logger.Debug("Map Matrix was created");
             cllted_rooms = Collect_Rooms(matrix_rooms);
+            Logger.logger.Debug("Rooms are created");
             assing_doors_to_rooms(cllted_rooms);
+            Logger.logger.Debug("Rooms are getting Doors assigned");
 
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
 
@@ -412,6 +436,7 @@ namespace _5_Jahre_Hoelle.pages
             if (gamePaused || isTransitioning)
                 return;
 
+
             energyTimer -= deltaTime;
 
             if (energyTimer <= 0)
@@ -425,11 +450,11 @@ namespace _5_Jahre_Hoelle.pages
 
                 energyTimer = 3;
             }
-
+            Logger.logger.Debug("Energy is getting updated");
             if (player.Energy == 0)
             {
                 PauseGame();
-
+                Logger.logger.Debug("Game Over Energy is Empty");
                 this.Content = new Frame
                 {
                     Content = new pages.Loosescreen()
@@ -442,18 +467,26 @@ namespace _5_Jahre_Hoelle.pages
 
             //chatgpt andang: fixe den bug das ich wenn ich schießen anfange nicht mehr aufhören kann und ich mich nicht bewegen kann
             moveLeft = Keyboard.IsKeyDown(Key.A);
+            Logger.logger.Debug("A Key was Pressed");
             moveRight = Keyboard.IsKeyDown(Key.D);
+            Logger.logger.Debug("D Key was Pressed");
             moveUp = Keyboard.IsKeyDown(Key.W);
+            Logger.logger.Debug("W Key was Pressed");
             moveDown = Keyboard.IsKeyDown(Key.S);
+            Logger.logger.Debug("S Key was Pressed");
 
             shootup = Keyboard.IsKeyDown(Key.Up);
+            Logger.logger.Debug("Up Key was Pressed");
             shootleft = Keyboard.IsKeyDown(Key.Left);
+            Logger.logger.Debug("Left Key was Pressed");
             shootright = Keyboard.IsKeyDown(Key.Right);
+            Logger.logger.Debug("Right Key was Pressed");
             shootdown = Keyboard.IsKeyDown(Key.Down);
+            Logger.logger.Debug("Down Key was Pressed");
             //chatgpt ende
             // chatgpt anfang: wie mache ich bei diesem code das die bullets nur 4 mal in der sekunde geschossen werden (ganzer code)
             shootTimer -= deltaTime;
-
+            
            
             if (shootTimer <= 0)
             {
@@ -463,6 +496,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (shootup && shootTimer <= 0 && currentRoom.Type != 'B')
             {
+                Logger.logger.Debug("User shoot a bullet upwards");
                 Bullets bullet = new Bullets(
                     player.Damage,
                     player.Firerate,
@@ -472,6 +506,7 @@ namespace _5_Jahre_Hoelle.pages
                     player.Y_Pos + 40
                     
                 );
+                Logger.logger.Debug("Bullet got created");
 
                 bullet.X_pos = player.X_Pos + 35;
                 bullet.Y_pos = player.Y_Pos + 40;
@@ -483,6 +518,7 @@ namespace _5_Jahre_Hoelle.pages
             // chatgpt ende
             if (shootleft && shootTimer <= 0 && currentRoom.Type != 'B')
             {
+                Logger.logger.Debug("User shoot a bullet left");
                 Bullets bullet = new Bullets(
                     player.Damage,
                     player.Firerate,
@@ -491,6 +527,7 @@ namespace _5_Jahre_Hoelle.pages
                     player.X_Pos + 35,
                     player.Y_Pos + 40
                 );
+                Logger.logger.Debug("Bullet got created");
 
                 bullet.X_pos = player.X_Pos + 35;
                 bullet.Y_pos = player.Y_Pos + 40;
@@ -502,6 +539,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (shootright && shootTimer <= 0 && currentRoom.Type != 'B')
             {
+                Logger.logger.Debug("User shoot a bullet right");
                 Bullets bullet = new Bullets(
                     player.Damage,
                     player.Firerate,
@@ -510,6 +548,7 @@ namespace _5_Jahre_Hoelle.pages
                     player.X_Pos + 35,
                     player.Y_Pos + 40
                 );
+                Logger.logger.Debug("Bullet got created");
 
                 bullet.X_pos = player.X_Pos + 35;
                 bullet.Y_pos = player.Y_Pos + 40;
@@ -521,6 +560,7 @@ namespace _5_Jahre_Hoelle.pages
 
             if (shootdown && shootTimer <= 0 && currentRoom.Type != 'B')
             {
+                Logger.logger.Debug("User shoot a bullet downwards");
                 Bullets bullet = new Bullets(
                     player.Damage,
                     player.Firerate,
@@ -529,6 +569,7 @@ namespace _5_Jahre_Hoelle.pages
                     player.X_Pos + 35,
                     player.Y_Pos + 40
                 );
+                Logger.logger.Debug("Bullet got created");
 
                 bullet.X_pos = player.X_Pos + 35;
                 bullet.Y_pos = player.Y_Pos + 40;
@@ -553,6 +594,7 @@ namespace _5_Jahre_Hoelle.pages
                         bullet.rotation = 0;
                     }
                 }
+                Logger.logger.Debug("Every Bullet of the player got rotated");
 
                 foreach (Enemy enemy in currentRoom.Enemies)
                 {
@@ -565,6 +607,7 @@ namespace _5_Jahre_Hoelle.pages
                             bullet.rotation = 0;
                         }
                     }
+                    Logger.logger.Debug("Every Bullet of the enemys got rotated");
                 }
 
 
@@ -575,6 +618,7 @@ namespace _5_Jahre_Hoelle.pages
             {
                 player_bullet_collision_obstacle(obstacle);
             }
+            Logger.logger.Debug("Every Obstacle is checked if it collides with a bullet of the player");
             move();
             UpdateEnemies();
             UpdateBoss();
@@ -600,6 +644,7 @@ namespace _5_Jahre_Hoelle.pages
                     return true;
                 }
             }
+            Logger.logger.Debug("Every Obstacle is checked if it collides the player");
 
             return false;
         }
@@ -620,9 +665,11 @@ namespace _5_Jahre_Hoelle.pages
 
 
             Vector direction = new Vector(0, 0);
+            Logger.logger.Debug("Vector for the movemnt is created");
 
             if (moveLeft && player.X_Pos  >= 0)
             {
+                Logger.logger.Debug("Player moves left");
                 if (currentRoom.DoorLeft && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos <= 2 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)
@@ -652,12 +699,14 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     animationTimer = 0;
                 }
+                Logger.logger.Debug("Animtaion of the player got updated");
                 // KI Ende (block wird weitere 3x verwendet.)
             }
 
 
             if (moveRight && player.X_Pos + 73 <= 1680)
             {
+                Logger.logger.Debug("Player moves right");
                 if (currentRoom.DoorRight && player.Y_Pos >= 300 && player.Y_Pos <= 450 && player.X_Pos >= 1580 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)   
@@ -683,12 +732,13 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     animationTimer = 0;
                 }
+                Logger.logger.Debug("Animtaion of the player got updated");
             }
 
 
             if (moveUp && player.Y_Pos >= -10)
             {
-                
+                Logger.logger.Debug("Player moves up");
                 if (currentRoom.DoorTop && player.Y_Pos <= 15 && player.X_Pos >= 760 && player.X_Pos <= 900 && currentRoom.IsCleared)
                 {
                     if (!isTransitioning)
@@ -714,12 +764,14 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     animationTimer = 0;
                 }
+                Logger.logger.Debug("Animtaion of the player got updated");
             }
 
 
             if (moveDown && player.Y_Pos + 100
                 <= 840)
             {
+                Logger.logger.Debug("Player moves down");
                 if (currentRoom.DoorBottom && player.Y_Pos >= 730 && player.X_Pos >= 760 && player.X_Pos <= 900 && currentRoom.IsCleared) 
                 {
                     if (!isTransitioning)
@@ -745,16 +797,19 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     animationTimer = 0;
                 }
+                Logger.logger.Debug("Animtaion of the player got updated");
             }
 
             if (direction.Length > 0)
             {
                 // chatgpt anfang: wie mach ich das die diagonales laufen gleich schnell ist
                 direction.Normalize();
+                
                 // chatgpt ende: wie mach ich das die diagonales laufen gleich schnell ist
 
                 double Xnew = player.X_Pos + direction.X * player.Speed * deltaTime;
                 double Ynew = player.Y_Pos + direction.Y * player.Speed * deltaTime;
+                Logger.logger.Debug("Player stats are changed with the movement vector");
 
                 if (!CollidesWithObstacle(Xnew, player.Y_Pos))
                 {
@@ -765,6 +820,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     player.Y_Pos = Ynew;
                 }
+
             }
 
             CheckShopCollision();
@@ -778,8 +834,10 @@ namespace _5_Jahre_Hoelle.pages
             {
                 CanvasGame.Children.Remove(rect);
             }
+            Logger.logger.Debug("Every Bullet  gets removed of the Canvas");
 
             bulletRects.Clear();
+            Logger.logger.Debug("bullets rect list is getting cleared");
 
             foreach (Bullets bullet in player.Bullets)
             {
@@ -808,7 +866,7 @@ namespace _5_Jahre_Hoelle.pages
                 CanvasGame.Children.Add(bulletRect);
                 bulletRects.Add(bulletRect);
             }
-
+            Logger.logger.Debug("Every Bullet of the Player gets added back in the bullets rect list and on the canvas");
 
             Canvas.SetLeft(Rect_Player, player.X_Pos);
             Canvas.SetTop(Rect_Player, player.Y_Pos);
@@ -831,7 +889,9 @@ namespace _5_Jahre_Hoelle.pages
             {
                 CanvasGame.Children.Remove(rect);
             }
+            Logger.logger.Debug("Every Enemys gets removed of the Canvas");
             enemyRects.Clear();
+            Logger.logger.Debug(" enemys list is getting cleared");
 
             foreach (Enemy enemy in currentRoom.Enemies)
             {
@@ -889,6 +949,7 @@ namespace _5_Jahre_Hoelle.pages
                     enemyRects.Add(bulletRect); 
                 }
             }
+            Logger.logger.Debug(" Every Enemy and every Bullet of the enemys are getting drawed");
 
             // Boss grafics
             foreach (Rectangle rect in bossRects)
@@ -948,6 +1009,7 @@ namespace _5_Jahre_Hoelle.pages
                     CanvasGame.Children.Add(bulletRect);
                     bossRects.Add(bulletRect);
                 }
+                Logger.logger.Debug("Boss and every Bullet of the Boss are getting drawed");
             }
         }
 
@@ -982,6 +1044,7 @@ namespace _5_Jahre_Hoelle.pages
             }
         }
 
+        
         public Dictionary<(int y, int x), Room> Collect_Rooms (List<List<char>> rooms)
         {
             // adds all rooms into a dict<(int x, int y), Room>
@@ -1180,6 +1243,7 @@ namespace _5_Jahre_Hoelle.pages
         // KI Start
         public async Task SwitchRoom(Room room_from, Room room_to)
         {
+            Logger.logger.Debug("Roomswitch Animtation starts");
             if (isTransitioning) return;
             player.Bullets.Clear();
             isTransitioning = true;
@@ -1299,6 +1363,7 @@ namespace _5_Jahre_Hoelle.pages
         {
             if (e.Key == Key.H)
             {
+                Logger.logger.Debug(" H Key is Pressed and in the next Room you can see the hitboxes of the obstacels");
                 if (ShowHitboxes)
                     ShowHitboxes = false;
                 else
@@ -1307,21 +1372,23 @@ namespace _5_Jahre_Hoelle.pages
 
             if (e.Key == Key.Escape)
             {
+                Logger.logger.Debug("Esc Key is pressed and the game pauses");
                 ShowPauseScreen();
                 return;
             }
 
             if (e.Key == Key.E && playerNearShop && !shopOpen && !gamePaused)
             {
-                e.Handled = true;
+                Logger.logger.Debug("E Key is pressed near a shop");
+               
 
                 shopOpen = true;
-
+                Logger.logger.Debug(" Game pauses");
                 PauseGame();
 
                 Shop shop = new Shop(player);
                 shop.ShowDialog();
-
+                Logger.logger.Debug(" Game resumes");
                 ResumeGame();
                 GradeDisplay.SetNote(player.Grade);
 
@@ -1333,10 +1400,11 @@ namespace _5_Jahre_Hoelle.pages
 
         private void ShowPauseScreen()
         {
+            Logger.logger.Debug("Player pauses the game");
             PauseGame();
+            Logger.logger.Debug("Game pauses");
 
-            
-                pauseScreen = new usercontrols.Pausescreen(SaveGame());
+            pauseScreen = new usercontrols.Pausescreen(SaveGame());
 
                 pauseScreen.Width = 600;
                 pauseScreen.Height = 700;
@@ -1390,12 +1458,15 @@ namespace _5_Jahre_Hoelle.pages
                     bullet.Y_pos >= 840)
                 {
                     player.Bullets.RemoveAt(i);
+                    Logger.logger.Debug(" Bullet gets removed because it hits the wall");
                 }
             }
+            Logger.logger.Debug("Every bullet of the player moves");
         }
 
         private void shootrangecheck()
         {
+            Logger.logger.Debug("Range of the shoots of the player are getting checked");
             for (int i = player.Bullets.Count - 1; i >= 0; i--)
             {
                 Bullets bullet = player.Bullets[i];
@@ -1406,6 +1477,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     if (bullet.X_pos_created + bullet.Range * 100 <= bullet.X_pos)
                     {
+                        Logger.logger.Debug("Bullet gets deleted");
                         player.Bullets.RemoveAt(i);
                     }
                 }
@@ -1414,6 +1486,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     if (bullet.X_pos_created - bullet.Range * 100 >= bullet.X_pos)
                     {
+                        Logger.logger.Debug("Bullet gets deleted");
                         player.Bullets.RemoveAt(i);
                     }
                 }
@@ -1422,6 +1495,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     if (bullet.Y_pos_created + bullet.Range * 100 <= bullet.Y_pos)
                     {
+                        Logger.logger.Debug("Bullet gets deleted");
                         player.Bullets.RemoveAt(i);
                     }
                 }
@@ -1430,6 +1504,7 @@ namespace _5_Jahre_Hoelle.pages
                 {
                     if (bullet.Y_pos_created - bullet.Range * 100 >= bullet.Y_pos)
                     {
+                        Logger.logger.Debug("Bullet gets deleted");
                         player.Bullets.RemoveAt(i);
                     }
                 }
@@ -1441,6 +1516,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private void CheckShopCollision()
         {
+            Logger.logger.Debug("shop collision check starts");
             playerNearShop = false;
 
             if (currentRoom.Type != 'S')
@@ -1459,6 +1535,7 @@ namespace _5_Jahre_Hoelle.pages
             // Prompt: Hey chat kannst du bitte einen bool machen wo true macht wenn man in diese Borders reinkommt weil lwk ich bin faul
             // KI Anfang
             bool intersects = playerX < shopX + shopWidth && playerX + playerWidth > shopX && playerY < shopY + shopHeight && playerY + playerHeight > shopY;
+            Logger.logger.Debug("gets checked if the player is near the shop");
             // KI Ende
 
             playerNearShop = intersects;
@@ -1466,6 +1543,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private void CheckExamCollision()
         {
+            Logger.logger.Debug("exam collision check starts");
             if (currentRoom.Type != 'X') return;
             if (!currentRoom.ExamRoom) return;
             if (currentRoom.ExamTriggered) return;
@@ -1481,19 +1559,21 @@ namespace _5_Jahre_Hoelle.pages
             {
                 currentRoom.ExamTriggered = true;
                 OpenExamRoom();
+                Logger.logger.Debug("player collision is true with the exam book");
             }
         }
 
         private void OpenExamRoom()
         {
             PauseGame();
-
+            Logger.logger.Debug("Game pauses");
             question_ask exam = new question_ask(player,difficulty);
             exam.ShowDialog();
 
             currentRoom.IsCleared = true;
             GradeDisplay.SetNote(player.Grade);
             ResumeGame();
+            Logger.logger.Debug("Game reseuemes");
         }
 
         public void PauseGame()
@@ -1529,9 +1609,11 @@ namespace _5_Jahre_Hoelle.pages
                 Enemy enemy = currentRoom.Enemies[i];
 
                 enemy.Move(player, deltaTime, currentRoom.Enemies);
+                Logger.logger.Debug("enemy moves");
                 enemy.Shoot(player, deltaTime);
-
+                Logger.logger.Debug("enemy shoots");
                 // move bullets
+                Logger.logger.Debug("enemys bullets move");
                 for (int j = enemy.Bullets.Count - 1; j >= 0; j--)
                 {
                     Bullets bullet = enemy.Bullets[j];
@@ -1540,8 +1622,10 @@ namespace _5_Jahre_Hoelle.pages
                     bullet.Y_pos += bullet.Direction.Y;
 
                     // hitbox room
+                    Logger.logger.Debug("enemy bullets collision with walls check");
                     if (bullet.X_pos >= 1680 || bullet.Y_pos <= 0 || bullet.X_pos <= 0 || bullet.Y_pos >= 840)
                     {
+                        Logger.logger.Debug("enemy bullet gets deleted");
                         enemy.Bullets.RemoveAt(j);
                         continue;
                     }
@@ -1549,7 +1633,7 @@ namespace _5_Jahre_Hoelle.pages
                     // Bullet hit player
                     Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
                     Rect playerRect = new Rect(player.X_Pos + 30, player.Y_Pos + 50, 43, 50);
-
+                    Logger.logger.Debug("enemy bullets collision with player check");
                     if (bulletRect.IntersectsWith(playerRect))
                     {
                         if (player.Grade - bullet.Damage / difficulty  <= 0)
@@ -1562,21 +1646,24 @@ namespace _5_Jahre_Hoelle.pages
                         }
                         GradeDisplay.SetNote(player.Grade);
                         enemy.Bullets.RemoveAt(j);
+                        Logger.logger.Debug("enemy bullets gets deleted");
                         break;
                     }
                 }
 
                 //player hit enemy
+                Logger.logger.Debug("player bullets collision with enemy check");
                 for (int j = player.Bullets.Count - 1; j >= 0; j--)
                 {
                     Bullets bullet = player.Bullets[j];
                     Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
                     Rect enemyRect = new Rect(enemy.X_Pos, enemy.Y_Pos, 50, 50);
-
+                    Logger.logger.Debug("player bullets collision with enemys check");
                     if (bulletRect.IntersectsWith(enemyRect))
                     {
                         enemy.Health -= bullet.Damage;
                         player.Bullets.RemoveAt(j);
+                        Logger.logger.Debug("player bullet get deleted");
                         if (player.Grade + 2 * difficulty >= 100)
                         {
                             player.Grade = 100;
@@ -1589,6 +1676,7 @@ namespace _5_Jahre_Hoelle.pages
                         if (enemy.Health <= 0)
                         {
                             currentRoom.Enemies.RemoveAt(i);
+                            Logger.logger.Debug("enemy gets deleted");
                             break;
                         }
                     }
@@ -1604,6 +1692,7 @@ namespace _5_Jahre_Hoelle.pages
 
         private async void UpdateBoss()
         {
+            Logger.logger.Debug("Boss gets updated");
             if (currentRoom.Type != 'B') 
                 return;
             if (currentBoss == null)
@@ -1613,14 +1702,18 @@ namespace _5_Jahre_Hoelle.pages
             currentRoom.IsCleared = false;
 
             currentBoss.Move(player, deltaTime);
+            Logger.logger.Debug("Boss moves");
             currentBoss.Attack(player, deltaTime);
+            Logger.logger.Debug("Boss attacks");
             if (currentBoss.QuestionCount >= 5)
             {
+                Logger.logger.Debug("5 questions correctly answered");
                 currentBoss.Bullets.Clear();
                 currentBoss = null;
                 currentRoom.IsCleared = true;
                 if (player.Grade < 60)
                 {
+                    Logger.logger.Debug("Game lost because grade == 5");
                     await animation_Toblack(CanvasTotalGamescreen, 4);
                     CompositionTarget.Rendering -= GameLoop;
                     this.Content = new Frame
@@ -1636,7 +1729,7 @@ namespace _5_Jahre_Hoelle.pages
                     {
                         if (player.Grade >= 90)
                         {
-                            
+                            Logger.logger.Debug("Stage completed with grade = 1");
                             player.Range += 0.5;
                             player.Speed += 30;
                             player.Damage += 0.2;
@@ -1645,12 +1738,14 @@ namespace _5_Jahre_Hoelle.pages
                         }
                         else if (player.Grade >= 80)
                         {
+                            Logger.logger.Debug("Stage completed with grade = 2");
                             player.Range += 0.25;
                             player.Speed += 15;
                             player.Damage += 0.1;
                         }
                         else if (player.Grade >= 70)
                         {
+                            Logger.logger.Debug("Stage completed with grade = 3");
                             player.Range += 0;
                             player.Speed += 0;
                             player.Damage += 0;
@@ -1658,11 +1753,13 @@ namespace _5_Jahre_Hoelle.pages
                         }
                         else if (player.Grade >= 60)
                         {
+                            Logger.logger.Debug("Stage completed with grade = 4");
                             player.Range -= 0.5;
                             player.Speed -= 30;
                             player.Damage -= 0.2;
                         }
                         CompositionTarget.Rendering -= GameLoop;
+                        Logger.logger.Debug("Gameloop stops");
                         this.Content = new Frame
                         {
                             Content = new pages.Game(difficulty,player)
@@ -1673,6 +1770,7 @@ namespace _5_Jahre_Hoelle.pages
                         CompositionTarget.Rendering -= GameLoop;
                         Acheavments.Acheavment3 = 1;
                         statistics.Wins += 1;
+                        Logger.logger.Information("Game won");
                         this.Content = new Frame
                         {
                             Content = new pages.Winscreen()
@@ -1690,18 +1788,20 @@ namespace _5_Jahre_Hoelle.pages
 
                 bullet.X_pos += bullet.Direction.X;
                 bullet.Y_pos += bullet.Direction.Y;
-
+                Logger.logger.Debug("Boss bullet moves");
+                Logger.logger.Debug("Boss bullet collision check with wall");
                 if (bullet.X_pos >= 1680 || bullet.Y_pos <= 0 ||
                     bullet.X_pos <= 0 || bullet.Y_pos >= 840)
                 {
                     currentBoss.Bullets.RemoveAt(j);
+                    Logger.logger.Debug("Boss bullet gets removed");
                     continue;
                 }
 
                 // Boss hit player
                 Rect bulletRect = new Rect(bullet.X_pos, bullet.Y_pos, 25, 25);
                 Rect playerRect = new Rect(player.X_Pos + 30, player.Y_Pos + 50, 43, 50);
-
+                Logger.logger.Debug("Boss bullet collision check with player");
                 if (bulletRect.IntersectsWith(playerRect))
                 {
                     if (player.Grade - bullet.Damage / difficulty <= 0)
@@ -1714,6 +1814,7 @@ namespace _5_Jahre_Hoelle.pages
                     }
 
                     GradeDisplay.SetNote(player.Grade);
+                    Logger.logger.Debug("Boss bullet gets removed");
                     currentBoss.Bullets.RemoveAt(j);
                     continue;
                 }
@@ -1722,6 +1823,7 @@ namespace _5_Jahre_Hoelle.pages
 
         public static async Task animation_fromblack(Canvas canvas, int time)
         {
+            Logger.logger.Debug("animation form black starts");
             Rectangle rect_anima = new Rectangle();
             rect_anima.Width = 1920;
             rect_anima.Height = 1080;
@@ -1741,11 +1843,13 @@ namespace _5_Jahre_Hoelle.pages
             await Task.Delay(TimeSpan.FromSeconds(time));
             // KI ENDE
 
+            Logger.logger.Debug("animation form black ends");
             canvas.Children.Remove(rect_anima);
         }
 
         public static async Task animation_Toblack(Canvas canvas,int time) 
         {
+            Logger.logger.Debug("animation to black starts");
             rect_animation = new Rectangle();
             rect_animation.Width = 1920;
             rect_animation.Height = 1080;
@@ -1759,7 +1863,7 @@ namespace _5_Jahre_Hoelle.pages
 
             DoubleAnimation fade = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(time));
             rect_animation.BeginAnimation(UIElement.OpacityProperty, fade);
-
+            Logger.logger.Debug("animation to black ends");
             await Task.Delay(TimeSpan.FromSeconds(time));
         }
 
@@ -1769,6 +1873,7 @@ namespace _5_Jahre_Hoelle.pages
         // KI Anfang
         private string SaveGame()
         {
+            Logger.logger.Debug("started to save game");
             SaveGame save = new SaveGame();
 
             // Player
@@ -1786,6 +1891,7 @@ namespace _5_Jahre_Hoelle.pages
             save.CurrentRoomX = currentRoom.Xpos;
             save.CurrentRoomY = currentRoom.Ypos;
 
+
             // Räume - nur die wichtigen Daten
             save.Rooms = cllted_rooms.Values.Select(r => new RoomSaveData
             {
@@ -1800,6 +1906,7 @@ namespace _5_Jahre_Hoelle.pages
                 ExamRoom = r.ExamRoom,
                 ExamTriggered = r.ExamTriggered,
                 room_matrix = r.room_matrix,
+
                 Enemies = r.Enemies.Select(enemy => new EnemySaveData
                 {
                     X_Pos = enemy.X_Pos,
@@ -1811,7 +1918,7 @@ namespace _5_Jahre_Hoelle.pages
                     Firerate = enemy.Firerate
                 }).ToList()
             }).ToList();
-
+            Logger.logger.Debug("Saved the rooms and enemys");
             // Boss
             if (currentBoss != null)
             {
@@ -1824,12 +1931,15 @@ namespace _5_Jahre_Hoelle.pages
             {
                 save.HasBoss = false;
             }
-
+            Logger.logger.Debug("Saved the Boss");
+            Logger.logger.Debug("Game is saved");
             return JsonSerializer.Serialize(save, new JsonSerializerOptions { WriteIndented = true });
+            
         }
 
         private void LoadGame()
         {
+            Logger.logger.Debug("loading the game starts");
             try
             {
                 if (!File.Exists("save.json"))
@@ -1855,7 +1965,7 @@ namespace _5_Jahre_Hoelle.pages
                     room.ExamRoom = rd.ExamRoom;
                     room.ExamTriggered = rd.ExamTriggered;
                     room.room_matrix = rd.room_matrix;
-
+                    Logger.logger.Debug($"loaded room ({rd.Ypos}|{rd.Xpos})");
                     foreach (EnemySaveData ed in rd.Enemies)
                     {
                         Enemy enemy = new Enemy(
@@ -1870,6 +1980,7 @@ namespace _5_Jahre_Hoelle.pages
                         enemy.Y_Pos = ed.Y_Pos;
 
                         room.Enemies.Add(enemy);
+                        Logger.logger.Debug("loaded enemys");
                     }
 
                     cllted_rooms.Add((rd.Ypos, rd.Xpos), room);
@@ -1922,7 +2033,9 @@ namespace _5_Jahre_Hoelle.pages
             {
                 MessageBox.Show("Fehler: " + ex.Message + "\n\n" + ex.StackTrace);
             }
+            Logger.logger.Debug("loadgame done");
         }
+
         // KI ENDE
     }
 }

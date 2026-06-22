@@ -13,15 +13,15 @@ namespace _5_Jahre_Hoelle.classes
     public class Boss
     {
         public List<Bullets> Bullets = new List<Bullets>();
-        public int QuestionCount {  get; set; }
+        public int QuestionCount { get; set; }
         public double X_Pos { get; set; }
         public double Y_Pos { get; set; }
-        private double Damage {  get; set; }
+        private double Damage { get; set; }
         private double Speed { get; set; }
         private double Range { get; set; }
         private double Firerate { get; set; }
         private double shootTimer = 0;
-        private double attackChoiceTimer = 0;        
+        private double attackChoiceTimer = 0;
         private Random random = new Random();
         private Game game;
         public string lastDirection { get; set; } = "front";
@@ -37,6 +37,7 @@ namespace _5_Jahre_Hoelle.classes
             Firerate = firerate;
             QuestionCount = 0;
             this.game = game;
+            Logger.logger.Debug("boss got created");
         }
 
         public void Move(Player player, double deltaTime)
@@ -62,6 +63,8 @@ namespace _5_Jahre_Hoelle.classes
             {
                 lastDirection = move_direction.Y > 0 ? "front" : "up";
             }
+
+            Logger.logger.Debug("boss moves");
         }
 
         public void Attack(Player player, double deltaTime)
@@ -80,6 +83,8 @@ namespace _5_Jahre_Hoelle.classes
 
             if (decide_attack_question == 0)
             {
+                Logger.logger.Debug("boss starts question attack");
+
                 game.PauseGame();
                 QuestionAttack(player);
                 game.ResumeGame();
@@ -90,10 +95,12 @@ namespace _5_Jahre_Hoelle.classes
 
                 if (chose_attack == 0)
                 {
+                    Logger.logger.Debug("boss starts octa attack");
                     OctaAttack(deltaTime);
                 }
                 else
                 {
+                    Logger.logger.Debug("boss starts normal attack");
                     NormalAttack(player);
                 }
             }
@@ -107,6 +114,11 @@ namespace _5_Jahre_Hoelle.classes
             if (question_Ask.AwnserCorrect)
             {
                 QuestionCount++;
+                Logger.logger.Debug("boss question was answerd right");
+            }
+            else
+            {
+                Logger.logger.Debug("boss question was answerd wrong");
             }
         }
 
@@ -135,6 +147,7 @@ namespace _5_Jahre_Hoelle.classes
             bullet.Y_pos = Y_Pos + 25;
 
             Bullets.Add(bullet);
+            Logger.logger.Debug("boss bullet got created");
         }
 
         private void OctaAttack(double deltaTime)
@@ -174,10 +187,14 @@ namespace _5_Jahre_Hoelle.classes
 
                 Bullets.Add(bullet);
             }
+
+            Logger.logger.Debug("boss octa bullets got created");
         }
 
         public string Serialize()
         {
+            Logger.logger.Debug("boss gets serialized");
+
             return JsonSerializer.Serialize(this, new JsonSerializerOptions
             {
                 WriteIndented = true

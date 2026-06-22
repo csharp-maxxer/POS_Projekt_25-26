@@ -23,9 +23,12 @@ namespace _5_Jahre_Hoelle.pages
     {
         public Achievments()
         {
+           
             InitializeComponent();
             Game.animation_fromblack(Canva_acheavments,1);
             Acheavments.init();
+            Logger.logger.Debug("Acheavments initialized");
+            Logger.logger.Debug("Acheavments Page was opened");
             if (Acheavments.Acheavment1 == 1)
             {
                 Acheavment_1.Text = "☑";
@@ -52,25 +55,31 @@ namespace _5_Jahre_Hoelle.pages
             {
                 _Acheavment_3.Text = "☐";
             }
+            Logger.logger.Debug("Acheavments are checked if they are done");
         }
 
         private async void Button_Zurück_Click(object sender, RoutedEventArgs e)
         {
+            Logger.logger.Debug("Button Back to Menu was pressed");
             await Game.animation_Toblack(Canva_acheavments,1);
+            
             this.Content = new Frame
             {
                 Content = new pages.menue_page()
             };
+            
         }
 
         private void Button_Zurück_MouseEnter(object sender, MouseEventArgs e)
         {
             Line_Zurück.Opacity = 1;
+            Logger.logger.Debug("Mouse Entered Button Back to Menu ");
         }
 
         private void Button_Zurück_MouseLeave(object sender, MouseEventArgs e)
         {
             Line_Zurück.Opacity = 0;
+            Logger.logger.Debug("Mouse left Button Back to Menu was pressed");
         }
     }
 }

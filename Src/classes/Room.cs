@@ -26,7 +26,7 @@ namespace _5_Jahre_Hoelle.classes
         public bool DoorBottom { get; set; }
         public bool DoorLeft { get; set; }
         [JsonIgnore]
-        public List<Rect> obstacles {  get; set; }
+        public List<Rect> obstacles { get; set; }
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
         // 14x7 mit je 120px
@@ -46,6 +46,8 @@ namespace _5_Jahre_Hoelle.classes
 
         public Room(int ypos, int xpos, char type)
         {
+            Logger.logger.Debug("room gets created");
+
             obstacles = new List<Rect>();
             DoorTop = false;
             DoorRight = false;
@@ -67,12 +69,15 @@ namespace _5_Jahre_Hoelle.classes
             if (Type == 'O' || Type == 'S')
             {
                 IsCleared = true;
+                Logger.logger.Debug("room is cleared becuase its start or shop");
             }
             if (Type == 'X')
             {
                 Exam_Enemy_Room();
             }
             ChooseRandomRoom();
+
+            Logger.logger.Debug("room got created");
         }
         private void Exam_Enemy_Room()
         {
@@ -80,17 +85,24 @@ namespace _5_Jahre_Hoelle.classes
             if (random.Next(3) == 2)
             {
                 ExamRoom = true;
+                Logger.logger.Debug("room got choosen as exam room");
+            }
+            else
+            {
+                Logger.logger.Debug("room got choosen as enemy room");
             }
         }
 
         private void ChooseRandomRoom()
         {
+            Logger.logger.Debug("random room gets choosen");
 
             int roomNumber = random.Next(1, 21);
 
             string filepath = $"../../../rooms/room{roomNumber}.txt";
 
             string[] room_loaded = File.ReadAllLines(filepath);
+            Logger.logger.Debug("room file got readed");
 
             foreach (string room in room_loaded)
             {
@@ -105,10 +117,14 @@ namespace _5_Jahre_Hoelle.classes
 
                 room_matrix.Add(row_splitted);
             }
+
+            Logger.logger.Debug("room matrix got loaded");
         }
 
         public void DrawRoom()
         {
+            Logger.logger.Debug("room gets drawed");
+
             obstacles.Clear();
             RoomCanvas.Children.Clear();
 
@@ -127,15 +143,19 @@ namespace _5_Jahre_Hoelle.classes
             Canvas.SetTop(background, -80);
 
             RoomCanvas.Children.Add(background);
-            
+
             PlaceObjects();
             PlaceDoors();
+
+            Logger.logger.Debug("room got drawed");
         }
 
         public void SpawnEnemies()
         {
             if (Type == 'X' && !ExamRoom)
-            { 
+            {
+                Logger.logger.Debug("enemys are getting spawned");
+
                 Random rand = new Random();
                 int count = rand.Next(1, 4);
 
@@ -154,11 +174,15 @@ namespace _5_Jahre_Hoelle.classes
 
                     Enemies.Add(enemy);
                 }
+
+                Logger.logger.Debug("enemys got spawned");
             }
         }
 
         private void PlaceObjects()
         {
+            Logger.logger.Debug("room objects are getting placed");
+
             if (this.Type == 'O' || this.Type == 'X')
             {
                 Dictionary<int, (string, int, int)> graphics = new Dictionary<int, (string, int, int)>();
@@ -244,6 +268,8 @@ namespace _5_Jahre_Hoelle.classes
 
                     ExamBookRect = new Rect(x, y, book_img.Width, book_img.Height);
                     RoomCanvas.Children.Add(book_img);
+
+                    Logger.logger.Debug("exam book got placed");
                 }
             }
             if (this.Type == 'S')
@@ -257,12 +283,18 @@ namespace _5_Jahre_Hoelle.classes
                 Canvas.SetTop(booth, 319);
 
                 RoomCanvas.Children.Add(booth);
+
+                Logger.logger.Debug("shop got placed");
             }
+
+            Logger.logger.Debug("room objects got placed");
         }
-            
+
 
         private void PlaceDoors()
         {
+            Logger.logger.Debug("doors are getting placed");
+
             if (DoorTop)
             {
                 Image door = new Image();
@@ -321,12 +353,16 @@ namespace _5_Jahre_Hoelle.classes
                 Canvas.SetLeft(door, 1680);
                 Canvas.SetTop(door, 316);
 
-                RoomCanvas.Children.Add(door); 
+                RoomCanvas.Children.Add(door);
             }
+
+            Logger.logger.Debug("doors got placed");
         }
 
         public string Serialize()
         {
+            Logger.logger.Debug("room gets serialized");
+
             // chatgpt: wie kann ich machen dass es rekursiv in klassen serialisiert?
             return JsonSerializer.Serialize(this, new JsonSerializerOptions
             {

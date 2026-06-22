@@ -13,7 +13,7 @@ namespace _5_Jahre_Hoelle.classes
     public class Player
     {
         public List<Bullets> Bullets;
-        public double Damage {  get; set; }
+        public double Damage { get; set; }
         public double Speed { get; set; }
         public double Range { get; set; }
         public double Grade { get; set; }
@@ -30,10 +30,12 @@ namespace _5_Jahre_Hoelle.classes
                 if (value > 100)
                 {
                     _energy = 100;
+                    Logger.logger.Debug("player energy was to high and got set to 100");
                 }
                 else if (value < 0)
                 {
                     _energy = 0;
+                    Logger.logger.Debug("player energy was to low and got set to 0");
                 }
                 else
                 {
@@ -42,13 +44,13 @@ namespace _5_Jahre_Hoelle.classes
             }
         }
         public double Firerate { get; set; }
-        public double X_Pos { get; set; } 
+        public double X_Pos { get; set; }
         public double Y_Pos { get; set; }
 
-        public Player(double damage, double speed, double ramge, double firerate,int grade,double energy)
+        public Player(double damage, double speed, double ramge, double firerate, int grade, double energy)
         {
             Damage = damage;
-            Speed = speed;  
+            Speed = speed;
             Range = ramge;
             Firerate = firerate;
             Grade = grade;
@@ -56,21 +58,26 @@ namespace _5_Jahre_Hoelle.classes
             X_Pos = 803;
             Y_Pos = 370;
             Bullets = new List<Bullets>();
+
+            Logger.logger.Debug("player got created");
         }
 
         public Player()
         {
-
+            Logger.logger.Debug("empty player got created");
         }
 
 
         public void Attack(Bullets bullet)
         {
             Bullets.Add(bullet);
+            Logger.logger.Debug("player attacks");
         }
 
         public string Serialize()
         {
+            Logger.logger.Debug("player gets serialized");
+
             return JsonSerializer.Serialize(this, new JsonSerializerOptions
             {
                 WriteIndented = true

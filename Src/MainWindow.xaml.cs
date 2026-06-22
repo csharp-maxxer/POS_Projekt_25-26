@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _5_Jahre_Hoelle.classes;
 
 namespace _5_Jahre_Hoelle
 {
@@ -23,6 +25,7 @@ namespace _5_Jahre_Hoelle
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Logger.init("log.txt");
             this.Content = new Frame
             {
                 Content = new pages.menue_page()
