@@ -31,11 +31,14 @@ namespace _5_Jahre_Hoelle.subwindows
         public question_ask(Player player, double difficulty)
         {
             InitializeComponent();
+            Logger.logger.Debug("Question window initialized");
+
             this.difficulty = difficulty;
 
             this.player = player;
 
             Tuple<string, Dictionary<string, int>> test = ParseQuestion(choose_question());
+            Logger.logger.Debug("Question was chosen and parsed");
 
             Txt_Frage.Text = test.Item1;
 
@@ -95,6 +98,7 @@ namespace _5_Jahre_Hoelle.subwindows
         {
             string[] unformated = File.ReadAllLines("../../../questions/questions.txt");
             Random random = new Random();
+            Logger.logger.Debug("Question file was read");
             return unformated[random.Next(unformated.Length)];
         }
 
@@ -121,6 +125,7 @@ namespace _5_Jahre_Hoelle.subwindows
         private async Task CheckAnswer(int value, Border clickedBorder)
         {
             IsEnabled = false;
+            Logger.logger.Debug("answer was selected");
 
             if (value == 1)
             {
@@ -134,23 +139,26 @@ namespace _5_Jahre_Hoelle.subwindows
                     player.Grade += 5 * difficulty;
                 }
                 AwnserCorrect = true;
-            }   
+                Logger.logger.Debug("Aswer was correct");
+            }
             else
             {
                 clickedBorder.Background = Brushes.Red;
-                if (player.Grade - 20 /difficulty <= 0)
+                if (player.Grade - 20 / difficulty <= 0)
                 {
                     player.Grade = 0;
                 }
                 else
                 {
-                    player.Grade -= 20 / difficulty ;
+                    player.Grade -= 20 / difficulty;
                 }
                 AwnserCorrect = false;
+                Logger.logger.Debug("Answer was wrong");
             }
 
             await Task.Delay(300);
 
+            Logger.logger.Debug("question was closed");
             Close();
         }
     }

@@ -31,8 +31,12 @@ namespace _5_Jahre_Hoelle.subwindows
         public Shop(Player player)
         {
             InitializeComponent();
+            Logger.logger.Debug("Shop  initialized");
+
             this.player = player;
             UpdateLabels();
+
+            Logger.logger.Debug("Shop  was opened");
         }
 
         private void Button_Monster_Click(object sender, RoutedEventArgs e)
@@ -41,6 +45,8 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Grade -= 20;
             UpdateLabels();
             Acheavments.Acheavment2 = 1;
+
+            Logger.logger.Debug("Monster was bought");
         }
 
         private void Button_Redbull_Click(object sender, RoutedEventArgs e)
@@ -49,6 +55,8 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Energy -= 20;
             UpdateLabels();
             Acheavments.Acheavment2 = 1;
+
+            Logger.logger.Debug("Redbull was bought");
         }
 
         private void Button_Leberkase_Click(object sender, RoutedEventArgs e)
@@ -57,6 +65,8 @@ namespace _5_Jahre_Hoelle.subwindows
             player.Grade -= 30;
             UpdateLabels();
             Acheavments.Acheavment2 = 1;
+
+            Logger.logger.Debug("Leberkase was bought");
         }
 
         private void Button_Monster_MouseEnter(object sender, MouseEventArgs e)
@@ -76,7 +86,7 @@ namespace _5_Jahre_Hoelle.subwindows
 
         private void Button_Redbull_MouseLeave(object sender, MouseEventArgs e)
         {
-            TxtBlock_RedbullDescription.Foreground= Brushes.Transparent;
+            TxtBlock_RedbullDescription.Foreground = Brushes.Transparent;
         }
 
         private void Button_Leberkase_MouseEnter(object sender, MouseEventArgs e)
@@ -91,6 +101,8 @@ namespace _5_Jahre_Hoelle.subwindows
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
+            Logger.logger.Debug("Shop was closed");
+
             this.Close();
         }
     }
