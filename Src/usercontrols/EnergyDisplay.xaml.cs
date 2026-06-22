@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5_Jahre_Hoelle.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,10 +24,13 @@ namespace _5_Jahre_Hoelle.usercontrols
         public EnergyDisplay()
         {
             InitializeComponent();
+            Logger.logger.Debug("EnergyDisplay initialized");
         }
 
         public void SetEnergy(double energy)
         {
+            Logger.logger.Debug("Energy was updated");
+
             if (energy > 100)
             {
                 energy = 100;
