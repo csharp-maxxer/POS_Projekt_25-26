@@ -11,7 +11,7 @@ namespace _5_Jahre_Hoelle.classes
         private static int _attemps;
         private static int _wins;
         private static int _achievment_numer;
-        
+
 
         public static int Attemps
         {
@@ -22,6 +22,7 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _attemps = value;
+                Logger.logger.Debug("attemps got changed");
                 Save();
             }
         }
@@ -35,6 +36,7 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _wins = value;
+                Logger.logger.Debug("wins got changed");
                 Save();
             }
         }
@@ -48,18 +50,21 @@ namespace _5_Jahre_Hoelle.classes
             set
             {
                 _achievment_numer = value;
+                Logger.logger.Debug("achievments got changed");
                 Save();
             }
         }
 
         public static void init()
         {
+            Logger.logger.Debug("statistics class is getting initialized");
             Load();
         }
 
         private static void CreateDefaultSaveFile()
         {
-           
+            Logger.logger.Debug("default statistics file gets created");
+
             Dictionary<string, int> data_nix = new Dictionary<string, int>();
 
             data_nix.Add("Attemps", 0);
@@ -69,11 +74,13 @@ namespace _5_Jahre_Hoelle.classes
             string json_nix = JsonSerializer.Serialize(data_nix);
 
             File.WriteAllText("statistics.json", json_nix);
+            Logger.logger.Debug("default statistics file got created");
         }
 
         private static void Save()
         {
-            
+            Logger.logger.Debug("statistics are getting saved");
+
             Dictionary<string, int> data = new Dictionary<string, int>();
 
             data.Add("Attemps", _attemps);
@@ -83,13 +90,16 @@ namespace _5_Jahre_Hoelle.classes
             string json = JsonSerializer.Serialize(data);
 
             File.WriteAllText("statistics.json", json);
+            Logger.logger.Debug("statistics got saved");
         }
 
         private static void Load()
         {
-            
+            Logger.logger.Debug("statistics are getting loaded");
+
             if (!File.Exists("statistics.json"))
             {
+                Logger.logger.Debug("statistics file does not exist");
                 //MessageBox.Show("File gibt es nicht");
 
                 CreateDefaultSaveFile();
@@ -98,13 +108,17 @@ namespace _5_Jahre_Hoelle.classes
                 _wins = 0;
                 _achievment_numer = 0;
 
+                Logger.logger.Debug("statistics are set to 0");
+
                 return;
             }
 
             string json = File.ReadAllText("statistics.json");
+            Logger.logger.Debug("statistics file got readed");
 
             if (json == "")
             {
+                Logger.logger.Warning("statistics file is empty");
                 MessageBox.Show("File ist leer");
 
                 CreateDefaultSaveFile();
@@ -113,13 +127,17 @@ namespace _5_Jahre_Hoelle.classes
                 _wins = 0;
                 _achievment_numer = 0;
 
+                Logger.logger.Debug("statistics are set to 0");
+
                 return;
             }
 
             Dictionary<string, int> data = JsonSerializer.Deserialize<Dictionary<string, int>>(json);
+            Logger.logger.Debug("statistics file got deserialized");
 
             if (data == null)
             {
+                Logger.logger.Warning("statistics file is broken");
                 MessageBox.Show("File ist kaputt");
 
                 CreateDefaultSaveFile();
@@ -127,6 +145,8 @@ namespace _5_Jahre_Hoelle.classes
                 _attemps = 0;
                 _wins = 0;
                 _achievment_numer = 0;
+
+                Logger.logger.Debug("statistics are set to 0");
 
                 return;
             }
@@ -157,6 +177,8 @@ namespace _5_Jahre_Hoelle.classes
             {
                 _achievment_numer = 0;
             }
+
+            Logger.logger.Debug("statistics got loaded");
         }
     }
 }
