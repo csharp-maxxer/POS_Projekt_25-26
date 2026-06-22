@@ -276,7 +276,7 @@ namespace _5_Jahre_Hoelle.pages
         
         public Game(double difficulty)
         {
-            Logger.logger.Debug("Game Page got loaded");
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
             Logger.logger.Debug("statistics class is getting initialized");
             Acheavments.init();
@@ -303,7 +303,7 @@ namespace _5_Jahre_Hoelle.pages
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
-            Logger.logger.Debug("Gameloop Starts");
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
             this.Focusable = true;
@@ -315,7 +315,7 @@ namespace _5_Jahre_Hoelle.pages
 
         public Game(double difficulty,Player player_Konst)
         {
-            Logger.logger.Debug("Game Page got loaded");
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
             Logger.logger.Debug("statistics class is getting initialized");
             Acheavments.init();
@@ -347,7 +347,7 @@ namespace _5_Jahre_Hoelle.pages
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
 
-            Logger.logger.Debug("Gameloop Starts");
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
             this.Focusable = true;
@@ -360,7 +360,7 @@ namespace _5_Jahre_Hoelle.pages
        
         public Game()
         {
-            Logger.logger.Debug("Game Page got loaded");
+            Logger.logger.Information("Game Page got loaded");
             statistics.init();
             Logger.logger.Debug("statistics class is getting initialized");
             Acheavments.init();
@@ -386,7 +386,7 @@ namespace _5_Jahre_Hoelle.pages
             currentRoom = cllted_rooms[(5, 5)];
             currentRoom.DrawRoom();
             CanvasGame.Children.Add(currentRoom.RoomCanvas);
-            Logger.logger.Debug("Gameloop Starts");
+            Logger.logger.Information("Gameloop Starts");
             CompositionTarget.Rendering += GameLoop;
 
 
